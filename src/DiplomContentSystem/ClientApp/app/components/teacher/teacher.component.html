@@ -1,0 +1,24 @@
+﻿<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching teachers from the server.</p>
+
+<p *ngIf="!teachers"><em>Loading...</em></p>
+
+<table class='table' *ngIf="teachers">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>ФИО</th>
+            <th>Должность</th>
+            <th>Нагрузка</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let forecast of teachers">
+            <td>{{ forecast.id }}</td>
+            <td>{{ forecast.fio }}</td>
+            <td>{{ forecast.position }}</td>
+            <td>{{ forecast.maxWorkCount}}</td>
+        </tr>
+    </tbody>
+</table>

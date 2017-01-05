@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace DiplomContentSystem.Core
 {
-    public class DiplomWork
+    public class Group : IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public DateTime ApproveDate { get; set; }
+        //TODO: Предусмотреть добавление специальностей
+        public string Profession { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
     }

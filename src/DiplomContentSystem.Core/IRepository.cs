@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace DiplomContentSystem.Core
 {
-    public interface IRepository<T>
+    public interface IRepository<T> where T: class, IEntity
     {
-        IEnumerable<T> Get(Expression<Func<T, bool>> predicate, int? skip, int? take);
+        IEnumerable<T> Get();
+        IEnumerable<T> Get(Expression<Func<T, bool>> predicate = null);
         T Get(int id);
         void Add(T item);
         void Update(T item);

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DiplomContentSystem.Core
 {
-    public class CalendarEvent
+    public class CalendarEvent : IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

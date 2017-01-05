@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
+using DiplomContentSystem.Services;
+using DiplomContentSystem.DataLayer;
+using DiplomContentSystem.Core;
 namespace DiplomContentSystem
 {
     public class Startup
@@ -30,6 +32,9 @@ namespace DiplomContentSystem
         {
             // Add framework services.
             services.AddMvc();
+            services.AddScoped<TeacherService>();
+            services.AddScoped<IRepository<Teacher>, RepositoryBase<Teacher>>();
+            services.AddDbContext<DiplomContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +46,8 @@ namespace DiplomContentSystem
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
+                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                {
                     HotModuleReplacement = true
                 });
             }
@@ -51,6 +57,19 @@ namespace DiplomContentSystem
             }
 
             app.UseStaticFiles();
+            using (var context = new DiplomContentSystem.DataLayer.DiplomContext())
+            {
+                if(!context.Teachers.Any())
+                {
+                    context.Teachers.Add(new Core.Teacher()
+                    {
+                        FIO = "Забаштанский А.К.",
+                        MaxWorkCount = 2,
+                        Position = "Старший преподаватель"
+                    });
+                    context.SaveChanges();
+                }
+            }
 
             app.UseMvc(routes =>
             {

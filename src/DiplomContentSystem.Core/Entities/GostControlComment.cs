@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DiplomContentSystem.Core
 {
-    public class GostControlComment
+    public class GostControlComment : IEntity
     {
         public int Id { get; set; }
         public string Text { get; set; }

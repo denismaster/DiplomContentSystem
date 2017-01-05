@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DiplomContentSystem.Core
 {
-    public class Student
+    public class Student : IEntity
     {
         public int Id { get; set; }
         public string FIO { get; set; }
