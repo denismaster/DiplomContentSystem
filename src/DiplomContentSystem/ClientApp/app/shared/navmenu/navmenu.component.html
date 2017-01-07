@@ -1,5 +1,5 @@
 <div class='main-nav'>
-    <div class='navbar navbar-inverse'>
+    <div class='navbar navbar-default navbar-top'>
         <div class='navbar-header'>
             <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
                 <span class='sr-only'>Toggle navigation</span>
@@ -9,27 +9,31 @@
             </button>
             <a class='navbar-brand' [routerLink]="['/home']">DiplomContentSystem</a>
         </div>
-        <div class='clearfix'></div>
-        <div class='navbar-collapse collapse'>
+        <div class='navbar-collapse collapse nav-wrapper'>
             <ul class='nav navbar-nav'>
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/home']">
-                        <span class='glyphicon glyphicon-home'></span> Home
+                        <span class='fa fa-home'></span> Home
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/counter']">
-                        <span class='glyphicon glyphicon-education'></span> Counter
-                    </a>
-                </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/fetch-data']">
-                        <span class='glyphicon glyphicon-th-list'></span> Fetch data
+                        <span class='fa fa-university'></span> Counter
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/teachers']">
-                        <span class='glyphicon glyphicon-th-list'></span> Teachers
+                        <span class='glyphicon glyphicon-th-list'></span> Преподаватели
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/students']">
+                        <span class='glyphicon glyphicon-th-list'></span> Студенты
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/diploms']">
+                        <span class='glyphicon glyphicon-th-list'></span> Дипломные работы
                     </a>
                 </li>
             </ul>
