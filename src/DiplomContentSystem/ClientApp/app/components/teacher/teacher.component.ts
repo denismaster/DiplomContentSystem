@@ -11,7 +11,6 @@ export class TeachersComponent {
     constructor(http: Http) {
         http.get('/api/teachers').subscribe(result => {
             let teachers = result.json() as Teacher[];
-            console.log(teachers);
             this.teachers = teachers;
         });
     }
