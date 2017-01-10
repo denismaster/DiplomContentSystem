@@ -5,7 +5,7 @@
             </p>
 <div class="panel panel-default">
     <div class="panel-heading">
-        Преподаватели
+        Дипломники
         <div class="btn-group pull-right">
             <button type="button" class="btn btn-square btn-default">
                 <i class="fa fa-search"></i> Поиск
@@ -17,21 +17,38 @@
             <div></div>
         </div>
     </div>
-    <table class="table table-bordered table-striped table-hover" *ngIf="teachers">
+    <table class="table table-bordered table-striped" *ngIf="teachers">
         <thead>
             <tr>
                 <th>№</th>
                 <th>ФИО</th>
-                <th>Должность</th>
-                <th>Нагрузка</th>
+                <th>Группа</th>
+                <th>Дипломная работа</th>
+                <th>Преподаватель</th>
+
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let forecast of teachers">
-                <td>{{ forecast.id }}</td>
-                <td>{{ forecast.fio }}</td>
-                <td>{{ forecast.position }}</td>
-                <td>{{ forecast.maxWorkCount}}</td>
+            <tr>
+                <td>1</td>
+                <td>Иванов Иван Иванович</td>
+                <td>ИСб-41о</td>
+                <td><a>Исследование способов работы с текстом</a></td>
+                <td><a>Забаштанский А.К.</a></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Петров Петр Сергеевич</td>
+                <td>ИСб-41о</td>
+                <td><button type="button" class="btn btn-sm btn-default">Добавить работу</button></td>
+                <td><a>Забаштанский А.К.</a></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Сидоров Петр Олегович</td>
+                <td>ИСб-41о</td>
+                <td><button type="button" class="btn btn-sm btn-default">Добавить работу</button></td>
+                <td><button type="button" class="btn btn-sm btn-default">Добавить руководителя</button></td>
             </tr>
         </tbody>
     </table>

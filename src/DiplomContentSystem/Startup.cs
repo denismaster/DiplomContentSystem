@@ -48,7 +48,9 @@ namespace DiplomContentSystem
                 app.UseDeveloperExceptionPage();
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
                 {
-                    HotModuleReplacement = true
+                    HotModuleReplacement = true,
+                        
+
                 });
             }
             else
@@ -57,20 +59,6 @@ namespace DiplomContentSystem
             }
 
             app.UseStaticFiles();
-            using (var context = new DiplomContentSystem.DataLayer.DiplomContext())
-            {
-                if(!context.Teachers.Any())
-                {
-                    context.Teachers.Add(new Core.Teacher()
-                    {
-                        FIO = "Забаштанский А.К.",
-                        MaxWorkCount = 2,
-                        Position = "Старший преподаватель"
-                    });
-                    context.SaveChanges();
-                }
-            }
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

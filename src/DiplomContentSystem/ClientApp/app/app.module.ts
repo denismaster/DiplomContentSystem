@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { TeachersComponent } from './components/teacher/teacher.component';
 import { CounterComponent } from './components/counter/counter.component';
+import { StudentComponent } from './components/student/student.component';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -16,7 +17,8 @@ import { CounterComponent } from './components/counter/counter.component';
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
-        TeachersComponent
+        TeachersComponent,
+        StudentComponent
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
@@ -26,6 +28,7 @@ import { CounterComponent } from './components/counter/counter.component';
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'teachers', component: TeachersComponent },
+            { path: 'students', component:StudentComponent},
             { path: '**', redirectTo: 'home' }
         ])
     ]

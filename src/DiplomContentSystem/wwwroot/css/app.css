@@ -135,6 +135,28 @@ hr {
         padding: 30px 15px
     }
 }
+.navbar-blue
+{
+    border: 0;
+    border-radius:0;
+    background-color: #23b7e5;
+    background-image: -webkit-linear-gradient(left, #23b7e5, #51c6ea);
+    background-image: linear-gradient(90deg, #23b7e5 0, #51c6ea);
+    background-repeat: repeat-x;
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ff23b7e5', endColorstr='#ff51c6ea', GradientType=1)
+}
+.navbar-blue .navbar-nav>.open>a,
+    .navbar-blue .navbar-nav>li>.navbar-text,
+    .navbar-blue .navbar-nav>li>a {
+        color: #fff
+    }
+    .navbar-blue .navbar-nav>.open>a:focus,
+    .navbar-blue .navbar-nav>.open>a:hover,
+    .navbar-blue .navbar-nav>li>a:focus,
+    .navbar-blue .navbar-nav>li>a:hover {
+        /*color: #117391*/
+        color:#ccc;
+    }
 .nav-tabs>li>a {
     font-weight: 700;
     color: #515253;
