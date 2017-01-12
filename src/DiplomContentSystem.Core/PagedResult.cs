@@ -9,11 +9,6 @@ namespace DiplomContentSystem.Core
     {
         public IEnumerable<T> Items { get; set; }
         public long TotalCount { get; set; }
-
-        public PagedResult(IEnumerable<T> items, long totalCount)
-        {
-            this.Items = items;
-            this.TotalCount = totalCount;
-        }
+        public long LoadedCount { get;set; }
     }
 }

@@ -1,0 +1,62 @@
+﻿<div class="sidebar-nav">
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="visible-xs navbar-brand">Главное меню</span>
+        </div>
+        <div class="navbar-collapse collapse sidebar-navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a>Создать счет на оплату</a></li>
+                <!--<li><a href="#">Импорт лицевых счетов</a></li>-->
+                <li [routerLinkActive]="['link-active']"><a [routerLink]="['/bill']">Счета на оплату</a></li>
+                <!--<li class="second"><a href="#">Обработать</a></li>-->
+                <!--<li class="second"><a href="#">Архив счетов</a></li>-->
+                <li><a>Реестр муниципальных помещений</a></li>
+                <li class="second" [routerLinkActive]="['link-active']"><a [routerLink]="['/apartment-house']">МКД</a></li>
+                <li class="second" [routerLinkActive]="['link-active']"><a  [routerLink]="['/premisses']">Помещения</a></li>
+                <li class="second"><a>Импорт данных от ДУМИ</a></li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/personal-account']">
+                        Реестр лицевых счетов
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/special-accounts']">
+                        Реестр спец.счетов
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/AZCFileRequests']">Заявки на оплату для АЦК</a>
+                </li>
+                <li><a>Справочники</a></li>
+                <li class="second" [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/fee']">
+                        Минимальный размер взноса
+                    </a>
+                </li>
+                <li class="second" [routerLinkActive]="['link-active']"><a [routerLink]="['/organization']">Организации</a></li>
+                <!--<li class="second"><a href="#">ФИАС</a></li>-->
+                <li><a>Администрирование</a></li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/import']">
+                        Импорт данных
+                    </a>
+                </li>
+               <!-- <li><a href="#">История загрузки файлов</a></li>-->
+                <!--<li [routerLinkActive]="['link-active']"> 
+                    <a [routerLink]="['/test']">
+                        <i class='glyphicon glyphicon-fire'></i> 
+                        Тест
+                    </a>
+                </li>-->
+            </ul>
+        </div>
+    </div>
+</div>
+
+
