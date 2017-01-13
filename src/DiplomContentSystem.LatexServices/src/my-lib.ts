@@ -8,3 +8,9 @@ export function getPackageVersion() {
 
   return pkg.version || 'no version';
 }
+
+export function getSample():string {
+  const cwd = process.cwd();
+  const rawPkg = readFileSync(join(cwd, 'sample.tex')).toString();
+  return rawPkg;
+}
