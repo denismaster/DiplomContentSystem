@@ -3,6 +3,7 @@ import { Request, Response } from "express"
 import { Stream } from "stream";
 import * as _express from "express"
 import * as _bodyParser from "body-parser";
+import * as bodyParser from 'body-parser';
 console.log("DiplomContentSystem LaTeX->PDF Service");
 console.log(getPackageVersion());
 
@@ -19,8 +20,9 @@ let app = _express();
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
+app.use(_bodyParser.json({strict:false}));
 app.use(_bodyParser.urlencoded({ extended: true }));
-app.use(_bodyParser.json());
+
 
 var port = process.env.PORT || 1337;        // set our port
 
@@ -29,14 +31,21 @@ var port = process.env.PORT || 1337;        // set our port
 var router = _express.Router();              // get an instance of the express Router
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-router.get('/', function (request: Request, response: Response) {
-    //let data:string = (request.body!=null)?request.body.data:"";
+router.get('/sample', function (request: Request, response: Response) {
     let data = getSample();
     response.setHeader('Content-type', 'application/pdf');
     response.setHeader('Content-disposition', 'attachment; filename=file.pdf');
     let result = (<Stream>latex(data)).pipe(response);
 });
+router.post('/convert', function (request: Request, response: Response) {
 
+    const data = request.body.data.toString();//(request.body&&request.body.data)?request.body.data:"wfrger";
+    response.setHeader('Content-type', 'application/pdf');
+    let filename = new Date().toDateString();
+    //response.end(data+'');
+    response.setHeader('Content-disposition', 'attachment; filename='+filename+'.pdf');
+    (<Stream>latex(data)).pipe(response);
+});
 // more routes for our AжPI will happen here
 
 // REGISTER OUR ROUTES -------------------------------
