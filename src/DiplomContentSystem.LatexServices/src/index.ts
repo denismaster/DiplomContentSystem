@@ -14,6 +14,7 @@ console.log(getPackageVersion());
 
 // call the packages we need
 let latex = require("latex");
+let cors = require("cors");
 // define our app using express
 let app = _express();
 
@@ -22,7 +23,7 @@ let app = _express();
 // this will let us get the data from a POST
 app.use(_bodyParser.json({strict:false}));
 app.use(_bodyParser.urlencoded({ extended: true }));
-
+app.use(cors());
 
 var port = process.env.PORT || 1337;        // set our port
 
@@ -39,10 +40,14 @@ router.get('/sample', function (request: Request, response: Response) {
 });
 router.post('/convert', function (request: Request, response: Response) {
 
-    const data = request.body.data.toString();//(request.body&&request.body.data)?request.body.data:"wfrger";
+    const data = (request.body.data)?request.body.data.toString():null;
+    if(!data)
+    {
+        response.status(400).end();
+        return;
+    }
     response.setHeader('Content-type', 'application/pdf');
-    let filename = new Date().toDateString();
-    //response.end(data+'');
+    let filename = new Date().toISOString();
     response.setHeader('Content-disposition', 'attachment; filename='+filename+'.pdf');
     (<Stream>latex(data)).pipe(response);
 });
@@ -51,8 +56,6 @@ router.post('/convert', function (request: Request, response: Response) {
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 app.use('/api', router);
-
-// START THE SERVER
-// =============================================================================
+// starting our server
 app.listen(port);
 console.log('Application started on port ' + port);

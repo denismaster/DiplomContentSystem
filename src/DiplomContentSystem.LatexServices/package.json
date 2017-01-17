@@ -36,8 +36,10 @@
     "typings": "^1.0.4"
   },
   "dependencies": {
+    "@types/cors": "^2.8.0",
     "@types/express": "^4.0.34",
     "@types/node": "^7.0.0",
+    "cors": "^2.8.1",
     "express": "^4.14.0",
     "latex": "0.0.1"
   }
