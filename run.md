@@ -5,6 +5,7 @@
 * Node.JS >6.7
 * .NET Core 1.1
 * TexLive
+* Сейчас у нас SQLite, но скорее всего перейдем на PostgreSQL
 
 ## Глобальные зависимости
 * `npm install -g typescript` - ставит TypeScript
@@ -29,6 +30,10 @@
 * `npm install` - установка зависимостей.
 * `Ctrl+Shift+B` - сборка нашего проекта из Typescript в Javascript. (По сути вызывает компилятор tsc)
 * `node .` - запуск сервера.
+
+### DataLayer(или миграции)
+* `dotnet ef --project ../DiplomContentSystem.DataLayer --startup-project . migrations add MyNewMigration` - создание миграции
+* `dotnet ef --project ../DiplomContentSystem.DataLayer --startup-project . database update`  - обновление
 
 ## Сборка клиентской части
 * `npm install` - установка зависимостей.
