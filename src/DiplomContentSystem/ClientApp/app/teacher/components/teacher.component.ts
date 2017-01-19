@@ -14,6 +14,19 @@ export class TeachersComponent {
             this.teachers = teachers;
         });
     }
+   /* sendRequest() {
+        let object = {
+            "id": 1,
+            "data": [
+                "\\documentclass{article}\n\\begin{document}\nHello,Denismaster!\n\\end{document}\n"]
+        };
+        this.http.post("http://localhost:1337/api/convert",object).subscribe(data => this.downloadFile(data));
+    }
+    downloadFile(data: Response) {
+        let blob = new Blob([data], { type: 'application/pdf' });
+        let url = window.URL.createObjectURL(blob);
+        FileSaver.saveAs(blob,"sample.pdf");
+}*/
 }
 
 interface Teacher {
