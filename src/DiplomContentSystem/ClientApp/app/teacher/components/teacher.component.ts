@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
+import { TeacherService } from '../teacher.service';
 
 @Component({
     selector: 'teachers',
@@ -8,10 +9,9 @@ import { Http } from '@angular/http';
 export class TeachersComponent {
     public teachers: Teacher[];
 
-    constructor(http: Http) {
-        http.get('/api/teachers').subscribe(result => {
-            let teachers = result.json() as Teacher[];
-            this.teachers = teachers;
+    constructor(private service: TeacherService) {
+        service.getTeachers().subscribe(result => {
+            this.teachers = result;
         });
     }
    /* sendRequest() {
@@ -29,7 +29,7 @@ export class TeachersComponent {
 }*/
 }
 
-interface Teacher {
+export interface Teacher {
     id: number;
     fio: string;
     position: string;
