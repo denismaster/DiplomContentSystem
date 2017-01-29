@@ -16,9 +16,8 @@ namespace DiplomContentSystem.Controllers
             _service = service;
         }
         [HttpGet("")]
-        public async Task<IActionResult> Teachers()
+        public IActionResult Teachers()
         {
-            await Task.Delay(2000);
             return Ok(_service.GetTeachers());
         }
     }
