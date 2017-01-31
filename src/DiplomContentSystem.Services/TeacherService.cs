@@ -18,5 +18,12 @@ namespace DiplomContentSystem.Services
         {
             return _repository.Get();
         }
+
+        public bool AddTeacher(Teacher teacher)
+        {
+            _repository.Add(teacher);
+            _repository.SaveChanges();
+            return true;
+        }
     }
 }

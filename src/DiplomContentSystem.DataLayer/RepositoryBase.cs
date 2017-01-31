@@ -48,5 +48,9 @@ namespace DiplomContentSystem.DataLayer
         {
             throw new NotImplementedException();
         }
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
     }
 }

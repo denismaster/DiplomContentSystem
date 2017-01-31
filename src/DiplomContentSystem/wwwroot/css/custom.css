@@ -2,6 +2,7 @@ body{
     background-color: #edeef0;
 }
 
+
 .jumbotron
 {
     border:1px solid #ddd;
@@ -32,4 +33,22 @@ body{
 {
   padding-top:0;
   padding-bottom:0;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea
+{
+    max-width: 500px!important;
+}
+
+.alert-sm
+{
+    padding: 5px;
+}
+
+.container
+{
+    width:900px;
 }

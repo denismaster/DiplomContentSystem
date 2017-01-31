@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { TeacherService } from '../teacher.service';
-
+import { Teacher } from '../models/teacher';
 @Component({
     selector: 'teachers',
     templateUrl: './teacher.component.html'
@@ -29,9 +29,3 @@ export class TeachersComponent {
 }*/
 }
 
-export interface Teacher {
-    id: number;
-    fio: string;
-    position: string;
-    maxWorkCount: string;
-}

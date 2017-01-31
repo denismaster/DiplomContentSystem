@@ -15,10 +15,17 @@ namespace DiplomContentSystem.Controllers
         {
             _service = service;
         }
+
         [HttpGet("")]
         public IActionResult Teachers()
         {
             return Ok(_service.GetTeachers());
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add([FromBody] Teacher teacher)
+        {
+            return Ok(_service.AddTeacher(teacher));
         }
     }
 }
