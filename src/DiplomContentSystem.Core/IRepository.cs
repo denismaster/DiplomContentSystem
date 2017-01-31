@@ -14,5 +14,6 @@ namespace DiplomContentSystem.Core
         void Add(T item);
         void Update(T item);
         void Delete(T item);
+        void SaveChanges();
     }
 }
