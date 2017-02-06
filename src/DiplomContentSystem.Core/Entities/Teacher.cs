@@ -13,5 +13,11 @@ namespace DiplomContentSystem.Core
         public string Position { get; set; }
         //TODO: число дипломников также зависит от периода
         public int MaxWorkCount { get; set; }
+
+        public int SpecialityId { get; set; }
+        public Speciality Speciality { get; set; }
+
+        public List<DiplomWork> DiplomWorks { get; set; }
+        public List<TeacherComment> TeacherComments { get; set; }
     }
 }

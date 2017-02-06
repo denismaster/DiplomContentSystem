@@ -5,14 +5,17 @@ using System.Threading.Tasks;
 
 namespace DiplomContentSystem.Core
 {
-    public class CalendarEvent : IEntity
+    public class ImplementationStage : IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
-        //если заполнено, то привязана к работе, а не глобально
-        public int? DiplomWorkId { get; set; }
+        
+        public int DiplomWorkId { get; set; }
         public DiplomWork DiplomWork { get; set; }
+
+        public List<SubImplementationStage> SubImplementationStages { get; set; }
+        public List<ImplementationStageComment> ImplementationStageComments { get; set; }
     }
 }

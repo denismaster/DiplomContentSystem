@@ -9,9 +9,10 @@ namespace DiplomContentSystem.Core
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        //TODO: Предусмотреть добавление специальностей
-        public string Profession { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+
+        public int SpecialityId { get; set; }
+        public Speciality Speciality { get; set; }
+
+        public List<Student> Students { get; set; }
     }
 }
