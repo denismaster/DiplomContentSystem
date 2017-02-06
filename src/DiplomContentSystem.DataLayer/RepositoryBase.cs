@@ -19,7 +19,7 @@ namespace DiplomContentSystem.DataLayer
 
         public void Add(T item)
         {
-            throw new NotImplementedException();
+           _context.Set<T>().Add(item);
         }
 
         public void Delete(T item)
@@ -47,6 +47,10 @@ namespace DiplomContentSystem.DataLayer
         public void Update(T item)
         {
             throw new NotImplementedException();
+        }
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
         }
     }
 }

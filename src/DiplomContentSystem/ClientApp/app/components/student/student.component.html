@@ -1,15 +1,13 @@
-﻿<p>
-            <button type="button" class="btn btn-info">
-                <i class="fa fa-plus"></i> Добавить
-            </button>
-            </p>
-<div class="panel panel-default">
+﻿<div class="panel panel-default">
     <div class="panel-heading">
         Дипломники
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-square btn-default">
+            <button type="button" class="btn btn-sm btn-default">
                 <i class="fa fa-search"></i> Поиск
             </button>
+            <a [routerLink]="['/students/new']" class="btn btn-sm btn-primary">
+                <i class="fa fa-search"></i> Добавить
+            </a>
         </div>
     </div>
     <div *ngIf="!teachers" class="panel-body panel-body-loader">

@@ -1,0 +1,54 @@
+body{
+    background-color: #edeef0;
+}
+
+
+.jumbotron
+{
+    border:1px solid #ddd;
+}
+
+
+.nav.navbar-nav>li>a+a,
+.nav.navbar-nav>li>a:first-child {
+    border-left: 1px solid rgba(34,36,38,.1);
+}
+
+.panel-heading .btn-group.pull-right
+{
+    margin-top:-5px;
+}
+
+.btn-icon
+{
+    position: relative;
+    background: transparent;
+    background: rgba(0,0,0,.05);
+    display: inline-block;
+    padding: 5px 15px;
+    left: -13px;
+    border-radius: 3px 0 0 3px;
+}
+.btn-labeled    
+{
+  padding-top:0;
+  padding-bottom:0;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea
+{
+    max-width: 500px!important;
+}
+
+.alert-sm
+{
+    padding: 5px;
+}
+
+.container
+{
+    width:900px;
+}

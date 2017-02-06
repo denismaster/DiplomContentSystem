@@ -1,0 +1,65 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        Новый преподаватель
+    </div>
+    <form [formGroup]="form" (ngSubmit)="submit(form.value)">
+        <div class="panel-body panel-body-loader">
+            <div class="form-group" [class.has-error]="!form.controls['lastName'].valid && form.controls['lastName'].touched">
+                <label class="control-label">Фамилия</label>
+                <input name="lastName" placeholder="Фамилия" class="form-control" type="text" [formControl]="form.controls['lastName']" />
+                <div class="text-danger help-block">
+                    <span *ngIf="form.controls['lastName'].hasError('required')&&form.controls['lastName'].touched">
+                        Поле должно быть заполнено.
+                    </span>
+                    <span *ngIf="form.controls['lastName'].hasError('notEmpty')&&form.controls['lastName'].touched">
+                        Поле не должно быть пустым.
+                    </span>
+                </div>
+            </div>
+            <div class="form-group" [class.has-error]="!form.controls['firstName'].valid && form.controls['firstName'].touched">
+                <label class="control-label">Имя</label>
+                <input class="form-control" type="text" placeholder="Имя" [formControl]="form.controls['firstName']" />
+                <div class="text-danger help-block">
+                    <span *ngIf="form.controls['firstName'].hasError('required')&&form.controls['firstName'].touched">
+                        Поле должно быть заполнено.
+                    </span>
+                    <span *ngIf="form.controls['firstName'].hasError('notEmpty')&&form.controls['firstName'].touched">
+                        Поле не должно быть пустым.
+                    </span>
+                </div>
+            </div>
+            <div class="form-group" [class.has-error]="!form.controls['middleName'].valid && form.controls['middleName'].touched">
+                <label class="control-label">Отчество</label>
+                <input class="form-control" type="text" placeholder="Отчество" [formControl]="form.controls['middleName']" />
+                <div class="text-danger help-block">
+                    <span *ngIf="form.controls['middleName'].hasError('required')&&form.controls['middleName'].touched">
+                        Поле должно быть заполнено.
+                    </span>
+                    <span *ngIf="form.controls['middleName'].hasError('notEmpty')&&form.controls['middleName'].touched">
+                        Поле не должно быть пустым.
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Должность</label>
+                <input class="form-control" type="text" placeholder="Должность" [formControl]="form.controls['position']" />
+            </div>
+            <div class="form-group" [class.has-error]="!form.controls['maxWorkCount'].valid && form.controls['maxWorkCount'].touched">
+                <label class="control-label">Нагрузка</label>
+                <input class="form-control" type="number" placeholder="Нагрузка" [formControl]="form.controls['maxWorkCount']" />
+                <div class="text-danger help-block">
+                    <span *ngIf="form.controls['maxWorkCount'].hasError('required')&&form.controls['maxWorkCount'].touched">
+                        Поле должно быть заполнено.
+                    </span>
+                    <span *ngIf="form.controls['maxWorkCount'].hasError('minValue')&&form.controls['maxWorkCount'].touched">
+                        Значение должно быть больше 0.
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Добавить</button>
+            <a [routerLink]="['/teachers']" class="btn btn-default">Отмена</a>
+        </div>
+    </form>
+</div>
