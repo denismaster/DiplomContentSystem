@@ -4,6 +4,7 @@ import { TeachersComponent } from './components/teacher.component';
 import { TeachersAddComponent } from './components/teacher-add.component';
 import { TeacherService } from './teacher.service';
 import { TeacherRoutesModule } from './teacher.routes.module';
+import { TeachersEditComponent } from './components/teacher-edit.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -11,8 +12,8 @@ import { TeacherRoutesModule } from './teacher.routes.module';
 
 @NgModule({
     imports: [SharedModule,TeacherRoutesModule],
-    declarations: [TeachersComponent, TeachersAddComponent],
-    exports: [TeachersComponent, TeachersAddComponent],
+    declarations: [TeachersComponent, TeachersAddComponent,TeachersEditComponent],
+    exports: [TeachersComponent, TeachersAddComponent, TeachersEditComponent],
     providers:[TeacherService]
 })
 export class TeachersModule { }

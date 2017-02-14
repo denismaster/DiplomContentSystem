@@ -1,0 +1,44 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Руководитель
+    </div>
+    <div class="panel-body" *ngIf="isLoading">
+        <loader></loader>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="submit(form.value)" *ngIf="!isLoading">
+        <div class="panel-body">
+            <div class="form-group" [class.has-error]="!form.controls['fio'].valid && form.controls['fio'].touched">
+                <label class="control-label">ФИО</label>
+                <input name="fio" placeholder="Фамилия" class="form-control" type="text" [formControl]="form.controls['fio']" />
+                <div class="text-danger help-block">
+                    <span *ngIf="form.controls['fio'].hasError('required')&&form.controls['fio'].touched">
+                        Поле должно быть заполнено.
+                    </span>
+                    <span *ngIf="form.controls['fio'].hasError('notEmpty')&&form.controls['fio'].touched">
+                        Поле не должно быть пустым.
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Должность</label>
+                <input class="form-control" type="text" placeholder="Должность" [formControl]="form.controls['position']" />
+            </div>
+            <div class="form-group" [class.has-error]="!form.controls['maxWorkCount'].valid && form.controls['maxWorkCount'].touched">
+                <label class="control-label">Нагрузка</label>
+                <input class="form-control" type="number" placeholder="Нагрузка" [formControl]="form.controls['maxWorkCount']" />
+                <div class="text-danger help-block">
+                    <span *ngIf="form.controls['maxWorkCount'].hasError('required')&&form.controls['maxWorkCount'].touched">
+                        Поле должно быть заполнено.
+                    </span>
+                    <span *ngIf="form.controls['maxWorkCount'].hasError('minValue')&&form.controls['maxWorkCount'].touched">
+                        Значение должно быть больше 0.
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Сохранить</button>
+            <a [routerLink]="['/teachers']" class="btn btn-default">Отмена</a>
+        </div>
+    </form>
+</div>

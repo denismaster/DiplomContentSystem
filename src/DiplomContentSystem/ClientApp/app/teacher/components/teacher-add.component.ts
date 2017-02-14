@@ -30,7 +30,7 @@ export class TeachersAddComponent {
         teacher.position = value.position;
         teacher.maxWorkCount = value.maxWorkCount;
         
-        this.service.addTeacher(teacher).subscribe(result=>this.goBack());
+        this.service.add(teacher).subscribe(result=>this.goBack());
     }
 
     public goBack(): void {

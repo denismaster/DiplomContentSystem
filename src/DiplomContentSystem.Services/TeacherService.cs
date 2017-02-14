@@ -18,10 +18,21 @@ namespace DiplomContentSystem.Services
         {
             return _repository.Get();
         }
-
+        public Teacher Get(int id)
+        {
+            return _repository.Get(id);
+        }
+        
         public bool AddTeacher(Teacher teacher)
         {
             _repository.Add(teacher);
+            _repository.SaveChanges();
+            return true;
+        }
+
+        public bool UpdateTeacher(Teacher teacher)
+        {
+            _repository.Update(teacher);
             _repository.SaveChanges();
             return true;
         }

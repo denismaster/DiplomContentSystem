@@ -1,6 +1,4 @@
-﻿<p>
-            </p>
-<div class="panel panel-default">
+﻿<div class="panel panel-default">
     <div class="panel-heading">
         Преподаватели
         <div class="btn-group btn-group-sm pull-right">
@@ -14,60 +12,39 @@
             </a>
         </div>
     </div>
-    <div *ngIf="!teachers" class="panel-body panel-body-loader">
-        <div class="ball-clip-rotate">
-            <div></div>
-        </div>
-    </div>
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped table-hover" *ngIf="teachers">
+    <div class="table-responsive" [rtList]="getTeachers" #list="rtList" (onListInit)="onListInit($event)">
+        <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
                     <th>№</th>
-                    <th>ФИО</th>
-                    <th>Должность</th>
-                    <th>Нагрузка</th>
+                    <th><span rtSort="fio">ФИО</span></th>
+                    <th><span rtSort="position">Должность</span></th>
+                    <th><span rtSort="maxWorkCount">Нагрузка</span></th>
+                    <th>Действия</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let forecast of teachers">
-                    <td>{{ forecast.id }}</td>
-                    <td>{{ forecast.fio }}</td>
-                    <td>{{ forecast.position }}</td>
-                    <td>{{ forecast.maxWorkCount}}</td>
+                <tr *ngFor="let item of list.items">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.fio }}</td>
+                    <td>{{ item.position }}</td>
+                    <td>{{ item.maxWorkCount}}</td>
+                    <td>
+                        <a [routerLink]="['edit/',item.id]" class="btn btn-warning btn-sm">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
     <div class="panel-footer">
-        <nav>
-            <ul class="pagination pagination-sm m0">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">«</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">1</a>
-                </li>
-                <li>
-                    <a href="#">2</a>
-                </li>
-                <li>
-                    <a href="#">3</a>
-                </li>
-                <li>
-                    <a href="#">4</a>
-                </li>
-                <li class="active">
-                    <a href="#">5</a>
-                </li>
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">»</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <div class="btn-group btn-group-sm">
+            <button type="button" class="btn btn-default">1</button>
+            <button type="button" class="btn btn-default">2</button>
+            <button type="button" class="btn btn-default">3</button>
+            <button type="button" class="btn btn-default">4</button>
+            <button type="button" class="btn btn-default">5</button>
+        </div>
     </div>
 </div>

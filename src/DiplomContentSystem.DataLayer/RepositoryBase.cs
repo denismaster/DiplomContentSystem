@@ -46,7 +46,7 @@ namespace DiplomContentSystem.DataLayer
 
         public void Update(T item)
         {
-            throw new NotImplementedException();
+            _context.Entry(item).State = EntityState.Modified;
         }
         public void SaveChanges()
         {

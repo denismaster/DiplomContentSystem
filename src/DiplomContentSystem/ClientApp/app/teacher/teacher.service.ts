@@ -4,22 +4,20 @@ import { Observable } from 'rxjs/Observable';
 import { Teacher } from './models/teacher';
 import { ServiceBase } from '../shared/service-base';
 import { OperationResult } from '../shared/operation-result';
+import { ApiService, ApiRoutes } from '../shared/api-service';
 
 @Injectable()
-export class TeacherService extends ServiceBase{
-    constructor(private http: Http)
+export class TeacherService extends ApiService<Teacher>{
+    protected static routes:ApiRoutes = 
     {
-        super();
+        getUrl:"/api/teachers",
+        getOneUrl:"/api/teachers/",
+        addUrl:"api/teachers/add",
+        updateUrl:"/api/teachers/update/",
+        deleteUrl:"/api/teachers/delete/"
     }
-
-    public addTeacher(teacher:Teacher):Observable<OperationResult>
+    constructor(http: Http)
     {
-        console.log(teacher);
-        return this.http.post('/api/teachers/add',teacher).map(this.extractData);
-    }
-
-    public getTeachers():Observable<Teacher[]>
-    {
-        return this.http.get('/api/teachers').map(this.extractData);
+        super(TeacherService.routes,http);
     }
 }

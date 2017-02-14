@@ -1,6 +1,6 @@
 {
   "name": "node-ts-seed",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Simple seed for your NodeJS projects made with typescript.",
   "main": "dist/index.js",
   "repository": {
@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@types/express": "^4.0.34",
+    "@types/jasmine": "^2.5.41",
     "@types/node": "^7.0.0",
     "express": "^4.14.0",
     "latex": "0.0.1"

@@ -2,30 +2,23 @@ import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { TeacherService } from '../teacher.service';
 import { Teacher } from '../models/teacher';
+import {RtList } from 'right-angled';
 @Component({
     selector: 'teachers',
     templateUrl: './teacher.component.html'
 })
 export class TeachersComponent {
-    public teachers: Teacher[];
 
     constructor(private service: TeacherService) {
-        service.getTeachers().subscribe(result => {
-            this.teachers = result;
-        });
     }
-   /* sendRequest() {
-        let object = {
-            "id": 1,
-            "data": [
-                "\\documentclass{article}\n\\begin{document}\nHello,Denismaster!\n\\end{document}\n"]
-        };
-        this.http.post("http://localhost:1337/api/convert",object).subscribe(data => this.downloadFile(data));
+
+    getTeachers = (request)=>
+    {
+        return this.service.getList(request);
     }
-    downloadFile(data: Response) {
-        let blob = new Blob([data], { type: 'application/pdf' });
-        let url = window.URL.createObjectURL(blob);
-        FileSaver.saveAs(blob,"sample.pdf");
-}*/
+
+     onListInit(list: RtList): void {
+        list.registerFilterTarget(this);
+    }
 }
 
