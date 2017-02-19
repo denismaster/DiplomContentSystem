@@ -14,10 +14,12 @@ namespace DiplomContentSystem.Services
             else
                 _repository = repository;
         }
-        public IEnumerable<Teacher> GetTeachers()
+
+        public IEnumerable<Teacher> GetTeachers(object obj)
         {
             return _repository.Get();
         }
+        
         public Teacher Get(int id)
         {
             return _repository.Get(id);

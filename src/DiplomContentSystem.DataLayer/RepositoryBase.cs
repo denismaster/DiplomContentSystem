@@ -24,7 +24,7 @@ namespace DiplomContentSystem.DataLayer
 
         public void Delete(T item)
         {
-            throw new NotImplementedException();
+            _context.Entry<T>(item).State = EntityState.Deleted;
         }
 
         public T Get(int id)
@@ -34,19 +34,63 @@ namespace DiplomContentSystem.DataLayer
 
         public IEnumerable<T> Get()
         {
-            return _context.Set<T>().AsNoTracking().AsEnumerable();
+            return _context.Set<T>().AsEnumerable();
         }
 
         public IEnumerable<T> Get(Expression<Func<T, bool>> predicate)
         {
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
-            return _context.Set<T>().AsNoTracking().Where(predicate).AsEnumerable();
+            
+            return _context.Set<T>().Where(predicate).AsEnumerable();
         }
 
+        public ListResponse<T> Get(Request<T> request)
+        {
+            var filter = request.FilterExpression;
+            var includePaths = new List<string>().ToArray();
+            var sortExpression = request.SortExpression;
+            IQueryable<T> query = _context.Set<T>();
+ 
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+ 
+            /*if (includePaths != null)
+            {
+                for (var i = 0; i < includePaths.Count(); i++)
+                {
+                    query = query.Include(includePaths[i]);
+                }
+            }*/
+ 
+            if (sortExpression != null)
+            {
+                IOrderedQueryable<T> orderedQuery = null;
+                if (request.SortDirection == SortDirection.Ascending)
+                {
+                    orderedQuery = query.OrderBy(sortExpression);
+                }
+                else
+                {
+                    orderedQuery = query.OrderByDescending(sortExpression);
+                }
+                if (request.Skip != null)
+                {
+                    query = orderedQuery.Skip(((int)request.Skip - 1) * (int)request.Take);
+                }
+            }
+
+            if (request.Take!= null)
+            {
+                query = query.Take((int)request.Take);
+            }
+            return null;
+        }
         public void Update(T item)
         {
-            _context.Entry(item).State = EntityState.Modified;
+            _context.Entry<T>(item).State = EntityState.Modified;
         }
         public void SaveChanges()
         {

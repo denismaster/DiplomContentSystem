@@ -6,15 +6,17 @@ import { RouterModule } from '@angular/router';
 import { NavMenuComponent } from './navmenu/navmenu.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoaderComponent } from './loader/loader.component';
+import { ErrorListComponent } from './error-list/error-list.component';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
     imports: [CommonModule, RouterModule, RTModule, ReactiveFormsModule],
-    declarations: [NavMenuComponent, SidebarComponent,LoaderComponent],
+    declarations: [NavMenuComponent, SidebarComponent,LoaderComponent, ErrorListComponent],
     exports: [NavMenuComponent, SidebarComponent,
-        CommonModule, FormsModule,RTModule, RouterModule,LoaderComponent,ReactiveFormsModule]
+        CommonModule, FormsModule,RTModule, RouterModule,LoaderComponent,
+        ErrorListComponent,ReactiveFormsModule]
 })
 export class SharedModule {
     static forRoot(): ModuleWithProviders {

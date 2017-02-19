@@ -22,7 +22,6 @@ namespace DiplomContentSystem.Controllers
         [HttpGet("")]
         public async Task<IActionResult> Students()
         {
-            await Task.Delay(2000);
             return Ok(_service.GetStudents());
         }
     }

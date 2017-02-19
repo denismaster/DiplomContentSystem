@@ -5,20 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DiplomContentSystem.Services;
 using DiplomContentSystem.Core;
+using Dto=DiplomContentSystem.Dto;
 namespace DiplomContentSystem.Controllers
 {   
-    public class SortingParam
-    {
-        public string FieldName {get;set;}
-        public int Direction {get;set;}
-    }
-    public class RequestDto
-    {
-        public int Skip {get;set;}
-        public int Take {get;set;}
-        public IEnumerable<SortingParam> Sortings {get;set;}
-    }
-    public class TeacherRequestDto: RequestDto
+    public class TeacherRequestDto: Dto.Request
     {
         
     }
@@ -34,7 +24,7 @@ namespace DiplomContentSystem.Controllers
         [HttpPost("")]
         public IActionResult Get([FromBody] TeacherRequestDto request )
         {
-            return Ok(_service.GetTeachers());
+            return Ok(_service.GetTeachers(request));
         }
 
         [HttpGet("{id:int}")]
