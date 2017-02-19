@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 
 namespace DiplomContentSystem.Core
 {
-    public class Period : IEntity
+    public class Institute : IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public string ShortName { get; set; }
 
-        public List<DiplomWork> DiplomWorks { get; set; }
+        public List<Speciality> Specialties { get; set; }
     }
 }
