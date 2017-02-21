@@ -4,6 +4,7 @@
     </div>
     <form [formGroup]="form" (ngSubmit)="submit(form.value)">
         <div class="panel-body panel-body-loader">
+            <error-list [errors]="errors"></error-list>
             <div class="form-group" [class.has-error]="!form.controls['lastName'].valid && form.controls['lastName'].touched">
                 <label class="control-label">Фамилия</label>
                 <input name="lastName" placeholder="Фамилия" class="form-control" type="text" [formControl]="form.controls['lastName']" />

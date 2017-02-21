@@ -4,7 +4,8 @@
   "dependencies": {
     "NETStandard.Library": "1.6.1",
     "FluentValidation.AspNetCore": "6.4.0-beta4",
-    "DiplomContentSystem.Core": "1.0.0-*"
+    "DiplomContentSystem.Core": "1.0.0-*",
+    "DiplomContentSystem.Dto": "1.0.0-*"
   },
 
   "frameworks": {

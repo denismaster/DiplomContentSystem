@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DiplomContentSystem.Core;
+using DiplomContentSystem.Dto;
 namespace DiplomContentSystem.Services
 {
     public class TeacherService
@@ -14,10 +15,21 @@ namespace DiplomContentSystem.Services
             else
                 _repository = repository;
         }
-        public IEnumerable<Teacher> GetTeachers()
+
+        public IEnumerable<TeacherListItem> GetTeachers()
         {
-            return _repository.Get();
+            return _repository.Get(null,new List<string>(){"Position","Speciality"}).Select(x=>{
+                return new TeacherListItem()
+                {
+                    Id = x.Id,
+                    FIO = x.FIO,
+                    Position = x.Position.Name,
+                    Speciality = x.Speciality.ShortName,
+                    MaxWorkCount = x.MaxWorkCount
+                };
+            });
         }
+        
         public Teacher Get(int id)
         {
             return _repository.Get(id);

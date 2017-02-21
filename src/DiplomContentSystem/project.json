@@ -24,7 +24,8 @@
     "Microsoft.EntityFrameworkCore.Design": "1.0.0-preview2-final",
     "DiplomContentSystem.Core": "1.0.0-*",
     "DiplomContentSystem.DataLayer": "1.0.0-*",
-    "DiplomContentSystem.Services": "1.0.0-*"
+    "DiplomContentSystem.Services": "1.0.0-*",
+    "DiplomContentSystem.Dto":"1.0.0-*"
   },
 
   "tools": {

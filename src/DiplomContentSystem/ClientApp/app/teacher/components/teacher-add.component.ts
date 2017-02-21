@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { TeacherService } from '../teacher.service';
 import { Teacher } from '../models/teacher';
 import { CustomValidators } from '../../shared/custom-validators';
+import { OperationResult } from '../../shared/operation-result';
 
 @Component({
     selector: 'teachers-add',
@@ -12,6 +13,8 @@ import { CustomValidators } from '../../shared/custom-validators';
 })
 export class TeachersAddComponent {
     private form: FormGroup;
+    private errors: string[] = ["Hello, error!"];
+
     constructor(private service: TeacherService, private router: Router, private formBuilder: FormBuilder) {
         this.form = this.formBuilder.group({
             "firstName": [undefined, Validators.compose([Validators.required, CustomValidators.notEmpty()])],
@@ -35,5 +38,16 @@ export class TeachersAddComponent {
 
     public goBack(): void {
         this.router.navigate(['/teachers']);
+    }
+
+    public checkResult(result:OperationResult):void{
+        if(!result.hasErrors)
+        {
+            this.goBack();
+        }
+        else
+        {
+            this.errors = result.errors;
+        }
     }
 }

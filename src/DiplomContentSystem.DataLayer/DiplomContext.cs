@@ -10,6 +10,7 @@ namespace DiplomContentSystem.DataLayer
     {
         public DbSet<Institute> Institutes { get; set; }
         public DbSet<Speciality> Specialities { get; set; }
+        public DbSet<TeacherPosition> TeachersPositions { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Student> Students { get; set; }
@@ -34,7 +35,8 @@ namespace DiplomContentSystem.DataLayer
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(@"Host=localhost;Port=5432;Database=Diplom;UserId=postgres;Password=1234;Pooling=true");
+            //TODO: Use appsettings.json or environment variable, not the string here.
+            optionsBuilder.UseNpgsql(@"Host=localhost;Port=5432;Database=DCS;UserId=postgres;Password=12345678;Pooling=true");
         }
     }
 }
