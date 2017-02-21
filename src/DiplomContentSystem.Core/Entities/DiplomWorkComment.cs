@@ -5,17 +5,14 @@ using System.Threading.Tasks;
 
 namespace DiplomContentSystem.Core
 {
-    public class Student : IEntity
+    public class DiplomWorkComment : IEntity
     {
         public int Id { get; set; }
-        public string FIO { get; set; }
-
-        public int GroupId { get; set; }
-        public Group Group { get; set; }
 
         public int DiplomWorkId { get; set; }
         public DiplomWork DiplomWork { get; set; }
 
-        public List<StudentComment> StudentComments { get; set; }
+        public int CommentId { get; set; }
+        public Comment Comment { get; set; }
     }
 }
