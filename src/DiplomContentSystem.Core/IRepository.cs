@@ -9,7 +9,7 @@ namespace DiplomContentSystem.Core
     public interface IRepository<T> where T: class, IEntity
     {
         IEnumerable<T> Get();
-        IEnumerable<T> Get(Expression<Func<T, bool>> predicate = null);
+        IEnumerable<T> Get(Expression<Func<T, bool>> predicate = null, IEnumerable<string> includes=null);
         ListResponse<T> Get(Request<T> request);
         T Get(int id);
         void Add(T item);

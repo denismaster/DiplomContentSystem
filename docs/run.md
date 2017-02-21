@@ -4,8 +4,8 @@
 ## Нужно поставить
 * Node.JS >6.7
 * .NET Core 1.1
-* TexLive
-* Сейчас у нас SQLite, но скорее всего перейдем на PostgreSQL
+* TexLive последней версии
+* PostgreSQL 9.6
 
 ## Глобальные зависимости
 * `npm install -g typescript` - ставит TypeScript

@@ -37,12 +37,21 @@ namespace DiplomContentSystem.DataLayer
             return _context.Set<T>().AsEnumerable();
         }
 
-        public IEnumerable<T> Get(Expression<Func<T, bool>> predicate)
+        public IEnumerable<T> Get(Expression<Func<T, bool>> predicate,IEnumerable<string> includes)
         {
-            if (predicate == null)
-                throw new ArgumentNullException(nameof(predicate));
-            
-            return _context.Set<T>().Where(predicate).AsEnumerable();
+            //if (predicate == null)
+            //    throw new ArgumentNullException(nameof(predicate));
+            var query = _context.Set<T>().AsNoTracking();
+            if(includes!=null)
+            {
+                foreach(var include in includes)
+                query = query.Include(include);
+            }
+            if(predicate!=null)
+            {
+                query = query.Where(predicate);
+            }
+            return query.AsEnumerable();
         }
 
         public ListResponse<T> Get(Request<T> request)
