@@ -27,7 +27,7 @@ export class TeachersEditComponent implements OnInit {
                 this.form = this.formBuilder.group({
                     "fio": [result.fio, Validators.compose([Validators.required, CustomValidators.notEmpty()])],
                     "maxWorkCount": [result.maxWorkCount, Validators.compose([Validators.required,CustomValidators.minValue(1)])],
-                    "position": [result.position]
+                    "position": [result.position.id]
                 });        
             })
     }

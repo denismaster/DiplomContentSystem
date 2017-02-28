@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using DiplomContentSystem.Core;
 namespace DiplomContentSystem.DataLayer
 {
-    public class RepositoryBase<T> : IRepository<T> where T: class, IEntity
+    public class RepositoryBase<T> : IRepository<T> where T : class, IEntity
     {
         private readonly DiplomContext _context;
 
@@ -17,90 +17,106 @@ namespace DiplomContentSystem.DataLayer
             _context = context;
         }
 
+        public IEnumerable<T> Get()
+        {
+            return _context.Set<T>().AsNoTracking().AsEnumerable();
+        }
+        public T Get(int id, IEnumerable<string> includes=null)
+        {
+             var query = _context.Set<T>().AsNoTracking();
+             if (includes != null)
+            {
+                foreach (var include in includes)
+                    query = query.Include(include);
+            }
+            return query.FirstOrDefault(entity => entity.Id == id);
+        }
+        public IEnumerable<T> Get(Expression<Func<T, bool>> predicate,IEnumerable<string> includes = null)
+        {
+            return _context.Set<T>().AsNoTracking().AsEnumerable();
+        }
+        
+        public long Count(Expression<Func<T, bool>> predicate=null)
+        {
+            var query = _context.Set<T>().AsNoTracking();
+            if(predicate!=null)
+                query = query.Where(predicate);
+            return query.LongCount();
+        }
+        
+        public IEnumerable<T> Get(Request<T> request,IEnumerable<string> includes = null)
+        {
+            var result = new PagedEnumerable<T>();
+            IQueryable<T> query = _context.Set<T>().AsNoTracking();
+
+            if (request.FilterExpression != null)
+            {
+                query = query.Where(request.FilterExpression);
+            }
+            if (includes != null)
+            {
+                foreach (var include in includes)
+                    query = query.Include(include);
+            }
+            var sortExpressions = request.SortExpressions;
+            if (sortExpressions != null&&sortExpressions.Any())
+            {
+                IOrderedQueryable<T> orderedQuery = null;
+                for (var i = 0; i < sortExpressions.Count(); i++)
+                {
+                    if (i == 0)
+                    {
+                        if (sortExpressions[i].SortDirection == SortDirection.Ascending)
+                        {
+                            orderedQuery = query.OrderBy(sortExpressions[i].SortBy);
+                        }
+                        else
+                        {
+                            orderedQuery = query.OrderByDescending(sortExpressions[i].SortBy);
+                        }
+                    }
+                    else
+                    {
+                        if (sortExpressions[i].SortDirection == SortDirection.Ascending)
+                        {
+                            orderedQuery = orderedQuery.ThenBy(sortExpressions[i].SortBy);
+                        }
+                        else
+                        {
+                            orderedQuery = orderedQuery.ThenByDescending(sortExpressions[i].SortBy);
+                        }
+ 
+                    }
+                }
+                query = orderedQuery;
+
+                
+            }
+            if (request.Skip.HasValue)
+                {
+                    query = query.Skip(request.Skip.Value);
+                }
+            if (request.Take != null)
+            {
+                query = query.Take(request.Take.Value);
+            }
+            return query.AsEnumerable();
+        }
         public void Add(T item)
         {
-           _context.Set<T>().Add(item);
+            _context.Set<T>().Add(item);
+        }
+
+        public void Update(T item)
+        {
+            _context.Entry<T>(item).State = EntityState.Modified;
         }
 
         public void Delete(T item)
         {
             _context.Entry<T>(item).State = EntityState.Deleted;
         }
-
-        public T Get(int id)
-        {
-            return _context.Set<T>().FirstOrDefault(entity => entity.Id == id);
-        }
-
-        public IEnumerable<T> Get()
-        {
-            return _context.Set<T>().AsEnumerable();
-        }
-
-        public IEnumerable<T> Get(Expression<Func<T, bool>> predicate,IEnumerable<string> includes)
-        {
-            //if (predicate == null)
-            //    throw new ArgumentNullException(nameof(predicate));
-            var query = _context.Set<T>().AsNoTracking();
-            if(includes!=null)
-            {
-                foreach(var include in includes)
-                query = query.Include(include);
-            }
-            if(predicate!=null)
-            {
-                query = query.Where(predicate);
-            }
-            return query.AsEnumerable();
-        }
-
-        public ListResponse<T> Get(Request<T> request)
-        {
-            var filter = request.FilterExpression;
-            var includePaths = new List<string>().ToArray();
-            var sortExpression = request.SortExpression;
-            IQueryable<T> query = _context.Set<T>();
- 
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
- 
-            /*if (includePaths != null)
-            {
-                for (var i = 0; i < includePaths.Count(); i++)
-                {
-                    query = query.Include(includePaths[i]);
-                }
-            }*/
- 
-            if (sortExpression != null)
-            {
-                IOrderedQueryable<T> orderedQuery = null;
-                if (request.SortDirection == SortDirection.Ascending)
-                {
-                    orderedQuery = query.OrderBy(sortExpression);
-                }
-                else
-                {
-                    orderedQuery = query.OrderByDescending(sortExpression);
-                }
-                if (request.Skip != null)
-                {
-                    query = orderedQuery.Skip(((int)request.Skip - 1) * (int)request.Take);
-                }
-            }
-
-            if (request.Take!= null)
-            {
-                query = query.Take((int)request.Take);
-            }
-            return null;
-        }
-        public void Update(T item)
-        {
-            _context.Entry<T>(item).State = EntityState.Modified;
-        }
+        
         public void SaveChanges()
         {
             _context.SaveChanges();

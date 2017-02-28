@@ -5,13 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DiplomContentSystem.Services;
 using DiplomContentSystem.Core;
-using Dto=DiplomContentSystem.Dto;
+using Newtonsoft.Json;
 namespace DiplomContentSystem.Controllers
 {   
-    public class TeacherRequestDto: Dto.Request
-    {
-        
-    }
     [Route("api/[controller]")]
     public class TeachersController : Controller
     {
@@ -22,7 +18,7 @@ namespace DiplomContentSystem.Controllers
         }
 
         [HttpPost("")]
-        public IActionResult Get([FromBody] TeacherRequestDto request )
+        public IActionResult Get([FromBody] Dto.TeacherRequest request )
         {
             return Ok(_service.GetTeachers(request));
         }

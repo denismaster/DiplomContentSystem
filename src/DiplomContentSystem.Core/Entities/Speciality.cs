@@ -14,8 +14,5 @@ namespace DiplomContentSystem.Core
 
         public int InstituteId { get; set; }
         public Institute Institute { get; set; }
-
-        public List<Teacher> Teachers { get; set; }
-        public List<Group> Groups { get; set; }
     }
 }

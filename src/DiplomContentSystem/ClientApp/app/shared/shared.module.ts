@@ -7,15 +7,17 @@ import { NavMenuComponent } from './navmenu/navmenu.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoaderComponent } from './loader/loader.component';
 import { ErrorListComponent } from './error-list/error-list.component';
+import { TableStateComponent } from './table-state/table-state.component';
+import { TablePaginationComponent } from './table-pagination/table-pagination.component';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
     imports: [CommonModule, RouterModule, RTModule, ReactiveFormsModule],
-    declarations: [NavMenuComponent, SidebarComponent,LoaderComponent, ErrorListComponent],
-    exports: [NavMenuComponent, SidebarComponent,
-        CommonModule, FormsModule,RTModule, RouterModule,LoaderComponent,
+    declarations: [NavMenuComponent, SidebarComponent,LoaderComponent,TableStateComponent,TablePaginationComponent, ErrorListComponent],
+    exports: [NavMenuComponent, SidebarComponent,TablePaginationComponent,
+        CommonModule, FormsModule,RTModule, RouterModule,LoaderComponent,TableStateComponent,
         ErrorListComponent,ReactiveFormsModule]
 })
 export class SharedModule {

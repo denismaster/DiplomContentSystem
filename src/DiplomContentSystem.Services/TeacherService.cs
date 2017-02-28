@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DiplomContentSystem.Core;
 using DiplomContentSystem.Dto;
@@ -16,25 +17,56 @@ namespace DiplomContentSystem.Services
                 _repository = repository;
         }
 
-        public IEnumerable<TeacherListItem> GetTeachers()
+        private Expression<Func<Teacher, object>> GetSortExpression(string sortFieldName)
         {
-            return _repository.Get(null,new List<string>(){"Position","Speciality"}).Select(x=>{
-                return new TeacherListItem()
+            switch (sortFieldName)
+            {
+                case "fio": return teacher => teacher.FIO;
+                case "position": return teacher => teacher.Position.Name;
+                case "maxWorkCount": return teacher => teacher.MaxWorkCount;
+                default: return teacher => teacher.Id;
+            }
+        }
+
+        public Dto.ListResponse<TeacherListItem> GetTeachers(TeacherRequest request)
+        {
+            var dbRequest = new Request<Teacher>();
+            var response = new ListResponse<TeacherListItem>();
+
+            string[] includes = {"Position","Speciality"};
+            dbRequest.Skip = request.Skip;
+            dbRequest.Take = request.Take;
+            if (!string.IsNullOrEmpty(request.FIO))
+            {
+                dbRequest.FilterExpression = teacher => teacher.FIO.Contains(request.FIO);
+            }
+            dbRequest.SortExpressions = (request == null || request.Sortings == null) ? null : request.Sortings
+                .Select(sorting =>
                 {
-                    Id = x.Id,
-                    FIO = x.FIO,
-                    Position = x.Position.Name,
-                    Speciality = x.Speciality.ShortName,
-                    MaxWorkCount = x.MaxWorkCount
-                };
-            });
+                    return new SortExpression<Teacher>(GetSortExpression(sorting.FieldName), (SortDirection)sorting.Direction);
+                })
+                .ToArray();
+            response.TotalCount = _repository.Count(dbRequest.FilterExpression);
+            response.Items =  _repository.Get(dbRequest, includes).Select(x =>
+                {
+                    return new TeacherListItem()
+                    {
+                        Id = x.Id,
+                        FIO = x.FIO,
+                        Position = x.Position.Name,
+                        Speciality = x.Speciality.ShortName,
+                        MaxWorkCount = x.MaxWorkCount
+                    };
+                });
+            return response;
         }
-        
+
         public Teacher Get(int id)
-        {
-            return _repository.Get(id);
+        {   
+            string[] includes = {"Position","Speciality"};
+            return _repository.Get(id,includes);
         }
-        
+
         public bool AddTeacher(Teacher teacher)
         {
             _repository.Add(teacher);
