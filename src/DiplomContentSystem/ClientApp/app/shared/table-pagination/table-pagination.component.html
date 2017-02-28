@@ -1,0 +1,37 @@
+<rt-paged-pager [defaultPageSize]="10" #rtPager>
+    <div class="btn-group btn-group-sm" role="group">
+        <button class="btn btn-default" [class.disabled]="!rtPager.canMoveBackward" (click)="rtPager.goToFirstPage()">
+                <i class="glyphicon glyphicon-backward"></i>
+            </button>
+        <button class="btn btn-default" [class.disabled]="!rtPager.canMoveBackward" (click)="rtPager.goToPreviousPage()">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+            </button>
+        <button *ngIf="checkPageNumber(rtPager.pager.pageNumber-3)" class="btn btn-default" (click)="goToPage(rtPager.pager.pageNumber-3)">
+                {{ rtPager.pager.pageNumber-3 }}
+            </button>
+        <button *ngIf="checkPageNumber(rtPager.pager.pageNumber-2)" class="btn btn-default" (click)="goToPage(rtPager.pager.pageNumber-2)">
+                {{ rtPager.pager.pageNumber-2 }}
+            </button>
+        <button *ngIf="checkPageNumber(rtPager.pager.pageNumber-1)" class="btn btn-default" (click)="goToPage(rtPager.pager.pageNumber-1)">
+                {{ rtPager.pager.pageNumber-1 }}
+            </button>
+        <button *ngIf="checkPageNumber(rtPager.pager.pageNumber)" class="btn btn-info" (click)="goToPage(rtPager.pager.pageNumber)">
+                {{ rtPager.pager.pageNumber }}
+            </button>
+        <button *ngIf="checkPageNumber(rtPager.pager.pageNumber+1)" class="btn btn-default" (click)="goToPage(rtPager.pager.pageNumber+1)">
+                {{ rtPager.pager.pageNumber+1 }}
+            </button>
+        <button *ngIf="checkPageNumber(rtPager.pager.pageNumber+2)" class="btn btn-default" (click)="goToPage(rtPager.pager.pageNumber+2)">
+                {{ rtPager.pager.pageNumber+2 }}
+            </button>
+        <button *ngIf="checkPageNumber(rtPager.pager.pageNumber+3)" class="btn btn-default" (click)="goToPage(rtPager.pager.pageNumber+3)">
+                {{ rtPager.pager.pageNumber+3 }}
+            </button>
+        <button class="btn btn-default" [class.disabled]="!rtPager.canMoveForward" (click)="rtPager.goToNextPage()" title="go to next page">
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </button>
+        <button class="btn btn-default" [class.disabled]="!rtPager.canMoveForward" (click)="rtPager.goToLastPage()" title="go to last page">
+                <i class="glyphicon glyphicon-forward"></i>
+            </button>
+    </div>
+</rt-paged-pager>

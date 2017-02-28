@@ -49,8 +49,6 @@ namespace DiplomContentSystem
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
                 {
                     HotModuleReplacement = true,
-                        
-
                 });
             }
             else

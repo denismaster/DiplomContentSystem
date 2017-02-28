@@ -48,10 +48,6 @@ textarea
     padding: 5px;
 }
 
-.container
-{
-    width:900px;
-}
 .rt-sortable {
     position: relative;
     padding-right: 45px;
@@ -78,4 +74,25 @@ textarea
 }
 .rt-sortable:hover:after {
     background-image: url("../img/sortable.png");
+}
+
+
+.app-loader {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 0;
+}
+
+.app-loader::before
+{
+        height: 100%;
+        display: inline-block;
+        vertical-align: middle;
+        content: '';
 }

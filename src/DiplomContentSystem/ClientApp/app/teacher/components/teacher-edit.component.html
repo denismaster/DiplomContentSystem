@@ -21,7 +21,12 @@
             </div>
             <div class="form-group">
                 <label class="control-label">Должность</label>
-                <input class="form-control" type="text" placeholder="Должность" [formControl]="form.controls['position']" />
+                <select class="form-control" placeholder="Должность" [formControl]="form.controls['position']">
+                    <option value="1">Ассистент</option>
+                    <option value="2">Старший преподаватель</option>
+                    <option value="3">Доцент</option>
+                    <option value="4">Профессор</option>
+                </select>
             </div>
             <div class="form-group" [class.has-error]="!form.controls['maxWorkCount'].valid && form.controls['maxWorkCount'].touched">
                 <label class="control-label">Нагрузка</label>

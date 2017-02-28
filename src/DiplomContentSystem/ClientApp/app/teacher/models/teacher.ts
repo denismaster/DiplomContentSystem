@@ -1,6 +1,9 @@
 export class Teacher {
     id: number;
     fio: string;
-    position: string;
+    position: {
+        id:number;
+        name:string;
+    }
     maxWorkCount: string;
 }

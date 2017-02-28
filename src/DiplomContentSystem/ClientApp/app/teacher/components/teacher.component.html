@@ -1,8 +1,8 @@
-﻿<div class="panel panel-default">
+﻿<div class="panel panel-default"  [rtList]="getTeachers" #list="rtList" (onListInit)="onListInit($event)">
     <div class="panel-heading">
         Преподаватели
         <div class="btn-group btn-group-sm pull-right">
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" (click)="showFilter=!showFilter">
                 <i class="fa fa-search"></i>
                  Поиск
             </button>
@@ -12,7 +12,16 @@
             </a>
         </div>
     </div>
-    <div class="table-responsive" [rtList]="getTeachers" #list="rtList" (onListInit)="onListInit($event)">
+    <div class="panel-body" *ngIf="showFilter">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Искать по ФИО..." style="max-width: 100%!important"
+            [(ngModel)]="FIO">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" (click)="list.reloadData()">Найти</button>
+            </span>
+        </div><!-- /input-group -->
+    </div>
+    <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
@@ -26,7 +35,11 @@
             <tbody>
                 <tr *ngFor="let item of list.items">
                     <td>{{ item.id }}</td>
-                    <td>{{ item.fio }}</td>
+                    <td>
+                        <a [routerLink]="['edit/', item.id]">
+                            {{ item.fio }}
+                        </a>
+                    </td>
                     <td>{{ item.position }}</td>
                     <td>{{ item.maxWorkCount}}</td>
                     <td>
@@ -36,15 +49,16 @@
                     </td>
                 </tr>
             </tbody>
+            <tfoot *ngIf="loading">
+                <tr>
+                    <td colspan="5">
+                        <table-state></table-state>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
     </div>
     <div class="panel-footer">
-        <div class="btn-group btn-group-sm">
-            <button type="button" class="btn btn-default">1</button>
-            <button type="button" class="btn btn-default">2</button>
-            <button type="button" class="btn btn-default">3</button>
-            <button type="button" class="btn btn-default">4</button>
-            <button type="button" class="btn btn-default">5</button>
-        </div>
+        <table-pagination></table-pagination>
     </div>
 </div>
