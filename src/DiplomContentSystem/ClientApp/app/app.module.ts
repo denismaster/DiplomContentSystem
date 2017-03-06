@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { TeacherService } from './teacher/teacher.service';
 import { TeachersModule } from './teacher/teacher.module';
 import { StundentsAddComponent} from './student/components/students-add.component'
+import { SignInComponent } from './login/components/sign-in.component';
 @NgModule({
     bootstrap: [ AppComponent ],
     declarations: [
@@ -19,7 +20,8 @@ import { StundentsAddComponent} from './student/components/students-add.componen
         FetchDataComponent,
         HomeComponent,
         StudentComponent,
-        StundentsAddComponent
+        StundentsAddComponent,
+        SignInComponent
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
