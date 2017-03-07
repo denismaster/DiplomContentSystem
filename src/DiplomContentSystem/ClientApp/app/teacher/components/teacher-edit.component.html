@@ -7,6 +7,7 @@
     </div>
     <form [formGroup]="form" (ngSubmit)="submit(form.value)" *ngIf="!isLoading">
         <div class="panel-body">
+            <error-list [errors]="errors"></error-list>
             <div class="form-group" [class.has-error]="!form.controls['fio'].valid && form.controls['fio'].touched">
                 <label class="control-label">ФИО</label>
                 <input name="fio" placeholder="Фамилия" class="form-control" type="text" [formControl]="form.controls['fio']" />

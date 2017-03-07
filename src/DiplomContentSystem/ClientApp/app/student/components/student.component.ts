@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { TeacherService } from '../teacher.service';
-import { Teacher } from '../models/teacher';
 import {RtList,filter } from 'right-angled';
+import { StudentService } from '../student.service';
 @Component({
-    selector: 'teachers',
-    templateUrl: './teacher.component.html'
+    selector: 'student-list',
+    templateUrl: './student.component.html'
 })
-export class TeachersComponent {
+export class StudentComponent {
 
     @filter()
     private FIO:string;
@@ -15,10 +14,10 @@ export class TeachersComponent {
     private showFilter:boolean;
     private isLoading: boolean = true;
     
-    constructor(private service: TeacherService) {
+    constructor(private service: StudentService) {
     }
 
-    getTeachers = (request)=>
+    getStudents = (request)=>
     {
         this.isLoading = true;
         const observable = this.service.getList(request);

@@ -5,45 +5,29 @@
     <form [formGroup]="form" (ngSubmit)="submit(form.value)">
         <div class="panel-body panel-body-loader">
             <error-list [errors]="errors"></error-list>
-            <div class="form-group" [class.has-error]="!form.controls['lastName'].valid && form.controls['lastName'].touched">
-                <label class="control-label">Фамилия</label>
-                <input name="lastName" placeholder="Фамилия" class="form-control" type="text" [formControl]="form.controls['lastName']" />
+            <div class="form-group" [class.has-error]="!form.controls['fio'].valid && form.controls['fio'].touched">
+                <label class="control-label">ФИО</label>
+                <input name="lastName" placeholder="Фамилия" class="form-control" type="text" [formControl]="form.controls['fio']" />
                 <div class="text-danger help-block">
-                    <span *ngIf="form.controls['lastName'].hasError('required')&&form.controls['lastName'].touched">
+                    <span *ngIf="form.controls['fio'].hasError('required')&&form.controls['fio'].touched">
                         Поле должно быть заполнено.
                     </span>
-                    <span *ngIf="form.controls['lastName'].hasError('notEmpty')&&form.controls['lastName'].touched">
+                    <span *ngIf="form.controls['fio'].hasError('notEmpty')&&form.controls['fio'].touched">
                         Поле не должно быть пустым.
+                    </span>
+                    <span *ngIf="form.controls['fio'].hasError('wordCount')&&form.controls['fio'].touched">
+                        ФИО должно содержать 3 слова.
                     </span>
                 </div>
             </div>
-            <div class="form-group" [class.has-error]="!form.controls['firstName'].valid && form.controls['firstName'].touched">
-                <label class="control-label">Имя</label>
-                <input class="form-control" type="text" placeholder="Имя" [formControl]="form.controls['firstName']" />
-                <div class="text-danger help-block">
-                    <span *ngIf="form.controls['firstName'].hasError('required')&&form.controls['firstName'].touched">
-                        Поле должно быть заполнено.
-                    </span>
-                    <span *ngIf="form.controls['firstName'].hasError('notEmpty')&&form.controls['firstName'].touched">
-                        Поле не должно быть пустым.
-                    </span>
-                </div>
-            </div>
-            <div class="form-group" [class.has-error]="!form.controls['middleName'].valid && form.controls['middleName'].touched">
-                <label class="control-label">Отчество</label>
-                <input class="form-control" type="text" placeholder="Отчество" [formControl]="form.controls['middleName']" />
-                <div class="text-danger help-block">
-                    <span *ngIf="form.controls['middleName'].hasError('required')&&form.controls['middleName'].touched">
-                        Поле должно быть заполнено.
-                    </span>
-                    <span *ngIf="form.controls['middleName'].hasError('notEmpty')&&form.controls['middleName'].touched">
-                        Поле не должно быть пустым.
-                    </span>
-                </div>
-            </div>
-            <div class="form-group">
+            <div class="form-group" [class.has-error]="!form.controls['position'].valid && form.controls['position'].touched">
                 <label class="control-label">Должность</label>
-                <input class="form-control" type="text" placeholder="Должность" [formControl]="form.controls['position']" />
+                <select class="form-control" placeholder="Должность" [formControl]="form.controls['position']">
+                    <option value="1">Ассистент</option>
+                    <option value="2">Старший преподаватель</option>
+                    <option value="3">Доцент</option>
+                    <option value="4">Профессор</option>
+                </select>
             </div>
             <div class="form-group" [class.has-error]="!form.controls['maxWorkCount'].valid && form.controls['maxWorkCount'].touched">
                 <label class="control-label">Нагрузка</label>

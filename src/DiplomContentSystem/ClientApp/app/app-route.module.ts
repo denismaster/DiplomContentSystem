@@ -1,8 +1,6 @@
 ﻿import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { StudentComponent } from './components/student/student.component';
-import { StundentsAddComponent} from './student/components/students-add.component'
 import { SignInComponent } from './login/components/sign-in.component';
 const appRoutes: Routes = [
     {
@@ -17,14 +15,6 @@ const appRoutes: Routes = [
     {
         path: 'login',
         component: SignInComponent,
-    },
-    {
-        path: 'students',
-        component: StudentComponent,
-    },
-    {
-        path: 'students/new',
-        component: StundentsAddComponent,
     },
     {
         path: '**',

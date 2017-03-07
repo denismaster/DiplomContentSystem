@@ -13,15 +13,13 @@ import { OperationResult } from '../../shared/operation-result';
 })
 export class TeachersAddComponent {
     private form: FormGroup;
-    private errors: string[] = ["Hello, error!"];
+    private errors: string[] = [];
 
     constructor(private service: TeacherService, private router: Router, private formBuilder: FormBuilder) {
         this.form = this.formBuilder.group({
-            "firstName": [undefined, Validators.compose([Validators.required, CustomValidators.notEmpty()])],
-            "lastName": [null, Validators.compose([Validators.required, CustomValidators.notEmpty()])],
-            "middleName": [undefined, Validators.compose([Validators.required, CustomValidators.notEmpty()])],
+            "fio": [undefined, Validators.compose([Validators.required, CustomValidators.notEmpty(), CustomValidators.wordCount(3)])],
             "maxWorkCount": [undefined, Validators.compose([Validators.required,CustomValidators.minValue(1)])],
-            "position": [undefined]
+            "position": [undefined, Validators.required]
         });
     }
 
@@ -29,11 +27,11 @@ export class TeachersAddComponent {
         event.preventDefault();
 
         const teacher = new Teacher();
-        teacher.fio = [value.lastName, value.firstName, value.middleName].join(" ");
-        teacher.position = value.position;
+        teacher.fio = value.fio;
+        teacher.positionId = value.position;
         teacher.maxWorkCount = value.maxWorkCount;
         
-        this.service.add(teacher).subscribe(result=>this.goBack());
+        this.service.add(teacher).subscribe(result=>this.checkResult(result));
     }
 
     public goBack(): void {
