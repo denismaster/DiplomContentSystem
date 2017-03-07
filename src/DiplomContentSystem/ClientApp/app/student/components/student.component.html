@@ -41,9 +41,27 @@
                             {{ item.fio }}
                         </a>
                     </td>
-                    <td>{{ item.group }}</td>
-                    <td>{{ item.diplomWork }}</td>
-                    <td>{{ item.teacher }}</td>
+                    <td>
+                        <a *ngIf="item.group" [routerLink]="['/group/', item.groupId]">
+                            {{ item.group }}
+                        </a>
+                    </td>
+                    <td>
+                        <a *ngIf="item.diplomWorkId" [routerLink]="['/diploms/', item.diplomWorkId]">
+                            {{ item.diplomWork }}
+                        </a>
+                        <a *ngIf="!item.diplomWorkId" class="btn btn-default btn-sm" [routerLink]="['/diplom/add/', item.id]">
+                            Добавить дипломную работу
+                        </a>
+                    </td>
+                    <td>
+                        <a *ngIf="item.teacherId" [routerLink]="['/teachers/edit/', item.teacherId]">
+                            {{ item.teacher }}
+                        </a>
+                        <a *ngIf="!item.teacher" class="btn btn-default btn-sm" [routerLink]="['/teacher/add/', item.id]">
+                            Добавить руководителя
+                        </a>
+                    </td>
                     <td>
                         <a  disabled [routerLink]="['edit/',item.id]" class="btn btn-warning btn-sm">
                             <i class="fa fa-edit"></i>

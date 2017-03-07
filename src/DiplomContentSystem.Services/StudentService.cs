@@ -57,9 +57,11 @@ namespace DiplomContentSystem.Services
                 {
                     Id = x.Id,
                     FIO = x.FIO,
-                    Group = x.Group.Name,
-                    DiplomWork = x.DiplomWork.Name,
-                    Teacher = x.Teacher.FIO
+                    Group = x.Group?.Name ?? "",
+                    DiplomWork = x.DiplomWork?.Name??"",
+                    DiplomWorkId = x.DiplomWorkId,
+                    Teacher = x.Teacher?.FIO??"",
+                    TeacherId = x.TeacherId
                 };
             });
             return response;
