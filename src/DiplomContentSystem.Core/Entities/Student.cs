@@ -13,8 +13,11 @@ namespace DiplomContentSystem.Core
         public int GroupId { get; set; }
         public Group Group { get; set; }
 
-        public int DiplomWorkId { get; set; }
+        public int? DiplomWorkId { get; set; }
         public DiplomWork DiplomWork { get; set; }
+
+        public int? TeacherId {get;set;}
+        public Teacher Teacher {get;set;}
 
         public List<StudentComment> StudentComments { get; set; }
     }

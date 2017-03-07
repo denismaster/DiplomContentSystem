@@ -5,12 +5,12 @@ import { AppComponent } from './app.component'
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
-import { StudentComponent } from './components/student/student.component';
 import { AppRoutesModule } from './app-route.module';
 import { SharedModule } from './shared/shared.module';
 import { TeacherService } from './teacher/teacher.service';
 import { TeachersModule } from './teacher/teacher.module';
-import { StundentsAddComponent} from './student/components/students-add.component'
+import { SignInComponent } from './login/components/sign-in.component';
+import { StudentsModule } from './student/student.module';
 @NgModule({
     bootstrap: [ AppComponent ],
     declarations: [
@@ -18,14 +18,14 @@ import { StundentsAddComponent} from './student/components/students-add.componen
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
-        StudentComponent,
-        StundentsAddComponent
+        SignInComponent
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         AppRoutesModule,
         SharedModule,
-        TeachersModule
+        TeachersModule,
+        StudentsModule
     ],
 })
 export class AppModule {

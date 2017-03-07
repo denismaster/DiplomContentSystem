@@ -5,6 +5,7 @@ import { Router,ActivatedRoute } from '@angular/router';
 import { TeacherService } from '../teacher.service';
 import { Teacher } from '../models/teacher';
 import { CustomValidators } from '../../shared/custom-validators';
+import { OperationResult } from '../../shared/operation-result';
 
 @Component({
     selector: 'teachers-edit',
@@ -12,6 +13,8 @@ import { CustomValidators } from '../../shared/custom-validators';
 })
 export class TeachersEditComponent implements OnInit {
     private form: FormGroup;
+    private errors: string[] = [];
+
     private id:number;
     private teacher: Teacher;
     private isLoading:boolean=true;
@@ -47,13 +50,24 @@ export class TeachersEditComponent implements OnInit {
         const teacher = new Teacher();
         teacher.id = this.id;
         teacher.fio = value.fio;
-        teacher.position = value.position;
+        teacher.positionId = value.position;
         teacher.maxWorkCount = value.maxWorkCount;
         
-        this.service.update(teacher).subscribe(result=>this.goBack());
+        this.service.update(teacher).subscribe(result=>this.checkResult(result));
     }
 
     public goBack(): void {
         this.router.navigate(['/teachers']);
+    }
+
+    public checkResult(result:OperationResult):void{
+        if(!result.hasErrors)
+        {
+            this.goBack();
+        }
+        else
+        {
+            this.errors = result.errors;
+        }
     }
 }

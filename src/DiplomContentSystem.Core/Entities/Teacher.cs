@@ -11,6 +11,7 @@ namespace DiplomContentSystem.Core
         public string FIO { get; set; }
         //TODO: добавить возможность менять должности и ставить их в зависимости от периода
         public TeacherPosition Position { get; set; }
+        public int PositionId {get;set;}
         //TODO: число дипломников также зависит от периода
         public int MaxWorkCount { get; set; }
 
