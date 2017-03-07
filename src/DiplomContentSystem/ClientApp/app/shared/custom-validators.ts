@@ -18,4 +18,12 @@ export class CustomValidators
             return min<=v ? null : { 'minValue': true };
         };
     }
+
+    public static wordCount(count:number):ValidatorFn{
+        return (control:AbstractControl): ValidationResult =>{
+            let value:string = control.value;
+            let words = value? value.trim().split(' '): [];
+            return words.length==count ? null: {'wordCount':true};
+        }
+    }
 }
