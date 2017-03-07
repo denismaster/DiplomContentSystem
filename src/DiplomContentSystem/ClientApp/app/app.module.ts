@@ -11,6 +11,7 @@ import { TeacherService } from './teacher/teacher.service';
 import { TeachersModule } from './teacher/teacher.module';
 import { SignInComponent } from './login/components/sign-in.component';
 import { StudentsModule } from './student/student.module';
+import { DiplomWorksModule } from './diplomWorks/diplom-works.module';
 @NgModule({
     bootstrap: [ AppComponent ],
     declarations: [
@@ -25,7 +26,8 @@ import { StudentsModule } from './student/student.module';
         AppRoutesModule,
         SharedModule,
         TeachersModule,
-        StudentsModule
+        StudentsModule,
+        DiplomWorksModule
     ],
 })
 export class AppModule {
