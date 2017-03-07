@@ -11,18 +11,18 @@ using DiplomContentSystem.Core;
 namespace DiplomContentSystem.Controllers
 {
     [Route("api/[controller]")]
-    public class StudentController : Controller
+    public class StudentsController : Controller
     {
         private readonly StudentService _service;
-        public StudentController(StudentService service)
+        public StudentsController(StudentService service)
         {
             _service = service;
         }
-        // GET: api/values
-        [HttpGet("")]
-        public async Task<IActionResult> Students()
+
+        [HttpPost("")]
+        public IActionResult Get([FromBody]Dto.StudentRequest request)
         {
-            return Ok(_service.GetStudents());
+            return Ok(_service.GetStudents(request));
         }
     }
 }

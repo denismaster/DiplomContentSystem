@@ -45,7 +45,11 @@ namespace DiplomContentSystem.Services
                 {
                     return new SortExpression<Teacher>(GetSortExpression(sorting.FieldName), (SortDirection)sorting.Direction);
                 })
-                .ToArray();
+                .ToList();
+            if(!dbRequest.SortExpressions.Any())
+            {
+                dbRequest.SortExpressions.Add(new SortExpression<Teacher>(GetSortExpression(""),SortDirection.Ascending));
+            }
             response.TotalCount = _repository.Count(dbRequest.FilterExpression);
             response.Items =  _repository.Get(dbRequest, includes).Select(x =>
                 {
@@ -69,14 +73,25 @@ namespace DiplomContentSystem.Services
 
         public bool AddTeacher(Teacher teacher)
         {
-            _repository.Add(teacher);
+            var dbTeacher = new Teacher();
+            dbTeacher.FIO = teacher.FIO;
+            dbTeacher.PositionId = teacher.PositionId;
+            dbTeacher.MaxWorkCount = teacher.MaxWorkCount;
+            dbTeacher.SpecialityId = 1;
+            _repository.Add(dbTeacher);
             _repository.SaveChanges();
             return true;
         }
 
         public bool UpdateTeacher(Teacher teacher)
         {
-            _repository.Update(teacher);
+            var dbTeacher = new Teacher();
+            dbTeacher.Id = teacher.Id;
+            dbTeacher.FIO = teacher.FIO;
+            dbTeacher.PositionId = teacher.PositionId;
+            dbTeacher.MaxWorkCount = teacher.MaxWorkCount;
+            dbTeacher.SpecialityId = 1;
+            _repository.Update(dbTeacher);
             _repository.SaveChanges();
             return true;
         }
