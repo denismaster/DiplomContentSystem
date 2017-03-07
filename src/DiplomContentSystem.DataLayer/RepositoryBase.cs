@@ -21,30 +21,30 @@ namespace DiplomContentSystem.DataLayer
         {
             return _context.Set<T>().AsNoTracking().AsEnumerable();
         }
-        public T Get(int id, IEnumerable<string> includes=null)
+        public T Get(int id, IEnumerable<string> includes = null)
         {
-             var query = _context.Set<T>().AsNoTracking();
-             if (includes != null)
+            var query = _context.Set<T>().AsNoTracking();
+            if (includes != null)
             {
                 foreach (var include in includes)
                     query = query.Include(include);
             }
             return query.FirstOrDefault(entity => entity.Id == id);
         }
-        public IEnumerable<T> Get(Expression<Func<T, bool>> predicate,IEnumerable<string> includes = null)
+        public IEnumerable<T> Get(Expression<Func<T, bool>> predicate, IEnumerable<string> includes = null)
         {
             return _context.Set<T>().AsNoTracking().AsEnumerable();
         }
-        
-        public long Count(Expression<Func<T, bool>> predicate=null)
+
+        public long Count(Expression<Func<T, bool>> predicate = null)
         {
             var query = _context.Set<T>().AsNoTracking();
-            if(predicate!=null)
+            if (predicate != null)
                 query = query.Where(predicate);
             return query.LongCount();
         }
-        
-        public IEnumerable<T> Get(Request<T> request,IEnumerable<string> includes = null)
+
+        public IEnumerable<T> Get(Request<T> request, IEnumerable<string> includes = null)
         {
             var result = new PagedEnumerable<T>();
             IQueryable<T> query = _context.Set<T>().AsNoTracking();
@@ -59,7 +59,7 @@ namespace DiplomContentSystem.DataLayer
                     query = query.Include(include);
             }
             var sortExpressions = request.SortExpressions;
-            if (sortExpressions != null&&sortExpressions.Any())
+            if (sortExpressions != null && sortExpressions.Any())
             {
                 IOrderedQueryable<T> orderedQuery = null;
                 for (var i = 0; i < sortExpressions.Count(); i++)
@@ -85,17 +85,17 @@ namespace DiplomContentSystem.DataLayer
                         {
                             orderedQuery = orderedQuery.ThenByDescending(sortExpressions[i].SortBy);
                         }
- 
+
                     }
                 }
                 query = orderedQuery;
 
-                
+
             }
             if (request.Skip.HasValue)
-                {
-                    query = query.Skip(request.Skip.Value);
-                }
+            {
+                query = query.Skip(request.Skip.Value);
+            }
             if (request.Take != null)
             {
                 query = query.Take(request.Take.Value);
@@ -109,14 +109,14 @@ namespace DiplomContentSystem.DataLayer
 
         public void Update(T item)
         {
-            _context.Entry<T>(item).State = EntityState.Modified;
+            _context.Set<T>().Update(item);
         }
 
         public void Delete(T item)
         {
             _context.Entry<T>(item).State = EntityState.Deleted;
         }
-        
+
         public void SaveChanges()
         {
             _context.SaveChanges();
