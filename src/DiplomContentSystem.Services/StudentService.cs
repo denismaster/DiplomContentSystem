@@ -21,10 +21,10 @@ namespace DiplomContentSystem.Services
         {
             switch (sortFieldName)
             {
-                case "fio": return Student => Student.FIO;
-                case "diplomWork": return Student => Student.DiplomWork.Name;
-                case "group": return Student => Student.Group.Name;
-                default: return Student => Student.Id;
+                case "fio": return student => student.FIO;
+                case "diplomWork": return student => student.DiplomWork.Name;
+                case "group": return student => student.Group.Name;
+                default: return student => student.Id;
             }
         }
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
@@ -32,6 +33,7 @@ namespace DiplomContentSystem
         {
             // Add framework services.
             services.AddMvc();
+            services.AddAutoMapper();
             services.AddScoped<TeacherService>();
             services.AddScoped<StudentService>();
             services.AddScoped<DiplomWorksService>();

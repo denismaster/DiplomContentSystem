@@ -5,16 +5,22 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DiplomContentSystem.Core;
 using DiplomContentSystem.Dto;
+using AutoMapper;
+
 namespace DiplomContentSystem.Services
 {
     public class TeacherService
     {
         private readonly IRepository<Teacher> _repository;
-        public TeacherService(IRepository<Teacher> repository)
+        private readonly IMapper _mapper;
+
+        public TeacherService(IRepository<Teacher> repository, IMapper mapper)
         {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
-            else
-                _repository = repository;
+            if (mapper == null) throw new ArgumentNullException(nameof(mapper));
+            _repository = repository;
+            _mapper = mapper;
+            
         }
 
         private Expression<Func<Teacher, object>> GetSortExpression(string sortFieldName)
@@ -62,6 +68,7 @@ namespace DiplomContentSystem.Services
                         MaxWorkCount = x.MaxWorkCount
                     };
                 });
+            var t = _mapper.Map<TeacherListItem>(new Teacher());
             return response;
         }
 
