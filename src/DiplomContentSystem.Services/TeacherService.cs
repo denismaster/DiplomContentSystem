@@ -57,18 +57,7 @@ namespace DiplomContentSystem.Services
                 dbRequest.SortExpressions.Add(new SortExpression<Teacher>(GetSortExpression(""),SortDirection.Ascending));
             }
             response.TotalCount = _repository.Count(dbRequest.FilterExpression);
-            response.Items =  _repository.Get(dbRequest, includes).Select(x =>
-                {
-                    return new TeacherListItem()
-                    {
-                        Id = x.Id,
-                        FIO = x.FIO,
-                        Position = x.Position.Name,
-                        Speciality = x.Speciality.ShortName,
-                        MaxWorkCount = x.MaxWorkCount
-                    };
-                });
-            var t = _mapper.Map<TeacherListItem>(new Teacher());
+            response.Items = _mapper.Map<IEnumerable<TeacherListItem>>(_repository.Get(dbRequest, includes));
             return response;
         }
 

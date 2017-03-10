@@ -11,8 +11,9 @@ namespace DiplomContentSystem.Services
     {
         public MappingProfile()
         {
-            // Add as many of these lines as you need to map your objects
-            CreateMap<Teacher, TeacherListItem>();
+            CreateMap<Teacher, TeacherListItem>()
+                .ForMember(item => item.Speciality, opt => opt.MapFrom(src => (src.Speciality!=null)?src.Speciality.ShortName:null))
+                .ForMember(item => item.Position, opt => opt.MapFrom(src => (src.Position!=null)?src.Position.Name:null));
         }
     }
 }
