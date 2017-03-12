@@ -34,6 +34,11 @@
                         <span class='fa fa-file-text'></span> Дипломные работы
                     </a>
                 </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/stages']">
+                        <span class='fa fa-border'></span> Календарный план
+                    </a>
+                </li>
                 <li class="dropdown" [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/docs']" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <span class="fa fa-file-pdf-o"></span>

@@ -1,0 +1,50 @@
+﻿<div class="panel panel-default" [rtList]="getStages" #list="rtList" (onListInit)="onListInit($event)">
+    <div class="panel-heading">
+        Стандартные этапы выполнения
+        <div class="btn-group btn-group-sm pull-right">
+            <a type="button" class="btn btn-default" [routerLink]="['/stages/new']">
+                <i class="fa fa-plus"></i>
+                Добавить
+            </a>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th><span rtSort="name">Название</span></th>
+                    <th><span rtSort="startDate">Дата начала</span></th>
+                    <th><span rtSort="endDate">Дата конца</span></th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of list.items">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.startDate }}</td>
+                    <td>{{ item.endDate}}</td>
+                    <td>
+                        <a [routerLink]="['edit/',item.id]" class="btn btn-warning btn-sm">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a [routerLink]="['delete/',item.id]" class="btn btn-warning btn-sm">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot *ngIf="isLoading">
+                <tr>
+                    <td colspan="5">
+                        <table-state></table-state>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="panel-footer">
+        <table-pagination></table-pagination>
+    </div>
+</div>
