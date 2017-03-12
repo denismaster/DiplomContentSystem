@@ -18,15 +18,13 @@ namespace DiplomContentSystem.DataLayer
         public DbSet<DiplomWork> DiplomWorks { get; set; }
         public DbSet<DiplomWorkMaterial> DiplomWorkMaterials { get; set; }
         public DbSet<GostControlTry> GostControlTries { get; set; }
-        public DbSet<ImplementationStage> ImplementationStages { get; set; }
-        public DbSet<SubImplementationStage> SubImplementationStages { get; set; }
+        public DbSet<Stage> Stages { get; set; }
         public DbSet<TeacherComment> TeacherComments { get; set; }
         public DbSet<StudentComment> StudentComments { get; set; }
         public DbSet<DiplomWorkComment> DiplomWorkComments { get; set; }
         public DbSet<DiplomWorkMaterialComment> DiplomWorkMaterialComments { get; set; }
         public DbSet<GostControlTryComment> GostControlTryComments { get; set; }
-        public DbSet<ImplementationStageComment> ImplementationStageComments { get; set; }
-        public DbSet<SubImplementationStageComment> SubImplementationStageComments { get; set; }
+        public DbSet<StageComment> StageComments { get; set; }
         public DbSet<Comment> Comments { get; set; }
 
         public DiplomContext(DbContextOptions<DiplomContext> options) : base(options)

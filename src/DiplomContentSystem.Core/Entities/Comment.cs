@@ -21,9 +21,7 @@ namespace DiplomContentSystem.Core
 
         public List<DiplomWorkMaterialComment> DiplomWorkMaterialComments { get; set; }
 
-        public List<ImplementationStageComment> ImplementationStageComments { get; set; }
-
-        public List<SubImplementationStageComment> SubImplementationStageComments { get; set; }
+        public List<StageComment> StageComments { get; set; }
 
         public List<GostControlTryComment> GostControlTryComments { get; set; }
     }
