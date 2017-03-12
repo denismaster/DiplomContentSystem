@@ -34,8 +34,10 @@ namespace DiplomContentSystem
             services.AddMvc();
             services.AddScoped<TeacherService>();
             services.AddScoped<StudentService>();
+            services.AddScoped<StageService>();
             services.AddScoped<IRepository<Teacher>, RepositoryBase<Teacher>>();
             services.AddScoped<IRepository<Student>, RepositoryBase<Student>>();
+            services.AddScoped<IRepository<Stage>, RepositoryBase<Stage>>();
             services.AddDbContext<DiplomContext>();
         }
 
