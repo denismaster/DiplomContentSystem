@@ -1,6 +1,7 @@
 import * as _express from "express";
 import * as _bodyParser from "body-parser";
 import * as _cors from "cors";
+import * as _morgan from "morgan";
 import { Request, Response } from "express"
 import { RouteHandler } from "./route-handler";
 export class Server {
@@ -17,7 +18,9 @@ export class Server {
 
     public useDefaultConfig(): Server {
         this.app.use(_bodyParser.json());
-        this.app.use(_cors());
+        this.app.use(_cors());      
+        this.app.use(_morgan("dev"));
+
         this.router.get("/sample", (request: Request, response: Response) => {
             this.routeHandler.sample(request, response);
         });
@@ -25,6 +28,12 @@ export class Server {
             this.routeHandler.convert(request, response);
         });
         this.app.use("/api", this.router);
+        
+        this.app.use((error:any,request:Request,response:Response,next:any)=>{
+            response.status(500);
+            console.error(error);
+            response.end();
+        });
         return this;
     }
 
