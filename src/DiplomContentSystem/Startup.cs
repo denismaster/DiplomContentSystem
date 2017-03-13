@@ -11,10 +11,15 @@ using Microsoft.Extensions.Logging;
 using DiplomContentSystem.Services;
 using DiplomContentSystem.DataLayer;
 using DiplomContentSystem.Core;
+using FluentValidation.AspNetCore;
+
 namespace DiplomContentSystem
 {
     public class Startup
     {
+        private const string SecretKey = "someverystrongkey";
+        private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -31,7 +36,14 @@ namespace DiplomContentSystem
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            })
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
             services.AddScoped<TeacherService>();
             services.AddScoped<StudentService>();
             services.AddScoped<IRepository<Teacher>, RepositoryBase<Teacher>>();
@@ -42,6 +54,8 @@ namespace DiplomContentSystem
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.ConfigureJwtBearerAuthentication(Configuration, _signingKey);
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
