@@ -20,13 +20,13 @@ export class DataService {
     constructor(private http: Http, private router: Router) { }
 
     public get(uri, headers?: Headers, responseType: ResponseContentType = null) {
-        this.refreshToken();
+        //this.refreshToken();
         return this._get(uri, headers, responseType);
     }
 
     public post(uri, body: any, headers?: Headers, responseType: ResponseContentType = null) 
     {
-        this.refreshToken();
+      //  this.refreshToken();
         return this._post(uri, body, headers, responseType);
     }
 

@@ -12,6 +12,38 @@ using System.Threading.Tasks;
 
 namespace DiplomContentSystem.Controllers
 {
+    [Route("api/[controller]")]
+    public class AccountController : Controller
+    {
+        private readonly JwtIssuerOptions _jwtOptions;
+        private readonly JsonSerializerSettings _serializerSettings;
+        private readonly ILoginService loginService;
+
+        public AccountController(IOptions<JwtIssuerOptions> jwtOptions, ILoginService service)
+        {
+            this.loginService = service;
+            this._jwtOptions = jwtOptions.Value;
+            service.ThrowIfInvalidOptions(_jwtOptions);
+
+            _serializerSettings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented
+            };
+        }
+
+        [HttpPost("login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login([FromBody] LoginViewModel user)
+        {
+            return await loginService.GetIdentity(user, _jwtOptions, _serializerSettings);
+        }
+
+        [HttpPost("refresh-identity")]
+        public async Task<IActionResult> Refresh([FromBody] string token)
+        {
+            return await loginService.RefreshToken(token, _jwtOptions, _serializerSettings);
+        }
+    }
     public class LoginViewModel
     {
         /// <summary>
@@ -217,38 +249,6 @@ namespace DiplomContentSystem.Controllers
 
             return Task.FromResult<ClaimsIdentity>(null);
         }
-        [Route("api/[controller]")]
-        public class AccountController : Controller
-        {
-            private readonly JwtIssuerOptions _jwtOptions;
-            private readonly JsonSerializerSettings _serializerSettings;
-            private readonly ILoginService loginService;
-
-            public AccountController(IOptions<JwtIssuerOptions> jwtOptions, ILoginService service)
-            {
-                this.loginService = service;
-                this._jwtOptions = jwtOptions.Value;
-                service.ThrowIfInvalidOptions(_jwtOptions);
-
-                _serializerSettings = new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented
-                };
-            }
-
-            [HttpPost("authenticate")]
-            [AllowAnonymous]
-            public async Task<IActionResult> Login([FromBody] LoginViewModel user)
-            {
-                return await loginService.GetIdentity(user, _jwtOptions, _serializerSettings);
-            }
-
-            [HttpPost("refresh-identity")]
-            public async Task<IActionResult> Refresh([FromBody] string token)
-            {
-                return await loginService.RefreshToken(token, _jwtOptions, _serializerSettings);
-            }
-        }
         internal class User
         {
             public bool IsAdmin = true;
@@ -257,6 +257,7 @@ namespace DiplomContentSystem.Controllers
             public User(string username)
             {
                 this.Login = username;
+                this.IsAdmin = true;
             }
         }
     }
