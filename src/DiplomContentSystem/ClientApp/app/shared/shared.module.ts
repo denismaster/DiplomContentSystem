@@ -9,6 +9,9 @@ import { LoaderComponent } from './loader/loader.component';
 import { ErrorListComponent } from './error-list/error-list.component';
 import { TableStateComponent } from './table-state/table-state.component';
 import { TablePaginationComponent } from './table-pagination/table-pagination.component';
+import { DataService } from './data-service';
+import { AuthGuard } from './auth-guard.service';
+import { AuthenticationService } from '../login/authentication-service';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -18,7 +21,8 @@ import { TablePaginationComponent } from './table-pagination/table-pagination.co
     declarations: [NavMenuComponent, SidebarComponent,LoaderComponent,TableStateComponent,TablePaginationComponent, ErrorListComponent],
     exports: [NavMenuComponent, SidebarComponent,TablePaginationComponent,
         CommonModule, FormsModule,RTModule, RouterModule,LoaderComponent,TableStateComponent,
-        ErrorListComponent,ReactiveFormsModule]
+        ErrorListComponent,ReactiveFormsModule],
+    providers:[DataService, AuthGuard, AuthenticationService]
 })
 export class SharedModule {
     static forRoot(): ModuleWithProviders {

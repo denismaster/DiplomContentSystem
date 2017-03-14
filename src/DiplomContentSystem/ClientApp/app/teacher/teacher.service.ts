@@ -5,6 +5,7 @@ import { Teacher } from './models/teacher';
 import { ServiceBase } from '../shared/service-base';
 import { OperationResult } from '../shared/operation-result';
 import { ApiService, ApiRoutes } from '../shared/api-service';
+import { DataService } from '../shared/data-service';
 
 @Injectable()
 export class TeacherService extends ApiService<Teacher>{
@@ -16,7 +17,7 @@ export class TeacherService extends ApiService<Teacher>{
         updateUrl:"/api/teachers/update/",
         deleteUrl:"/api/teachers/delete/"
     }
-    constructor(http: Http)
+    constructor(http: DataService)
     {
         super(TeacherService.routes,http);
     }

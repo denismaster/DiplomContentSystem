@@ -12,6 +12,10 @@ using DiplomContentSystem.Services;
 using DiplomContentSystem.DataLayer;
 using DiplomContentSystem.Core;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace DiplomContentSystem
 {
@@ -45,10 +49,12 @@ namespace DiplomContentSystem
             })
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
             services.AddScoped<TeacherService>();
-            services.AddScoped<StudentService>();
             services.AddScoped<IRepository<Teacher>, RepositoryBase<Teacher>>();
-            services.AddScoped<IRepository<Student>, RepositoryBase<Student>>();
             services.AddDbContext<DiplomContext>();
+
+            services
+                .AddAuthPolicy()
+                .ConfigureJwtIssuerOptions(Configuration, _signingKey);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
