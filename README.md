@@ -1,3 +1,4 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/9gw2rm8vgfltagcm?svg=true)](https://ci.appveyor.com/project/denismaster/diplomcontentsystem)
 # DiplomContentSystem
 Система документооборота для дипломных работ
 
