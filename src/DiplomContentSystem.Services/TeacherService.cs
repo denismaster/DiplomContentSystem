@@ -67,26 +67,17 @@ namespace DiplomContentSystem.Services
             return _repository.Get(id,includes);
         }
 
-        public bool AddTeacher(Teacher teacher)
+        public bool AddTeacher(TeacherEditItem teacher)
         {
-            var dbTeacher = new Teacher();
-            dbTeacher.FIO = teacher.FIO;
-            dbTeacher.PositionId = teacher.PositionId;
-            dbTeacher.MaxWorkCount = teacher.MaxWorkCount;
-            dbTeacher.SpecialityId = 1;
+            var dbTeacher = _mapper.Map<Teacher>(teacher);
             _repository.Add(dbTeacher);
             _repository.SaveChanges();
             return true;
         }
 
-        public bool UpdateTeacher(Teacher teacher)
+        public bool UpdateTeacher(TeacherEditItem teacher)
         {
-            var dbTeacher = new Teacher();
-            dbTeacher.Id = teacher.Id;
-            dbTeacher.FIO = teacher.FIO;
-            dbTeacher.PositionId = teacher.PositionId;
-            dbTeacher.MaxWorkCount = teacher.MaxWorkCount;
-            dbTeacher.SpecialityId = 1;
+            var dbTeacher = _mapper.Map<Teacher>(teacher);
             _repository.Update(dbTeacher);
             _repository.SaveChanges();
             return true;
