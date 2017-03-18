@@ -35,12 +35,12 @@ namespace DiplomContentSystem.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add([FromBody] Teacher teacher)
+        public IActionResult Add([FromBody]Dto.TeacherEditItem teacher)
         {
             return Ok(_service.AddTeacher(teacher));
         }
          [HttpPost("update")]
-        public IActionResult Update([FromBody] Teacher teacher)
+        public IActionResult Update([FromBody]Dto.TeacherEditItem teacher)
         {
             return Ok(_service.UpdateTeacher(teacher));
         }
