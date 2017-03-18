@@ -31,7 +31,7 @@ var sharedConfig = {
             'es6-promise',
             'event-source-polyfill',
             'jquery',
-            'zone.js',
+            'zone.js'
         ]
     },
     output: {

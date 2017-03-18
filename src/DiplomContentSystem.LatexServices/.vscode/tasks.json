@@ -1,23 +1,23 @@
 {
   "version": "0.1.0",
-  "command": "tsc",
+  "command": "npm",
   "isShellCommand": true,
+  "args": ["run"],
+  "showOutput": "always",
   "tasks": [
     {
       "taskName": "build",
-      "suppressTaskName": true,
-      "args": ["-w"],
-      "showOutput": "always",
-      "isWatching": true,
-      "problemMatcher": ["$tsc-watch"]
+      "isBuildCommand": true
     },
     {
-      "taskName": "build.dist",
-      "suppressTaskName": true,
-      "args": ["-p", "tsconfig.src.json"],
-      "showOutput": "always",
-      "isBuildCommand": true,
-      "isWatching": true
+      "taskName": "clean"
+    },
+    {
+      "taskName": "lint"
+    },
+    {
+      "taskName": "test",
+      "isTestCommand": true
     }
   ]
 }
