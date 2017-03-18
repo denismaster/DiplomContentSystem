@@ -21,9 +21,7 @@ export class TeachersComponent {
     getTeachers = (request)=>
     {
         this.isLoading = true;
-        const observable = this.service.getList(request);
-        observable.subscribe(a=>this.isLoading=false);
-        return observable;
+        return this.service.getList(request).do((response)=>this.isLoading=false);
     }
 
      onListInit(list: RtList): void {

@@ -21,10 +21,10 @@ namespace DiplomContentSystem.Services
         {
             switch (sortFieldName)
             {
-                case "fio": return Student => Student.FIO;
-                case "diplomWork": return Student => Student.DiplomWork.Name;
-                case "group": return Student => Student.Group.Name;
-                default: return Student => Student.Id;
+                case "fio": return student => student.FIO;
+                case "diplomWork": return student => student.DiplomWork.Name;
+                case "group": return student => student.Group.Name;
+                default: return student => student.Id;
             }
         }
 
@@ -57,9 +57,11 @@ namespace DiplomContentSystem.Services
                 {
                     Id = x.Id,
                     FIO = x.FIO,
-                    Group = x.Group.Name,
-                    DiplomWork = x.DiplomWork.Name,
-                    Teacher = x.Teacher.FIO
+                    Group = x.Group?.Name ?? "",
+                    DiplomWork = x.DiplomWork?.Name??"",
+                    DiplomWorkId = x.DiplomWorkId,
+                    Teacher = x.Teacher?.FIO??"",
+                    TeacherId = x.TeacherId
                 };
             });
             return response;

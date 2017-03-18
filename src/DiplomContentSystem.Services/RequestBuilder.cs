@@ -1,22 +1,33 @@
 using System;
 using System.Linq.Expressions;
+using System.Collections.Generic;
 
 namespace DiplomContentSystem.Services
 {
     //TODO REDONE WITH BUILDER PATTERN.
     public class RequestBuilder<T> where T : class, Core.IEntity
     {
-        private readonly Func<string, Expression<Func<T, object>>> SortingBuilder;
-        private readonly Func<string, Expression<Func<T, object>>> FilterBuilder;
-        public RequestBuilder<T> UseFilters()
+        protected RequestBuilder()
+        {
+
+        }
+        public static RequestBuilder<T> Create(Dto.Request requestDto)
         {
             return null;
         }
-        public RequestBuilder<T> UseSortings()
+        public RequestBuilder<T> UseFilter()
         {
-            return null;
+            return this;
         }
-        public RequestBuilder<T> UsePaging()
+        public RequestBuilder<T> UseSortings(Func<string, Expression<Func<T, object>>> sortAction)
+        {
+            return this;
+        }
+        public RequestBuilder<T> UsePaging(int skip, int take)
+        {
+            return this;
+        }
+        public Core.Request<T> Build()
         {
             return null;
         }
