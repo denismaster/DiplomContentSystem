@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using DiplomContentSystem.Services;
+using DiplomContentSystem.Services.Teachers;
 using DiplomContentSystem.DataLayer;
 using DiplomContentSystem.Core;
 namespace DiplomContentSystem
