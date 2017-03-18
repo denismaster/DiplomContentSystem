@@ -16,7 +16,7 @@ namespace DiplomContentSystem.Services.Teachers
                 default: return teacher => teacher.Id;
             }
         }
-        public override QueryBuilder<Teacher> UseFilters()
+        public override IQueryBuilder<Teacher> UseFilters()
         {
             var teachersRequest = _requestDto as Dto.TeacherRequest;
             if (!string.IsNullOrEmpty(teachersRequest.FIO))
@@ -25,7 +25,7 @@ namespace DiplomContentSystem.Services.Teachers
             }
             return this;
         }
-        public override QueryBuilder<Teacher> UseSortings(string defaultSorting)
+        public override IQueryBuilder<Teacher> UseSortings(string defaultSorting)
         {
             _dbQuery.SortExpressions = new System.Collections.Generic.List<SortExpression<Teacher>>();
             if (_requestDto.Sortings == null || !_requestDto.Sortings.Any())

@@ -13,27 +13,27 @@ namespace DiplomContentSystem.Services
         {
             _dbQuery = new Query<T>();
         }
-        public QueryBuilder<T> UseDto(Request requestDto)
+        public IQueryBuilder<T> UseDto(Request requestDto)
         {
             if (requestDto == null) throw new ArgumentNullException(nameof(requestDto));
             _requestDto = requestDto;
             return this;
         }
-        public virtual QueryBuilder<T> UseFilters()
+        public virtual IQueryBuilder<T> UseFilters()
         {
             return this;
         }
-        public virtual QueryBuilder<T> UseSortings(string defaultSorting)
+        public virtual IQueryBuilder<T> UseSortings(string defaultSorting)
         {
             return this;
         }
-        public QueryBuilder<T> UsePaging()
+        public IQueryBuilder<T> UsePaging()
         {
             _dbQuery.Skip = _requestDto.Skip;
             _dbQuery.Take = _requestDto.Take;
             return this;
         }
-        public QueryBuilder<T> UsePaging(int skip, int take)
+        public IQueryBuilder<T> UsePaging(int skip, int take)
         {
             _dbQuery.Skip = skip;
             _dbQuery.Take = take;
