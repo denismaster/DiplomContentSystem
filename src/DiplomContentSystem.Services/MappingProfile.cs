@@ -20,6 +20,11 @@ namespace DiplomContentSystem.Services
                 .ForMember(item=>item.SpecialityId, opt=>opt.UseValue(1))
                 .ForMember(item=>item.Position, opt=>opt.Ignore())
                 .ForMember(item=>item.Speciality, opt=>opt.Ignore());
+
+            CreateMap<Student, StudentListItem>()
+                .ForMember(item => item.DiplomWork, opt => opt.MapFrom(src => (src.DiplomWork!=null)?src.DiplomWork.Name:null))
+                .ForMember(item => item.Group, opt => opt.MapFrom(src => (src.Group!=null)?src.Group.Name:null))
+                .ForMember(item => item.Teacher, opt => opt.MapFrom(src => (src.Teacher!=null)?src.Teacher.FIO:null));
         }
     }
 }
