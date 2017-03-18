@@ -5,44 +5,44 @@ using DiplomContentSystem.Dto;
 
 namespace DiplomContentSystem.Services
 {
-    public abstract class RequestBuilder<T> : IRequestBuilder<T> where T : class, Core.IEntity
+    public abstract class QueryBuilder<T> : IQueryBuilder<T> where T : class, Core.IEntity
     {
         protected Dto.Request _requestDto;
-        protected Request<T> _dbRequest;
-        public RequestBuilder()
+        protected Query<T> _dbQuery;
+        public QueryBuilder()
         {
-            _dbRequest = new Request<T>();
+            _dbQuery = new Query<T>();
         }
-        public RequestBuilder<T> UseDto(Request requestDto)
+        public QueryBuilder<T> UseDto(Request requestDto)
         {
             if (requestDto == null) throw new ArgumentNullException(nameof(requestDto));
             _requestDto = requestDto;
             return this;
         }
-        public virtual RequestBuilder<T> UseFilters()
+        public virtual QueryBuilder<T> UseFilters()
         {
             return this;
         }
-        public virtual RequestBuilder<T> UseSortings(string defaultSorting)
+        public virtual QueryBuilder<T> UseSortings(string defaultSorting)
         {
             return this;
         }
-        public RequestBuilder<T> UsePaging()
+        public QueryBuilder<T> UsePaging()
         {
-            _dbRequest.Skip = _requestDto.Skip;
-            _dbRequest.Take = _requestDto.Take;
+            _dbQuery.Skip = _requestDto.Skip;
+            _dbQuery.Take = _requestDto.Take;
             return this;
         }
-        public RequestBuilder<T> UsePaging(int skip, int take)
+        public QueryBuilder<T> UsePaging(int skip, int take)
         {
-            _dbRequest.Skip = skip;
-            _dbRequest.Take = take;
+            _dbQuery.Skip = skip;
+            _dbQuery.Take = take;
             return this;
         }
 
-        public Request<T> Build()
+        public Query<T> Build()
         {
-            return _dbRequest;
+            return _dbQuery;
         }        
     }
 }

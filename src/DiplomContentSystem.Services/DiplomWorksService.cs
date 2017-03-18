@@ -30,7 +30,7 @@ namespace DiplomContentSystem.Services
 
         public Dto.ListResponse<DiplomWorkListItem> GetDiplomWorks(DiplomWorkRequest request)
         {
-            var dbRequest = new Request<DiplomWork>();
+            var dbRequest = new Query<DiplomWork>();
             var response = new ListResponse<DiplomWorkListItem>();
 
             string[] includes = { "Teacher", "Students" };

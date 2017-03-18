@@ -44,7 +44,7 @@ namespace DiplomContentSystem.DataLayer
             return query.LongCount();
         }
 
-        public IEnumerable<T> Get(Request<T> request, IEnumerable<string> includes = null)
+        public IEnumerable<T> Get(Query<T> request, IEnumerable<string> includes = null)
         {
             var result = new PagedEnumerable<T>();
             IQueryable<T> query = _context.Set<T>().AsNoTracking();

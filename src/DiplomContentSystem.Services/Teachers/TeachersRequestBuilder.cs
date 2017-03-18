@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 namespace DiplomContentSystem.Services.Teachers
 {
-    public class TeachersRequestBuilder : RequestBuilder<Teacher>
+    public class TeachersRequestBuilder : QueryBuilder<Teacher>
     {
         private Expression<Func<Teacher, object>> GetSortExpression(string sortFieldName)
         {
@@ -16,27 +16,27 @@ namespace DiplomContentSystem.Services.Teachers
                 default: return teacher => teacher.Id;
             }
         }
-        public override RequestBuilder<Teacher> UseFilters()
+        public override QueryBuilder<Teacher> UseFilters()
         {
             var teachersRequest = _requestDto as Dto.TeacherRequest;
             if (!string.IsNullOrEmpty(teachersRequest.FIO))
             {
-                _dbRequest.FilterExpression = teacher => teacher.FIO.Contains(teachersRequest.FIO);
+                _dbQuery.FilterExpression = teacher => teacher.FIO.Contains(teachersRequest.FIO);
             }
             return this;
         }
-        public override RequestBuilder<Teacher> UseSortings(string defaultSorting)
+        public override QueryBuilder<Teacher> UseSortings(string defaultSorting)
         {
-            _dbRequest.SortExpressions = new System.Collections.Generic.List<SortExpression<Teacher>>();
+            _dbQuery.SortExpressions = new System.Collections.Generic.List<SortExpression<Teacher>>();
             if (_requestDto.Sortings == null || !_requestDto.Sortings.Any())
             {
-                _dbRequest.SortExpressions.Add(new SortExpression<Teacher>(GetSortExpression(defaultSorting), SortDirection.Ascending));
+                _dbQuery.SortExpressions.Add(new SortExpression<Teacher>(GetSortExpression(defaultSorting), SortDirection.Ascending));
             }
             else
             {
                 foreach(var sorting in _requestDto.Sortings)
                 {
-                    _dbRequest.SortExpressions.Add(new SortExpression<Teacher>(GetSortExpression(sorting.FieldName), (SortDirection)sorting.Direction));
+                    _dbQuery.SortExpressions.Add(new SortExpression<Teacher>(GetSortExpression(sorting.FieldName), (SortDirection)sorting.Direction));
                 }
             }
             return this;

@@ -2,13 +2,13 @@
 
 namespace DiplomContentSystem.Services
 {
-    public interface IRequestBuilder<T> where T : class, IEntity
+    public interface IQueryBuilder<T> where T : class, IEntity
     {
-        RequestBuilder<T> UseDto(Dto.Request requestDto);
-        RequestBuilder<T> UseFilters();
-        RequestBuilder<T> UsePaging();
-        RequestBuilder<T> UsePaging(int page, int pageSize);
-        RequestBuilder<T> UseSortings(string defaultSorting);
-        Request<T> Build();
+        IQueryBuilder<T> UseDto(Dto.Request requestDto);
+        IQueryBuilder<T> UseFilters();
+        IQueryBuilder<T> UsePaging();
+        IQueryBuilder<T> UsePaging(int page, int pageSize);
+        IQueryBuilder<T> UseSortings(string defaultSorting);
+        Query<T> Build();
     }
 }
