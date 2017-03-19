@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DiplomContentSystem.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -69,16 +70,17 @@ namespace DiplomContentSystem.Controllers
     }
     public class LoginService : ILoginService
     {
-        //private readonly IRepositoryManager _repository;
+        private readonly IUserRepository _repository;
 
-        public LoginService(/*IRepositoryManager repository*/)
+        public LoginService(IUserRepository repository)
         {
-            // _repository = repository;
+            if (repository == null) throw new ArgumentNullException(nameof(repository));
+             _repository = repository;
         }
 
         public async Task<ObjectResult> GetIdentity(LoginViewModel user, JwtIssuerOptions _jwtOptions, JsonSerializerSettings _serializerSettings)
         {
-            if (string.IsNullOrEmpty(user.Username))
+            if (_repository.GetUser(user.Username) == null)
             {
                 var authenticationResult = new
                 {
@@ -218,20 +220,20 @@ namespace DiplomContentSystem.Controllers
 
         private long ToUnixEpochDate(DateTime date) => (long)Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
 
-        private Task<ClaimsIdentity> GetClaimsIdentity(LoginViewModel user)
+        private async Task<ClaimsIdentity> GetClaimsIdentity(LoginViewModel user)
         {
-            ///  var dbUser = _repository.GetCommonReadonlyRepository<Core.User>().Find().ToArray().FirstOrDefault(u => u.Login == user.Username && PasswordUtils.Verify(user.Password, u.PasswordHash));
-            var dbUser = new User(user.Username);
+            var dbUser = await _repository.GetUserAsync(user.Username);// asswordUtils.Verify(user.Password, u.PasswordHash));
+            //var dbUser = new User(user.Username);
             if (dbUser != null)
             {
-                return Task.FromResult(new ClaimsIdentity(new GenericIdentity(dbUser.Login, "Token"),
-                    dbUser.IsAdmin
-                    ? new Claim[] { new Claim(AuthConsts.ClaimUserType, AuthConsts.RoleAdmin) }
-                    : new Claim[] { new Claim(AuthConsts.ClaimUserType, AuthConsts.RoleUser
-                    ) }));
+                return new ClaimsIdentity(new GenericIdentity(dbUser.Login, "Token"),
+                   // dbUser.IsAdmin
+                   // ? new Claim[] { new Claim(AuthConsts.ClaimUserType, AuthConsts.RoleAdmin) }
+                   /* : */ new Claim[] { new Claim(AuthConsts.ClaimUserType, AuthConsts.RoleUser
+                    ) });
             }
 
-            return Task.FromResult<ClaimsIdentity>(null);
+            return null;
         }
 
         private Task<ClaimsIdentity> GetClaimsIdentity(string user)
