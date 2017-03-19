@@ -5,16 +5,22 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DiplomContentSystem.Core;
 using DiplomContentSystem.Dto;
+using AutoMapper;
+
 namespace DiplomContentSystem.Services
 {
     public class TeacherService
     {
         private readonly IRepository<Teacher> _repository;
-        public TeacherService(IRepository<Teacher> repository)
+        private readonly IMapper _mapper;
+
+        public TeacherService(IRepository<Teacher> repository, IMapper mapper)
         {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
-            else
-                _repository = repository;
+            if (mapper == null) throw new ArgumentNullException(nameof(mapper));
+            _repository = repository;
+            _mapper = mapper;
+            
         }
 
         private Expression<Func<Teacher, object>> GetSortExpression(string sortFieldName)
@@ -51,17 +57,7 @@ namespace DiplomContentSystem.Services
                 dbRequest.SortExpressions.Add(new SortExpression<Teacher>(GetSortExpression(""),SortDirection.Ascending));
             }
             response.TotalCount = _repository.Count(dbRequest.FilterExpression);
-            response.Items =  _repository.Get(dbRequest, includes).Select(x =>
-                {
-                    return new TeacherListItem()
-                    {
-                        Id = x.Id,
-                        FIO = x.FIO,
-                        Position = x.TeacherPosition.Name,
-                        Speciality = x.Speciality.ShortName,
-                        MaxWorkCount = x.MaxWorkCount
-                    };
-                });
+            response.Items = _mapper.Map<IEnumerable<TeacherListItem>>(_repository.Get(dbRequest, includes));
             return response;
         }
 
@@ -71,28 +67,17 @@ namespace DiplomContentSystem.Services
             return _repository.Get(id,includes);
         }
 
-        public bool AddTeacher(Teacher teacher)
+        public bool AddTeacher(TeacherEditItem teacher)
         {
-            var dbTeacher = new Teacher();
-            dbTeacher.FIO = teacher.FIO;
-            dbTeacher.TeacherPositionId = teacher.TeacherPositionId;
-            dbTeacher.MaxWorkCount = teacher.MaxWorkCount;
-            dbTeacher.SpecialityId = 1;
-            dbTeacher.PeriodId = 1;
+            var dbTeacher = _mapper.Map<Teacher>(teacher);
             _repository.Add(dbTeacher);
             _repository.SaveChanges();
             return true;
         }
 
-        public bool UpdateTeacher(Teacher teacher)
+        public bool UpdateTeacher(TeacherEditItem teacher)
         {
-            var dbTeacher = new Teacher();
-            dbTeacher.Id = teacher.Id;
-            dbTeacher.FIO = teacher.FIO;
-            dbTeacher.TeacherPositionId = teacher.TeacherPositionId;
-            dbTeacher.MaxWorkCount = teacher.MaxWorkCount;
-            dbTeacher.SpecialityId = 1;
-            dbTeacher.PeriodId = 1;
+            var dbTeacher = _mapper.Map<Teacher>(teacher);
             _repository.Update(dbTeacher);
             _repository.SaveChanges();
             return true;

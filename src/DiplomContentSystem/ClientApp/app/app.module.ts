@@ -12,6 +12,7 @@ import { TeachersModule } from './teacher/teacher.module';
 import { SignInComponent } from './login/components/sign-in.component';
 import { StudentsModule } from './student/student.module';
 import { StagesModule } from './stage/stage.module';
+import { DiplomWorksModule } from './diplomWorks/diplom-works.module';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -28,7 +29,8 @@ import { StagesModule } from './stage/stage.module';
         SharedModule,
         TeachersModule,
         StudentsModule,
-        StagesModule
+        StagesModule,
+        DiplomWorksModule
     ],
 })
 export class AppModule {
