@@ -8,7 +8,7 @@ using DiplomContentSystem.DataLayer;
 namespace DiplomContentSystem.DataLayer.Migrations
 {
     [DbContext(typeof(DiplomContext))]
-    [Migration("20170312105717_ChangeImplementationStage")]
+    [Migration("20170319122045_ChangeImplementationStage")]
     partial class ChangeImplementationStage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -314,11 +314,21 @@ namespace DiplomContentSystem.DataLayer.Migrations
 
                     b.Property<string>("FIO");
 
+                    b.Property<int>("MaxWorkCount");
+
+                    b.Property<int>("PeriodId");
+
                     b.Property<int>("SpecialityId");
+
+                    b.Property<int>("TeacherPositionId");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PeriodId");
+
                     b.HasIndex("SpecialityId");
+
+                    b.HasIndex("TeacherPositionId");
 
                     b.ToTable("Teachers");
                 });
@@ -346,19 +356,9 @@ namespace DiplomContentSystem.DataLayer.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("MaxWorkCount");
-
                     b.Property<string>("Name");
 
-                    b.Property<int>("PeriodId");
-
-                    b.Property<int>("TeacherId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PeriodId");
-
-                    b.HasIndex("TeacherId");
 
                     b.ToTable("TeachersPositions");
                 });
@@ -502,9 +502,19 @@ namespace DiplomContentSystem.DataLayer.Migrations
 
             modelBuilder.Entity("DiplomContentSystem.Core.Teacher", b =>
                 {
+                    b.HasOne("DiplomContentSystem.Core.Period", "Period")
+                        .WithMany("Teachers")
+                        .HasForeignKey("PeriodId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("DiplomContentSystem.Core.Speciality", "Speciality")
                         .WithMany()
                         .HasForeignKey("SpecialityId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DiplomContentSystem.Core.TeacherPosition", "TeacherPosition")
+                        .WithMany("Teachers")
+                        .HasForeignKey("TeacherPositionId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -517,19 +527,6 @@ namespace DiplomContentSystem.DataLayer.Migrations
 
                     b.HasOne("DiplomContentSystem.Core.Teacher", "Teacher")
                         .WithMany("TeacherComments")
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("DiplomContentSystem.Core.TeacherPosition", b =>
-                {
-                    b.HasOne("DiplomContentSystem.Core.Period", "Period")
-                        .WithMany("TeacherPositions")
-                        .HasForeignKey("PeriodId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DiplomContentSystem.Core.Teacher", "Teacher")
-                        .WithMany("TeacherPositions")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

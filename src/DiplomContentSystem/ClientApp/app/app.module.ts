@@ -12,7 +12,6 @@ import { TeachersModule } from './teacher/teacher.module';
 import { SignInComponent } from './login/components/sign-in.component';
 import { StudentsModule } from './student/student.module';
 import { StagesModule } from './stage/stage.module';
-import { DateValueAccessorModule } from 'angular-date-value-accessor';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -29,8 +28,7 @@ import { DateValueAccessorModule } from 'angular-date-value-accessor';
         SharedModule,
         TeachersModule,
         StudentsModule,
-        StagesModule,
-        DateValueAccessorModule
+        StagesModule
     ],
 })
 export class AppModule {

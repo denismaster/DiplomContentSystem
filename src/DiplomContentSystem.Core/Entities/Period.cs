@@ -12,7 +12,7 @@ namespace DiplomContentSystem.Core
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public List<TeacherPosition> TeacherPositions { get; set; }
+        public List<Teacher> Teachers { get; set; }
         public List<DiplomWork> DiplomWorks { get; set; }
     }
 }

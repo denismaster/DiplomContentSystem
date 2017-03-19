@@ -22,7 +22,7 @@ namespace DiplomContentSystem.Services
             switch (sortFieldName)
             {
                 case "fio": return teacher => teacher.FIO;
-                case "position": return teacher => teacher.Position.Name;
+                case "position": return teacher => teacher.TeacherPosition.Name;
                 case "maxWorkCount": return teacher => teacher.MaxWorkCount;
                 default: return teacher => teacher.Id;
             }
@@ -33,7 +33,7 @@ namespace DiplomContentSystem.Services
             var dbRequest = new Request<Teacher>();
             var response = new ListResponse<TeacherListItem>();
 
-            string[] includes = {"Position","Speciality"};
+            string[] includes = { "TeacherPosition", "Speciality" };
             dbRequest.Skip = request.Skip;
             dbRequest.Take = request.Take;
             if (!string.IsNullOrEmpty(request.FIO))
@@ -57,7 +57,7 @@ namespace DiplomContentSystem.Services
                     {
                         Id = x.Id,
                         FIO = x.FIO,
-                        Position = x.Position.Name,
+                        Position = x.TeacherPosition.Name,
                         Speciality = x.Speciality.ShortName,
                         MaxWorkCount = x.MaxWorkCount
                     };
@@ -67,7 +67,7 @@ namespace DiplomContentSystem.Services
 
         public Teacher Get(int id)
         {   
-            string[] includes = {"Position","Speciality"};
+            string[] includes = {"TeacherPosition","Speciality"};
             return _repository.Get(id,includes);
         }
 
@@ -75,9 +75,10 @@ namespace DiplomContentSystem.Services
         {
             var dbTeacher = new Teacher();
             dbTeacher.FIO = teacher.FIO;
-            dbTeacher.PositionId = teacher.PositionId;
+            dbTeacher.TeacherPositionId = teacher.TeacherPositionId;
             dbTeacher.MaxWorkCount = teacher.MaxWorkCount;
             dbTeacher.SpecialityId = 1;
+            dbTeacher.PeriodId = 1;
             _repository.Add(dbTeacher);
             _repository.SaveChanges();
             return true;
@@ -88,9 +89,10 @@ namespace DiplomContentSystem.Services
             var dbTeacher = new Teacher();
             dbTeacher.Id = teacher.Id;
             dbTeacher.FIO = teacher.FIO;
-            dbTeacher.PositionId = teacher.PositionId;
+            dbTeacher.TeacherPositionId = teacher.TeacherPositionId;
             dbTeacher.MaxWorkCount = teacher.MaxWorkCount;
             dbTeacher.SpecialityId = 1;
+            dbTeacher.PeriodId = 1;
             _repository.Update(dbTeacher);
             _repository.SaveChanges();
             return true;

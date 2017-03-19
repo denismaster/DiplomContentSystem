@@ -29,33 +29,19 @@ namespace DiplomContentSystem.DataLayer.Migrations
             migrationBuilder.DropTable(
                 name: "ImplementationStages");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Teachers_PositionId",
-                table: "Teachers");
-
-            migrationBuilder.DropColumn(
-                name: "MaxWorkCount",
-                table: "Teachers");
-
-            migrationBuilder.DropColumn(
+            migrationBuilder.RenameColumn(
                 name: "PositionId",
-                table: "Teachers");
+                table: "Teachers",
+                newName: "TeacherPositionId");
 
-            migrationBuilder.AddColumn<int>(
-                name: "MaxWorkCount",
-                table: "TeachersPositions",
-                nullable: false,
-                defaultValue: 0);
+            migrationBuilder.RenameIndex(
+                name: "IX_Teachers_PositionId",
+                table: "Teachers",
+                newName: "IX_Teachers_TeacherPositionId");
 
             migrationBuilder.AddColumn<int>(
                 name: "PeriodId",
-                table: "TeachersPositions",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<int>(
-                name: "TeacherId",
-                table: "TeachersPositions",
+                table: "Teachers",
                 nullable: false,
                 defaultValue: 0);
 
@@ -115,14 +101,9 @@ namespace DiplomContentSystem.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeachersPositions_PeriodId",
-                table: "TeachersPositions",
+                name: "IX_Teachers_PeriodId",
+                table: "Teachers",
                 column: "PeriodId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TeachersPositions_TeacherId",
-                table: "TeachersPositions",
-                column: "TeacherId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stages_DiplomWorkId",
@@ -148,18 +129,18 @@ namespace DiplomContentSystem.DataLayer.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_TeachersPositions_Periods_PeriodId",
-                table: "TeachersPositions",
+                name: "FK_Teachers_Periods_PeriodId",
+                table: "Teachers",
                 column: "PeriodId",
                 principalTable: "Periods",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_TeachersPositions_Teachers_TeacherId",
-                table: "TeachersPositions",
-                column: "TeacherId",
-                principalTable: "Teachers",
+                name: "FK_Teachers_TeachersPositions_TeacherPositionId",
+                table: "Teachers",
+                column: "TeacherPositionId",
+                principalTable: "TeachersPositions",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -171,12 +152,12 @@ namespace DiplomContentSystem.DataLayer.Migrations
                 table: "DiplomWorks");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_TeachersPositions_Periods_PeriodId",
-                table: "TeachersPositions");
+                name: "FK_Teachers_Periods_PeriodId",
+                table: "Teachers");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_TeachersPositions_Teachers_TeacherId",
-                table: "TeachersPositions");
+                name: "FK_Teachers_TeachersPositions_TeacherPositionId",
+                table: "Teachers");
 
             migrationBuilder.DropTable(
                 name: "StageComments");
@@ -185,36 +166,22 @@ namespace DiplomContentSystem.DataLayer.Migrations
                 name: "Stages");
 
             migrationBuilder.DropIndex(
-                name: "IX_TeachersPositions_PeriodId",
-                table: "TeachersPositions");
-
-            migrationBuilder.DropIndex(
-                name: "IX_TeachersPositions_TeacherId",
-                table: "TeachersPositions");
-
-            migrationBuilder.DropColumn(
-                name: "MaxWorkCount",
-                table: "TeachersPositions");
+                name: "IX_Teachers_PeriodId",
+                table: "Teachers");
 
             migrationBuilder.DropColumn(
                 name: "PeriodId",
-                table: "TeachersPositions");
+                table: "Teachers");
 
-            migrationBuilder.DropColumn(
-                name: "TeacherId",
-                table: "TeachersPositions");
-
-            migrationBuilder.AddColumn<int>(
-                name: "MaxWorkCount",
+            migrationBuilder.RenameColumn(
+                name: "TeacherPositionId",
                 table: "Teachers",
-                nullable: false,
-                defaultValue: 0);
+                newName: "PositionId");
 
-            migrationBuilder.AddColumn<int>(
-                name: "PositionId",
+            migrationBuilder.RenameIndex(
+                name: "IX_Teachers_TeacherPositionId",
                 table: "Teachers",
-                nullable: false,
-                defaultValue: 0);
+                newName: "IX_Teachers_PositionId");
 
             migrationBuilder.AlterColumn<int>(
                 name: "TeacherId",
@@ -316,11 +283,6 @@ namespace DiplomContentSystem.DataLayer.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Teachers_PositionId",
-                table: "Teachers",
-                column: "PositionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ImplementationStages_DiplomWorkId",

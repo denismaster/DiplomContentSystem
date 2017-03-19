@@ -9,12 +9,7 @@ namespace DiplomContentSystem.Core
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int MaxWorkCount { get; set; }
 
-        public int TeacherId { get; set; }
-        public Teacher Teacher { get; set; }
-
-        public int PeriodId { get; set; }
-        public Period Period { get; set; }
+        public List<Teacher> Teachers { get; set; }
     }
 }
