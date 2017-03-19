@@ -22,29 +22,21 @@ namespace DiplomContentSystem.Services.Teachers
             
         }
 
-        private Expression<Func<Teacher, object>> GetSortExpression(string sortFieldName)
-        {
-            switch (sortFieldName)
-            {
-                case "fio": return teacher => teacher.FIO;
-                case "position": return teacher => teacher.Position.Name;
-                case "maxWorkCount": return teacher => teacher.MaxWorkCount;
-                default: return teacher => teacher.Id;
-            }
-        }
-
         public Dto.ListResponse<TeacherListItem> GetTeachers(TeacherRequest request)
         {
-            var queryBuilder = new TeachersRequestBuilder();
+            var queryBuilder = new TeachersQueryBuilder();
             var response = new ListResponse<TeacherListItem>();
             string[] includes = {"Position","Speciality"};
+
             var query = queryBuilder.UseDto(request)
                                     .UsePaging()
                                     .UseFilters()
                                     .UseSortings(defaultSorting:"id")
                                     .Build();
+
             response.TotalCount = _repository.Count(query.FilterExpression);
             response.Items = _mapper.Map<IEnumerable<TeacherListItem>>(_repository.Get(query, includes));
+
             return response;
         }
 
@@ -54,17 +46,17 @@ namespace DiplomContentSystem.Services.Teachers
             return _repository.Get(id,includes);
         }
 
-        public bool AddTeacher(TeacherEditItem teacher)
+        public bool AddTeacher(TeacherEditItem teacherDto)
         {
-            var dbTeacher = _mapper.Map<Teacher>(teacher);
+            var dbTeacher = _mapper.Map<Teacher>(teacherDto);
             _repository.Add(dbTeacher);
             _repository.SaveChanges();
             return true;
         }
 
-        public bool UpdateTeacher(TeacherEditItem teacher)
+        public bool UpdateTeacher(TeacherEditItem teacherDto)
         {
-            var dbTeacher = _mapper.Map<Teacher>(teacher);
+            var dbTeacher = _mapper.Map<Teacher>(teacherDto);
             _repository.Update(dbTeacher);
             _repository.SaveChanges();
             return true;
