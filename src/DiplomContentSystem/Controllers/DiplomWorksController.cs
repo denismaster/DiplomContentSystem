@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using DiplomContentSystem.Services;
+using DiplomContentSystem.Services.DiplomWorks;
 using DiplomContentSystem.Core;
 using Newtonsoft.Json;
 namespace DiplomContentSystem.Controllers

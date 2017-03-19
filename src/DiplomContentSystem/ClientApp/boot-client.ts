@@ -1,3 +1,4 @@
+import 'chart.js';
 import 'angular2-universal-polyfills/browser';
 import { enableProdMode } from '@angular/core';
 import { platformUniversalDynamic } from 'angular2-universal';
