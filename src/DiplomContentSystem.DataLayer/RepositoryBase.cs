@@ -9,7 +9,7 @@ namespace DiplomContentSystem.DataLayer
 {
     public class RepositoryBase<T> : IRepository<T> where T : class, IEntity
     {
-        private readonly DiplomContext _context;
+        protected readonly DiplomContext _context;
 
         public RepositoryBase(DiplomContext context)
         {
