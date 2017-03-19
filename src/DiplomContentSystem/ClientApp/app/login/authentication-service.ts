@@ -15,7 +15,7 @@ export class AuthenticationService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post("api/account/login", JSON.stringify({ Username: model.login, Password: model.password, RememberMe: model.remember }), options)
+        return this.http.post("api/account/login", JSON.stringify({ username: model.login, password: model.password, rememberMe: model.remember }), options)
             .map((response: Response) => {
                 let token = response.json() && response.json().token;              
                 if (token) {
