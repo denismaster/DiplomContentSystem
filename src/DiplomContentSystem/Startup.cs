@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using DiplomContentSystem.Services;
+using DiplomContentSystem.Services.Students;
 using DiplomContentSystem.Services.Teachers;
+using DiplomContentSystem.Services.DiplomWorks;
 using DiplomContentSystem.DataLayer;
 using DiplomContentSystem.Core;
 namespace DiplomContentSystem
