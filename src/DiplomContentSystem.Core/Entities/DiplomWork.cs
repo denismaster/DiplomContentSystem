@@ -16,6 +16,9 @@ namespace DiplomContentSystem.Core
         public int PeriodId { get; set; }
         public Period Period { get; set; }
 
+        public int TeacherId { get; set; }
+        public Teacher Teacher { get; set; }
+
         public List<Student> Students { get; set; }
         public List<DiplomWorkMaterial> DiplomWorkMaterials { get; set; }
         public List<Stage> Stages { get; set; }

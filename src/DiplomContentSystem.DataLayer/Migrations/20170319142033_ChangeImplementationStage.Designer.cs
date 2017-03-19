@@ -8,7 +8,7 @@ using DiplomContentSystem.DataLayer;
 namespace DiplomContentSystem.DataLayer.Migrations
 {
     [DbContext(typeof(DiplomContext))]
-    [Migration("20170319122045_ChangeImplementationStage")]
+    [Migration("20170319142033_ChangeImplementationStage")]
     partial class ChangeImplementationStage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,7 +46,7 @@ namespace DiplomContentSystem.DataLayer.Migrations
 
                     b.Property<DateTime>("StartDate");
 
-                    b.Property<int?>("TeacherId");
+                    b.Property<int>("TeacherId");
 
                     b.HasKey("Id");
 
@@ -370,9 +370,10 @@ namespace DiplomContentSystem.DataLayer.Migrations
                         .HasForeignKey("PeriodId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("DiplomContentSystem.Core.Teacher")
+                    b.HasOne("DiplomContentSystem.Core.Teacher", "Teacher")
                         .WithMany("DiplomWorks")
-                        .HasForeignKey("TeacherId");
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DiplomContentSystem.Core.DiplomWorkComment", b =>

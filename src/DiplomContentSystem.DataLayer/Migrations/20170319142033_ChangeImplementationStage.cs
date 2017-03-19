@@ -10,10 +10,6 @@ namespace DiplomContentSystem.DataLayer.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_DiplomWorks_Teachers_TeacherId",
-                table: "DiplomWorks");
-
-            migrationBuilder.DropForeignKey(
                 name: "FK_Teachers_TeachersPositions_PositionId",
                 table: "Teachers");
 
@@ -44,11 +40,6 @@ namespace DiplomContentSystem.DataLayer.Migrations
                 table: "Teachers",
                 nullable: false,
                 defaultValue: 0);
-
-            migrationBuilder.AlterColumn<int>(
-                name: "TeacherId",
-                table: "DiplomWorks",
-                nullable: true);
 
             migrationBuilder.CreateTable(
                 name: "Stages",
@@ -121,14 +112,6 @@ namespace DiplomContentSystem.DataLayer.Migrations
                 column: "StageId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_DiplomWorks_Teachers_TeacherId",
-                table: "DiplomWorks",
-                column: "TeacherId",
-                principalTable: "Teachers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
                 name: "FK_Teachers_Periods_PeriodId",
                 table: "Teachers",
                 column: "PeriodId",
@@ -147,10 +130,6 @@ namespace DiplomContentSystem.DataLayer.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_DiplomWorks_Teachers_TeacherId",
-                table: "DiplomWorks");
-
             migrationBuilder.DropForeignKey(
                 name: "FK_Teachers_Periods_PeriodId",
                 table: "Teachers");
@@ -182,11 +161,6 @@ namespace DiplomContentSystem.DataLayer.Migrations
                 name: "IX_Teachers_TeacherPositionId",
                 table: "Teachers",
                 newName: "IX_Teachers_PositionId");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "TeacherId",
-                table: "DiplomWorks",
-                nullable: false);
 
             migrationBuilder.CreateTable(
                 name: "ImplementationStages",
@@ -313,14 +287,6 @@ namespace DiplomContentSystem.DataLayer.Migrations
                 name: "IX_SubImplementationStageComments_SubImplementationStageId",
                 table: "SubImplementationStageComments",
                 column: "SubImplementationStageId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_DiplomWorks_Teachers_TeacherId",
-                table: "DiplomWorks",
-                column: "TeacherId",
-                principalTable: "Teachers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Teachers_TeachersPositions_PositionId",
