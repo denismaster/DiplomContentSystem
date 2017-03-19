@@ -9,7 +9,7 @@ namespace DiplomContentSystem.Core
     {
         IEnumerable<T> Get();
         IEnumerable<T> Get(Expression<Func<T, bool>> predicate,IEnumerable<string> includes = null);
-        IEnumerable<T> Get(Request<T> request, IEnumerable<string> includes=null);
+        IEnumerable<T> Get(Query<T> request, IEnumerable<string> includes=null);
         T Get(int id, IEnumerable<string> includes=null);
         long Count(Expression<Func<T,bool>> predicate);
         void Add(T item);

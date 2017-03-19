@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DiplomContentSystem.Core;
 using DiplomContentSystem.Dto;
-namespace DiplomContentSystem.Services
+namespace DiplomContentSystem.Services.DiplomWorks
 {
     public class DiplomWorksService
     {
@@ -17,41 +17,20 @@ namespace DiplomContentSystem.Services
                 _repository = repository;
         }
 
-        private Expression<Func<DiplomWork, object>> GetSortExpression(string sortFieldName)
-        {
-            switch (sortFieldName)
-            {
-                case "name": return diplomWork => diplomWork.Name;
-                case "endDate": return diplomWork => diplomWork.EndDate;
-                case "startDate": return diplomWork => diplomWork.StartDate;
-                default: return diplomWork => diplomWork.Id;
-            }
-        }
-
         public Dto.ListResponse<DiplomWorkListItem> GetDiplomWorks(DiplomWorkRequest request)
         {
-            var dbRequest = new Request<DiplomWork>();
+            var queryBuilder = new DiplomWorksQueryBuilder();
             var response = new ListResponse<DiplomWorkListItem>();
-
             string[] includes = { "Teacher", "Students" };
-            dbRequest.Skip = request.Skip;
-            dbRequest.Take = request.Take;
-            if (!string.IsNullOrEmpty(request.Name))
-            {
-                dbRequest.FilterExpression = DiplomWork => DiplomWork.Name.Contains(request.Name);
-            }
-            dbRequest.SortExpressions = (request == null || request.Sortings == null) ? null : request.Sortings
-                .Select(sorting =>
-                {
-                    return new SortExpression<DiplomWork>(GetSortExpression(sorting.FieldName), (SortDirection)sorting.Direction);
-                })
-                .ToList();
-            if (!dbRequest.SortExpressions.Any())
-            {
-                dbRequest.SortExpressions.Add(new SortExpression<DiplomWork>(GetSortExpression(""), SortDirection.Ascending));
-            }
-            response.TotalCount = _repository.Count(dbRequest.FilterExpression);
-            response.Items = _repository.Get(dbRequest, includes).Select(x =>
+
+            var query = queryBuilder.UseDto(request)
+                                    .UsePaging()
+                                    .UseFilters()
+                                    .UseSortings(defaultSorting: "id")
+                                    .Build();
+
+            response.TotalCount = _repository.Count(query.FilterExpression);
+            response.Items = _repository.Get(query, includes).Select(x =>
             {
                 return new DiplomWorkListItem()
                 {

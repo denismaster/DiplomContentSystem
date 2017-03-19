@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DiplomContentSystem.Core;
 using DiplomContentSystem.Dto;
-namespace DiplomContentSystem.Services
+namespace DiplomContentSystem.Services.Students
 {
     public class StudentService
     {
@@ -17,41 +17,21 @@ namespace DiplomContentSystem.Services
                 _repository = repository;
         }
 
-        private Expression<Func<Student, object>> GetSortExpression(string sortFieldName)
-        {
-            switch (sortFieldName)
-            {
-                case "fio": return student => student.FIO;
-                case "diplomWork": return student => student.DiplomWork.Name;
-                case "group": return student => student.Group.Name;
-                default: return student => student.Id;
-            }
-        }
-
         public Dto.ListResponse<StudentListItem> GetStudents(StudentRequest request)
         {
-            var dbRequest = new Request<Student>();
+            var queryBuilder = new StudentsQueryBuilder();
             var response = new ListResponse<StudentListItem>();
 
             string[] includes = { "Group", "Teacher","DiplomWork" };
-            dbRequest.Skip = request.Skip;
-            dbRequest.Take = request.Take;
-            if (!string.IsNullOrEmpty(request.FIO))
-            {
-                dbRequest.FilterExpression = Student => Student.FIO.Contains(request.FIO);
-            }
-            dbRequest.SortExpressions = (request == null || request.Sortings == null) ? null : request.Sortings
-                .Select(sorting =>
-                {
-                    return new SortExpression<Student>(GetSortExpression(sorting.FieldName), (SortDirection)sorting.Direction);
-                })
-                .ToList();
-            if (!dbRequest.SortExpressions.Any())
-            {
-                dbRequest.SortExpressions.Add(new SortExpression<Student>(GetSortExpression(""), SortDirection.Ascending));
-            }
-            response.TotalCount = _repository.Count(dbRequest.FilterExpression);
-            response.Items = _repository.Get(dbRequest, includes).Select(x =>
+
+            var query = queryBuilder.UseDto(request)
+                                    .UsePaging()
+                                    .UseFilters()
+                                    .UseSortings(defaultSorting: "id")
+                                    .Build();
+
+            response.TotalCount = _repository.Count(query.FilterExpression);
+            response.Items = _repository.Get(query, includes).Select(x =>
             {
                 return new StudentListItem()
                 {
