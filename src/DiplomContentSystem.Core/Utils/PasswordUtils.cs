@@ -18,7 +18,7 @@ namespace DiplomContentSystem.Core
                     password: password,
                     salt: salt,
                     prf: KeyDerivationPrf.HMACSHA1,
-                    iterationCount: 10000,
+                    iterationCount: 4096,
                     numBytesRequested: 256 / 8));
             return hashed;
         }
