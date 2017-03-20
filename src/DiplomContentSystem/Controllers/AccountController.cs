@@ -10,6 +10,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using DiplomContentSystem.Dto.Login;
+using DiplomContentSystem.Services;
 
 namespace DiplomContentSystem.Controllers
 {
@@ -34,7 +36,7 @@ namespace DiplomContentSystem.Controllers
 
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<IActionResult> Login([FromBody] LoginViewModel user)
+        public async Task<IActionResult> Login([FromBody] LoginDto user)
         {
             return await loginService.GetIdentity(user, _jwtOptions, _serializerSettings);
         }
@@ -44,29 +46,6 @@ namespace DiplomContentSystem.Controllers
         {
             return await loginService.RefreshToken(token, _jwtOptions, _serializerSettings);
         }
-    }
-    public class LoginViewModel
-    {
-        /// <summary>
-        /// Username
-        /// </summary>
-        public string Username { get; set; }
-
-        /// <summary>
-        /// Password
-        /// </summary>
-        public string Password { get; set; }
-
-        /// <summary>
-        /// Should this user be remembered next time attempting to view secured pages
-        /// </summary>
-        public bool RememberMe { get; set; }
-    }
-    public interface ILoginService
-    {
-        Task<ObjectResult> GetIdentity(LoginViewModel user, JwtIssuerOptions _jwtOptions, JsonSerializerSettings _serializerSettings);
-        Task<ObjectResult> RefreshToken(string token, JwtIssuerOptions _jwtOptions, JsonSerializerSettings _serializerSettings);
-        void ThrowIfInvalidOptions(JwtIssuerOptions options);
     }
     public class LoginService : ILoginService
     {
@@ -78,7 +57,7 @@ namespace DiplomContentSystem.Controllers
              _repository = repository;
         }
 
-        public async Task<ObjectResult> GetIdentity(LoginViewModel user, JwtIssuerOptions _jwtOptions, JsonSerializerSettings _serializerSettings)
+        public async Task<string> GetIdentity(LoginDto user, JwtIssuerOptions _jwtOptions, JsonSerializerSettings _serializerSettings)
         {
             if (_repository.GetUser(user.Username) == null)
             {
@@ -115,7 +94,7 @@ namespace DiplomContentSystem.Controllers
             return TokenResult(encodedJwt, user.RememberMe ? (int)_jwtOptions.RememberValidFor.TotalSeconds : (int)_jwtOptions.ValidFor.TotalSeconds, _jwtOptions, _serializerSettings);
         }
 
-        private ObjectResult TokenResult(string token, double expires, JwtIssuerOptions _jwtOptions, JsonSerializerSettings _serializerSettings)
+        private string TokenResult(string token, double expires, JwtIssuerOptions _jwtOptions, JsonSerializerSettings _serializerSettings)
         {
             var response = new
             {
@@ -123,7 +102,7 @@ namespace DiplomContentSystem.Controllers
                 expires = expires
             };
             var json = JsonConvert.SerializeObject(response, _serializerSettings);
-            return new OkObjectResult(json);
+            return json;
         }
 
         public async Task<ObjectResult> RefreshToken(string token, JwtIssuerOptions _jwtOptions, JsonSerializerSettings _serializerSettings)
@@ -220,7 +199,7 @@ namespace DiplomContentSystem.Controllers
 
         private long ToUnixEpochDate(DateTime date) => (long)Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
 
-        private async Task<ClaimsIdentity> GetClaimsIdentity(LoginViewModel user)
+        private async Task<ClaimsIdentity> GetClaimsIdentity(LoginDto user)
         {
             var dbUser = await _repository.GetUserAsync(user.Username);
             dbUser = PasswordUtils.Verify(user.Password, dbUser.PasswordHash)? dbUser:null;// asswordUtils.Verify(user.Password, u.PasswordHash));
