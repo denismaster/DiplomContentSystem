@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using DiplomContentSystem.Controllers;
+using DiplomContentSystem.Authentication;
 
 namespace DiplomContentSystem
 {
@@ -61,7 +62,7 @@ namespace DiplomContentSystem
             services.AddScoped<IRepository<DiplomWork>, RepositoryBase<DiplomWork>>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddDbContext<DiplomContext>();
-            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IAuthService, AuthService>();
             services
                 .AddAuthPolicy()
                 .ConfigureJwtIssuerOptions(Configuration, _signingKey);
