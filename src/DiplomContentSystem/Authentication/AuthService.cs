@@ -167,7 +167,8 @@ namespace DiplomContentSystem.Authentication
         private async Task<ClaimsIdentity> GetClaimsIdentity(LoginDto user)
         {
             var dbUser = await _repository.GetUserAsync(user.Username);
-            dbUser = PasswordUtils.Verify(user.Password, dbUser.PasswordHash) ? dbUser : null;// asswordUtils.Verify(user.Password, u.PasswordHash));
+            //not await verify due to CPU-bound operation//
+            dbUser = PasswordUtils.Verify(user.Password, dbUser.PasswordHash) ? dbUser : null;
             if (dbUser != null)
             {
                 return new ClaimsIdentity(new GenericIdentity(dbUser.Login, "Token"),

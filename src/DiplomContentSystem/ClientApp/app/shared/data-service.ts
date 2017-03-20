@@ -33,6 +33,7 @@ export class DataService {
     private _post(uri, body: any, headers?: Headers, responseType?: ResponseContentType) 
     {
         let user: UserAuthModel = this._getCurrentUser();
+        if (!user) return Observable.empty();
         headers = headers == null ? new Headers() : headers;
         headers.append('Authorization', 'Bearer ' + user.Token);
         let options = new RequestOptions({ headers: headers });
@@ -54,6 +55,7 @@ export class DataService {
     private _get(uri, headers?: Headers, responseType?: ResponseContentType) 
     {
         let user: UserAuthModel = this._getCurrentUser();
+        if (!user) return Observable.empty();
         headers = headers == null ? new Headers() : headers;
         headers.append('Authorization', 'Bearer ' + user.Token);
         let options = new RequestOptions({ headers: headers });
