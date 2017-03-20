@@ -222,7 +222,8 @@ namespace DiplomContentSystem.Controllers
 
         private async Task<ClaimsIdentity> GetClaimsIdentity(LoginViewModel user)
         {
-            var dbUser = await _repository.GetUserAsync(user.Username);// asswordUtils.Verify(user.Password, u.PasswordHash));
+            var dbUser = await _repository.GetUserAsync(user.Username);
+            dbUser = PasswordUtils.Verify(user.Password, dbUser.PasswordHash)? dbUser:null;// asswordUtils.Verify(user.Password, u.PasswordHash));
             //var dbUser = new User(user.Username);
             if (dbUser != null)
             {
