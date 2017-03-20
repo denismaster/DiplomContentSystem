@@ -6,12 +6,10 @@ namespace DiplomContentSystem.Dto.Login
         /// Username
         /// </summary>
         public string Username { get; set; }
-
         /// <summary>
         /// Password
         /// </summary>
         public string Password { get; set; }
-
         /// <summary>
         /// Should this user be remembered next time attempting to view secured pages
         /// </summary>
