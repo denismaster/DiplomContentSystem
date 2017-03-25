@@ -171,13 +171,9 @@ namespace DiplomContentSystem.Authentication
             dbUser = PasswordUtils.Verify(user.Password, dbUser.PasswordHash) ? dbUser : null;
             if (dbUser != null)
             {
-                return new ClaimsIdentity(new GenericIdentity(dbUser.Login, "Token"),
-                   // dbUser.IsAdmin
-                   // ? new Claim[] { new Claim(AuthConsts.ClaimUserType, AuthConsts.RoleAdmin) }
-                   /* : */ new Claim[] { new Claim(AuthConsts.ClaimUserType, AuthConsts.RoleUser
-                    ) });
+                var claims = dbUser.Roles.Select(role=>new Claim(ClaimTypes.Role,role.Role.Name)).ToArray();
+                return new ClaimsIdentity(new GenericIdentity(dbUser.Login, "Token"),claims);
             }
-
             return null;
         }
 

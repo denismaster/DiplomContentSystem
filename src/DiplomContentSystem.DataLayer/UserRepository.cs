@@ -14,12 +14,12 @@ namespace DiplomContentSystem.DataLayer
 
         public User GetUser(string login)
         {
-            return _context.Users.FirstOrDefault(user => user.Login == login);
+            return _context.Users.Include(user=>user.Roles).ThenInclude(user=>user.Role).FirstOrDefault(user => user.Login == login);
         }
 
         public Task<User> GetUserAsync(string login)
         {
-            return _context.Users.FirstOrDefaultAsync(user => user.Login == login);
+            return _context.Users.Include(user=>user.Roles).ThenInclude(user=>user.Role).FirstOrDefaultAsync(user => user.Login == login);
         }
     }
 }

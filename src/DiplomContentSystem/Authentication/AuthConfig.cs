@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Security.Claims;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,9 +17,9 @@ namespace DiplomContentSystem.Authentication
             return service.AddAuthorization(options =>
             {
                 options.AddPolicy(AuthConsts.PolicyAdmin,
-                                  policy => policy.RequireClaim(AuthConsts.ClaimUserType, AuthConsts.RoleAdmin));
+                                  policy => policy.RequireClaim(ClaimTypes.Role, AuthConsts.Admin));
                 options.AddPolicy(AuthConsts.PolicyUser,
-                                  policy => policy.RequireClaim(AuthConsts.ClaimUserType, AuthConsts.RoleAdmin, AuthConsts.RoleUser));
+                                  policy => policy.RequireClaim(ClaimTypes.Role, AuthConsts.Student, AuthConsts.Teacher, AuthConsts.Institute));
             });
         }
 
