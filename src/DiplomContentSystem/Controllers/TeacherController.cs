@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using DiplomContentSystem.Services.Teachers;
+using DiplomContentSystem.Authentication;
 using DiplomContentSystem.Core;
 using Newtonsoft.Json;
 namespace DiplomContentSystem.Controllers
 {   
     [Route("api/[controller]")]
+    [Authorize(Policy=AuthConsts.PolicyUser)]
     public class TeachersController : Controller
     {
         private readonly TeacherService _service;
