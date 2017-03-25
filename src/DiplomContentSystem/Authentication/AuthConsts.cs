@@ -16,7 +16,7 @@ namespace DiplomContentSystem.Authentication
         public const string PolicyUser = "UserPolicy";
         public const string PolicyStudent = "StudentPolicy";
         public const string PolicyTeacher = "TeacherPolicy";
-        public const string PolicyInsititute = "InstutePolicy";
+        public const string PolicyInstitute = "InstutePolicy";
         public const string RoleUser = "User";
         public const string RoleAdmin = "Admin";
     }

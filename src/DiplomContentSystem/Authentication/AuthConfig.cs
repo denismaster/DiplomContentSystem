@@ -18,6 +18,12 @@ namespace DiplomContentSystem.Authentication
             {
                 options.AddPolicy(AuthConsts.PolicyAdmin,
                                   policy => policy.RequireClaim(AuthConsts.ClaimUserType,AuthConsts.Admin));
+                options.AddPolicy(AuthConsts.PolicyStudent,
+                                  policy => policy.RequireClaim(AuthConsts.ClaimUserType, AuthConsts.Student));
+                options.AddPolicy(AuthConsts.PolicyTeacher,
+                                  policy => policy.RequireClaim(AuthConsts.ClaimUserType, AuthConsts.Teacher));
+                options.AddPolicy(AuthConsts.PolicyInstitute,
+                                  policy => policy.RequireClaim(AuthConsts.ClaimUserType, AuthConsts.Institute));
                 options.AddPolicy(AuthConsts.PolicyUser,
                                   policy => policy.RequireClaim(AuthConsts.ClaimUserType,AuthConsts.Admin, AuthConsts.Student, AuthConsts.Teacher, AuthConsts.Institute));
             });
