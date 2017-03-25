@@ -17,9 +17,9 @@ namespace DiplomContentSystem.Authentication
             return service.AddAuthorization(options =>
             {
                 options.AddPolicy(AuthConsts.PolicyAdmin,
-                                  policy => policy.RequireClaim(ClaimTypes.Role, AuthConsts.Admin));
+                                  policy => policy.RequireClaim(AuthConsts.ClaimUserType,AuthConsts.Admin));
                 options.AddPolicy(AuthConsts.PolicyUser,
-                                  policy => policy.RequireClaim(ClaimTypes.Role, AuthConsts.Student, AuthConsts.Teacher, AuthConsts.Institute));
+                                  policy => policy.RequireClaim(AuthConsts.ClaimUserType,AuthConsts.Admin, AuthConsts.Student, AuthConsts.Teacher, AuthConsts.Institute));
             });
         }
 

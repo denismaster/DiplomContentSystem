@@ -171,12 +171,13 @@ namespace DiplomContentSystem.Authentication
             dbUser = PasswordUtils.Verify(user.Password, dbUser.PasswordHash) ? dbUser : null;
             if (dbUser != null)
             {
-                var claims = dbUser.Roles.Select(role=>new Claim(ClaimTypes.Role,role.Role.Name)).ToArray();
+                var claims = dbUser.Roles.Select(role=>new Claim(AuthConsts.ClaimUserType,role.Role.Name)).ToArray();
                 return new ClaimsIdentity(new GenericIdentity(dbUser.Login, "Token"),claims);
             }
             return null;
         }
 
+        //TODO: Implement refreshing.
         private Task<ClaimsIdentity> GetClaimsIdentity(string user)
         {
             var dbUser = new User(user);
