@@ -6,9 +6,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}\\src\\DiplomContentSystem\\bin\\Debug\\netcoreapp1.1\\DiplomContentSystem.dll",
+            "program": "${workspaceRoot}/src/DiplomContentSystem/bin/Debug/netcoreapp1.1/DiplomContentSystem.dll",
             "args": [],
-            "cwd": "${workspaceRoot}\\src\\DiplomContentSystem",
+            "cwd": "${workspaceRoot}/src/DiplomContentSystem",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {
