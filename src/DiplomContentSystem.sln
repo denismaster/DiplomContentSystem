@@ -1,17 +1,17 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26114.2
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DiplomContentSystem", "DiplomContentSystem\DiplomContentSystem.xproj", "{19318A22-340A-4DA9-8F8E-1772598A7084}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiplomContentSystem", "DiplomContentSystem\DiplomContentSystem.csproj", "{19318A22-340A-4DA9-8F8E-1772598A7084}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DiplomContentSystem.Core", "DiplomContentSystem.Core\DiplomContentSystem.Core.xproj", "{EABDEEC4-20F0-47C0-83A6-C4E601492CA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiplomContentSystem.Core", "DiplomContentSystem.Core\DiplomContentSystem.Core.csproj", "{EABDEEC4-20F0-47C0-83A6-C4E601492CA8}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DiplomContentSystem.DataLayer", "DiplomContentSystem.DataLayer\DiplomContentSystem.DataLayer.xproj", "{2C239FA3-41E3-4DAE-A8A2-5247A154A5AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiplomContentSystem.DataLayer", "DiplomContentSystem.DataLayer\DiplomContentSystem.DataLayer.csproj", "{2C239FA3-41E3-4DAE-A8A2-5247A154A5AB}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DiplomContentSystem.Services", "DiplomContentSystem.Services\DiplomContentSystem.Services.xproj", "{55DA8AF0-B7E7-46FF-B2C9-D7D7952C6B73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiplomContentSystem.Services", "DiplomContentSystem.Services\DiplomContentSystem.Services.csproj", "{55DA8AF0-B7E7-46FF-B2C9-D7D7952C6B73}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DiplomContentSystem.Dto", "DiplomContentSystem.Dto\DiplomContentSystem.Dto.xproj", "{A3B13F98-4B1F-4FEA-A3F9-A27AEBA23E8C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiplomContentSystem.Dto", "DiplomContentSystem.Dto\DiplomContentSystem.Dto.csproj", "{A3B13F98-4B1F-4FEA-A3F9-A27AEBA23E8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

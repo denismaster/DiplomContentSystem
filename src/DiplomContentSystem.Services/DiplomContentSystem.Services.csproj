@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <AssemblyName>DiplomContentSystem.Services</AssemblyName>
+    <PackageId>DiplomContentSystem.Services</PackageId>
+    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../DiplomContentSystem.Core/DiplomContentSystem.Core.csproj" />
+    <ProjectReference Include="../DiplomContentSystem.Dto/DiplomContentSystem.Dto.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="6.4.0-beta4" />
+    <PackageReference Include="AutoMapper" Version="5.2.0" />
+  </ItemGroup>
+
+</Project>
