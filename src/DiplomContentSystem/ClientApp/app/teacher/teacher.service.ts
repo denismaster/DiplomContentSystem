@@ -6,6 +6,7 @@ import { ServiceBase } from '../shared/service-base';
 import { OperationResult } from '../shared/operation-result';
 import { ApiService, ApiRoutes } from '../shared/api-service';
 import { DataService } from '../shared/data-service';
+import { SelectListItem } from '../shared/select-list-item';
 
 @Injectable()
 export class TeacherService extends ApiService<Teacher>{
@@ -17,8 +18,18 @@ export class TeacherService extends ApiService<Teacher>{
         updateUrl:"/api/teachers/update/",
         deleteUrl:"/api/teachers/delete/"
     }
+
     constructor(http: DataService)
     {
         super(TeacherService.routes,http);
+    }
+
+    public getPositions():Observable<SelectListItem[]>
+    {
+        return this.http.get("/api/teachers/positions").map(this.extractData);
+    }
+    public getSpecialities():Observable<SelectListItem[]>
+    {
+        return this.http.get("/api/specialities").map(this.extractData);
     }
 }

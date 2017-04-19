@@ -28,6 +28,7 @@
                     <th>№</th>
                     <th><span rtSort="fio">ФИО</span></th>
                     <th><span rtSort="position">Должность</span></th>
+                    <th>Кафедра</th>
                     <th><span rtSort="maxWorkCount">Нагрузка</span></th>
                     <th>Действия</th>
                 </tr>
@@ -41,6 +42,7 @@
                         </a>
                     </td>
                     <td>{{ item.position }}</td>
+                    <td>{{ item.speciality }}</td>
                     <td>{{ item.maxWorkCount}}</td>
                     <td>
                         <a [routerLink]="['edit/',item.id]" class="btn btn-warning btn-sm">

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,21 +6,31 @@ import { TeacherService } from '../teacher.service';
 import { Teacher } from '../models/teacher';
 import { CustomValidators } from '../../shared/custom-validators';
 import { OperationResult } from '../../shared/operation-result';
+import { SelectListItem } from '../../shared/select-list-item';
 
 @Component({
     selector: 'teachers-add',
     templateUrl: './teacher-add.component.html'
 })
-export class TeachersAddComponent {
+export class TeachersAddComponent implements OnInit {
     private form: FormGroup;
+    private positionOptions:SelectListItem[];
+    private specialityOptions:SelectListItem[];
     private errors: string[] = [];
 
     constructor(private service: TeacherService, private router: Router, private formBuilder: FormBuilder) {
         this.form = this.formBuilder.group({
             "fio": [undefined, Validators.compose([Validators.required, CustomValidators.notEmpty(), CustomValidators.wordCount(3)])],
             "maxWorkCount": [undefined, Validators.compose([Validators.required,CustomValidators.minValue(1)])],
-            "position": [undefined, Validators.required]
+            "position": ["", Validators.required],
+            "speciality": ["", Validators.required]
         });
+    }
+    
+    ngOnInit()
+    {
+        this.service.getPositions().subscribe(r=>this.positionOptions = r);
+        this.service.getSpecialities().subscribe(r=>this.specialityOptions = r);
     }
 
     private submit(value: any): void {
@@ -30,6 +40,7 @@ export class TeachersAddComponent {
         teacher.fio = value.fio;
         teacher.positionId = value.position;
         teacher.maxWorkCount = value.maxWorkCount;
+        teacher.specialityId = value.speciality;
         
         this.service.add(teacher).subscribe(result=>this.checkResult(result));
     }
