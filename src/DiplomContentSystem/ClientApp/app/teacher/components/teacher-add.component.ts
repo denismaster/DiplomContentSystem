@@ -40,7 +40,7 @@ export class TeachersAddComponent implements OnInit {
         teacher.fio = value.fio;
         teacher.positionId = value.position;
         teacher.maxWorkCount = value.maxWorkCount;
-        teacher.specialityId = value.speciality;
+        teacher.departmentId = value.speciality;
         
         this.service.add(teacher).subscribe(result=>this.checkResult(result));
     }
