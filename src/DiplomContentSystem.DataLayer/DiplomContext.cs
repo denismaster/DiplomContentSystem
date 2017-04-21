@@ -9,6 +9,7 @@ namespace DiplomContentSystem.DataLayer
     public class DiplomContext : DbContext
     {
         public DbSet<Institute> Institutes { get; set; }
+        public DbSet<Department> Departments { get; set; }
         public DbSet<Speciality> Specialities { get; set; }
         public DbSet<TeacherPosition> TeachersPositions { get; set; }
         public DbSet<Teacher> Teachers { get; set; }

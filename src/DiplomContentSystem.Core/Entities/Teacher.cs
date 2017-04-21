@@ -14,8 +14,8 @@ namespace DiplomContentSystem.Core
         public int PositionId {get;set;}
         public TeacherPosition Position { get; set; }
         
-        public int SpecialityId { get; set; }
-        public Speciality Speciality { get; set; }
+        public int DepartmentId { get; set; }
+        public Department Department { get; set; }
 
         public List<DiplomWork> DiplomWorks { get; set; }
         public List<TeacherComment> TeacherComments { get; set; }

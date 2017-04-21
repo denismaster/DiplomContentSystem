@@ -12,7 +12,7 @@ namespace DiplomContentSystem.Core
         public string ShortName { get; set; }
         public string Сode { get; set; }
 
-        public int InstituteId { get; set; }
-        public Institute Institute { get; set; }
+        public int DepartmentId { get; set; }
+        public Department Department { get; set; }
     }
 }
