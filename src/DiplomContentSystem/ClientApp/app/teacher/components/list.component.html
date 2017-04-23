@@ -45,9 +45,16 @@
                     <td>{{ item.department }}</td>
                     <td>{{ item.maxWorkCount}}</td>
                     <td>
-                        <a [routerLink]="['edit/',item.id]" class="btn btn-warning btn-sm">
-                            <i class="fa fa-edit"></i>
-                        </a>
+                        <role-admin>
+                            <a [routerLink]="['edit/',item.id]" class="btn btn-warning btn-sm">
+                                <i class="fa fa-edit"></i>
+                            </a>       
+                        </role-admin>
+                        <role-student>
+                            <button type="button" class="btn btn-sm btn-success">
+                                Назначить
+                            </button> 
+                        </role-student>
                     </td>
                 </tr>
             </tbody>
