@@ -18,7 +18,7 @@ namespace DiplomContentSystem.Controllers
             _repository = repository;
         }
 
-        [HttpGet("")]
+        [HttpGet("select-list")]
         public IActionResult Get()
         {
             var result = _repository.Get().Select(item=>new SelectListItem(){
