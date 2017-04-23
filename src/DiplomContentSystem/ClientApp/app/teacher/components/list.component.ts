@@ -5,7 +5,7 @@ import { Teacher } from '../models/teacher';
 import {RtList,filter } from 'right-angled';
 @Component({
     selector: 'teachers',
-    templateUrl: './teacher.component.html'
+    templateUrl: './list.component.html'
 })
 export class TeachersComponent {
 

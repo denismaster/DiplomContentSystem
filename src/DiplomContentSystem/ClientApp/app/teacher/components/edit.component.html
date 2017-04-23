@@ -1,13 +1,16 @@
-﻿<div class="panel panel-default">
+<div class="panel panel-default">
     <div class="panel-heading">
-        Новый преподаватель
+        Руководитель
     </div>
-    <form [formGroup]="form" (ngSubmit)="submit(form.value)">
-        <div class="panel-body panel-body-loader">
+    <div class="panel-body" *ngIf="isLoading">
+        <loader></loader>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="submit(form.value)" *ngIf="!isLoading">
+        <div class="panel-body">
             <error-list [errors]="errors"></error-list>
             <div class="form-group" [class.has-error]="!form.controls['fio'].valid && form.controls['fio'].touched">
                 <label class="control-label">ФИО</label>
-                <input name="lastName" placeholder="Фамилия" class="form-control" type="text" [formControl]="form.controls['fio']" />
+                <input name="fio" placeholder="Фамилия" class="form-control" type="text" [formControl]="form.controls['fio']" />
                 <div class="text-danger help-block">
                     <span *ngIf="form.controls['fio'].hasError('required')&&form.controls['fio'].touched">
                         Поле должно быть заполнено.
@@ -15,25 +18,20 @@
                     <span *ngIf="form.controls['fio'].hasError('notEmpty')&&form.controls['fio'].touched">
                         Поле не должно быть пустым.
                     </span>
-                    <span *ngIf="form.controls['fio'].hasError('wordCount')&&form.controls['fio'].touched">
-                        ФИО должно содержать 3 слова.
-                    </span>
                 </div>
             </div>
             <div class="form-group" [class.has-error]="!form.controls['position'].valid && form.controls['position'].touched">
                 <label class="control-label">Должность</label>
                 <select class="form-control" placeholder="Должность" [formControl]="form.controls['position']">
-                    <option selected value="">Укажите должность...</option>
                     <option *ngFor = "let option of positionOptions" [value]="option.value">
                         {{option.text}}
                     </option>
                 </select>
             </div>
-            <div class="form-group" [class.has-error]="!form.controls['speciality'].valid && form.controls['speciality'].touched">
+            <div class="form-group" [class.has-error]="!form.controls['department'].valid && form.controls['department'].touched">
                 <label class="control-label">Кафедра</label>
-                <select class="form-control" placeholder="Должность" [formControl]="form.controls['speciality']">
-                    <option selected value="">Укажите кафедру...</option>
-                    <option *ngFor = "let option of specialityOptions" [value]="option.value">
+                <select class="form-control" placeholder="Должность" [formControl]="form.controls['department']">
+                    <option *ngFor = "let option of departmentOptions" [value]="option.value">
                         {{option.text}}
                     </option>
                 </select>
@@ -52,7 +50,7 @@
             </div>
         </div>
         <div class="panel-footer">
-            <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Добавить</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Сохранить</button>
             <a [routerLink]="['/teachers']" class="btn btn-default">Отмена</a>
         </div>
     </form>

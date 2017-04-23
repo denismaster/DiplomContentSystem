@@ -6,15 +6,18 @@ import { TeacherService } from '../teacher.service';
 import { Teacher } from '../models/teacher';
 import { CustomValidators } from '../../shared/custom-validators';
 import { OperationResult } from '../../shared/operation-result';
+import { SelectListItem } from '../../shared/select-list-item';
 
 @Component({
     selector: 'teachers-edit',
-    templateUrl: './teacher-edit.component.html'
+    templateUrl: './edit.component.html'
 })
 export class TeachersEditComponent implements OnInit {
     private form: FormGroup;
     private errors: string[] = [];
 
+    private positionOptions:SelectListItem[];
+    private departmentOptions:SelectListItem[];
     private id:number;
     private teacher: Teacher;
     private isLoading:boolean=true;
@@ -30,7 +33,8 @@ export class TeachersEditComponent implements OnInit {
                 this.form = this.formBuilder.group({
                     "fio": [result.fio, Validators.compose([Validators.required, CustomValidators.notEmpty()])],
                     "maxWorkCount": [result.maxWorkCount, Validators.compose([Validators.required,CustomValidators.minValue(1)])],
-                    "position": [result.position.id]
+                    "position": [result.position.id, Validators.required],
+                    "department":[result.departmentId, Validators.required]
                 });        
             })
     }
@@ -40,8 +44,11 @@ export class TeachersEditComponent implements OnInit {
         this.form = this.formBuilder.group({
                     "fio": [undefined],
                     "maxWorkCount": [undefined],
-                    "position": [undefined]
+                    "position": [undefined],
+                    "department":[undefined]
                 });   
+        this.service.getPositions().subscribe(r=>this.positionOptions = r);
+        this.service.getDepartments().subscribe(r=>this.departmentOptions = r);
     }
 
     private submit(value: any): void {
@@ -52,6 +59,7 @@ export class TeachersEditComponent implements OnInit {
         teacher.fio = value.fio;
         teacher.positionId = value.position;
         teacher.maxWorkCount = value.maxWorkCount;
+        teacher.departmentId = value.department;
         
         this.service.update(teacher).subscribe(result=>this.checkResult(result));
     }
