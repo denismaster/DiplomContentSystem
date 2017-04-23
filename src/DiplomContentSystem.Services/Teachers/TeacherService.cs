@@ -23,7 +23,7 @@ namespace DiplomContentSystem.Services.Teachers
         {
             var queryBuilder = new TeachersQueryBuilder();
             var response = new ListResponse<TeacherListItem>();
-            string[] includes = {"Position","Speciality"};
+            string[] includes = {"Position","Department"};
 
             var query = queryBuilder.UseDto(request)
                                     .UsePaging()
@@ -39,7 +39,7 @@ namespace DiplomContentSystem.Services.Teachers
 
         public Teacher Get(int id)
         {   
-            string[] includes = {"Position","Speciality"};
+            string[] includes = {"Position","Department"};
             return _repository.Get(id,includes);
         }
 
