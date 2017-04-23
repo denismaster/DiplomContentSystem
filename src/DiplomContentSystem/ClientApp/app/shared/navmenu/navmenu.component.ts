@@ -1,5 +1,5 @@
 import { Component, OnChanges } from '@angular/core';
-import { AuthenticationService } from '../../login/authentication-service';
+import { AuthService } from '../../login/authentication-service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class NavMenuComponent {
     private username: string;
 
-    constructor(private router: Router, private authService: AuthenticationService) { 
+    constructor(private router: Router, private authService: AuthService) { 
         this.checkAuth();
     }
 
