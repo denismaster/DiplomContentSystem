@@ -62,6 +62,8 @@ namespace DiplomContentSystem
             services.AddScoped<IRepository<DiplomWork>, RepositoryBase<DiplomWork>>();
             services.AddScoped<IRepository<TeacherPosition>, RepositoryBase<TeacherPosition>>();
             services.AddScoped<IRepository<Speciality>, RepositoryBase<Speciality>>();
+            services.AddScoped<IRepository<Department>, RepositoryBase<Department>>();
+            services.AddScoped<IRepository<Group>, RepositoryBase<Group>>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddDbContext<DiplomContext>();
             services.AddScoped<IAuthService, AuthService>();
