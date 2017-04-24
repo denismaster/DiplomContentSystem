@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using DiplomContentSystem.Services.Students;
 using DiplomContentSystem.Services.Teachers;
 using DiplomContentSystem.Services.DiplomWorks;
+using DiplomContentSystem.Services.Groups;
 using DiplomContentSystem.DataLayer;
 using DiplomContentSystem.Core;
 using FluentValidation.AspNetCore;
@@ -57,6 +58,7 @@ namespace DiplomContentSystem
             services.AddScoped<TeacherService>();
             services.AddScoped<StudentService>();
             services.AddScoped<DiplomWorksService>();
+            services.AddScoped<GroupService>();
             services.AddScoped<IRepository<Teacher>, RepositoryBase<Teacher>>();
             services.AddScoped<IRepository<Student>, RepositoryBase<Student>>();
             services.AddScoped<IRepository<DiplomWork>, RepositoryBase<DiplomWork>>();
