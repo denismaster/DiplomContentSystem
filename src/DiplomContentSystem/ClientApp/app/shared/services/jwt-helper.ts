@@ -87,4 +87,19 @@ export class JwtHelper {
     // Token expired?
     return !(date.valueOf() > (new Date().valueOf() + (offsetSeconds * 1000)));
   }
+
+  public getRoles(token:string):string[]
+  {
+    let decoded: any;
+    decoded = this.decodeToken(token);
+
+    if (!decoded.hasOwnProperty("UserType")) {
+      return [];
+    }
+
+    let roles:string[] = [decoded["UserType"]];
+
+    return roles;
+
+  }
 }

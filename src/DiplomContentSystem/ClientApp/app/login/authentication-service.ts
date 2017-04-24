@@ -7,7 +7,7 @@ import { UserAuthModel } from '../shared/data-service';
 
 
 @Injectable()
-export class AuthenticationService {
+export class AuthService {
 
     constructor(private http: Http) { }
 

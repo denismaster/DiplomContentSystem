@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Authentication } from '../models/authentication';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../authentication-service';
+import { AuthService } from '../authentication-service';
 @Component({
     selector: 'sign-in',
     templateUrl: './sign-in.component.html'
@@ -13,7 +13,7 @@ export class SignInComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private authenticationService: AuthenticationService) { }
+        private authenticationService: AuthService) { }
 
     ngOnInit() {
         this.authenticationService.logout();

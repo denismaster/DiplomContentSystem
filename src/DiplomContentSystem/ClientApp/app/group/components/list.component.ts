@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { TeacherService } from '../teacher.service';
-import { Teacher } from '../models/teacher';
 import {RtList,filter } from 'right-angled';
+import { Group } from '../models/group';
+import { GroupService } from '../group.service';
 @Component({
-    selector: 'teachers',
-    templateUrl: './teacher.component.html'
+    selector: 'group-list',
+    templateUrl: './list.component.html'
 })
-export class TeachersComponent {
+export class GroupsComponent {
 
     @filter()
     private FIO:string;
@@ -15,10 +15,10 @@ export class TeachersComponent {
     private showFilter:boolean;
     private isLoading: boolean = true;
     
-    constructor(private service: TeacherService) {
+    constructor(private service: GroupService) {
     }
 
-    getTeachers = (request)=>
+    getGroups = (request)=>
     {
         this.isLoading = true;
         return this.service.getList(request).do((response)=>this.isLoading=false);

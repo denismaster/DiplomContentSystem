@@ -10,12 +10,12 @@ import { SelectListItem } from '../../shared/select-list-item';
 
 @Component({
     selector: 'teachers-add',
-    templateUrl: './teacher-add.component.html'
+    templateUrl: './add.component.html'
 })
 export class TeachersAddComponent implements OnInit {
     private form: FormGroup;
     private positionOptions:SelectListItem[];
-    private specialityOptions:SelectListItem[];
+    private departmentOptions:SelectListItem[];
     private errors: string[] = [];
 
     constructor(private service: TeacherService, private router: Router, private formBuilder: FormBuilder) {
@@ -23,14 +23,14 @@ export class TeachersAddComponent implements OnInit {
             "fio": [undefined, Validators.compose([Validators.required, CustomValidators.notEmpty(), CustomValidators.wordCount(3)])],
             "maxWorkCount": [undefined, Validators.compose([Validators.required,CustomValidators.minValue(1)])],
             "position": ["", Validators.required],
-            "speciality": ["", Validators.required]
+            "department": ["", Validators.required]
         });
     }
     
     ngOnInit()
     {
         this.service.getPositions().subscribe(r=>this.positionOptions = r);
-        this.service.getSpecialities().subscribe(r=>this.specialityOptions = r);
+        this.service.getDepartments().subscribe(r=>this.departmentOptions = r);
     }
 
     private submit(value: any): void {
@@ -40,7 +40,7 @@ export class TeachersAddComponent implements OnInit {
         teacher.fio = value.fio;
         teacher.positionId = value.position;
         teacher.maxWorkCount = value.maxWorkCount;
-        teacher.departmentId = value.speciality;
+        teacher.departmentId = value.department;
         
         this.service.add(teacher).subscribe(result=>this.checkResult(result));
     }

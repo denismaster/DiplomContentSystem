@@ -12,18 +12,20 @@ import { TableStateComponent } from './table-state/table-state.component';
 import { TablePaginationComponent } from './table-pagination/table-pagination.component';
 import { DataService } from './data-service';
 import { AuthGuard } from './auth-guard.service';
-import { AuthenticationService } from '../login/authentication-service';
+import { AuthService } from '../login/authentication-service';
+import { JwtHelper } from './services/jwt-helper';
+import { RoleModule } from './roles/role.module';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
-    imports: [CommonModule, RouterModule, RTModule, ChartsModule, ReactiveFormsModule],
+    imports: [CommonModule, RouterModule, RTModule, ChartsModule, ReactiveFormsModule, RoleModule],
     declarations: [NavMenuComponent, SidebarComponent, LoaderComponent, TableStateComponent, TablePaginationComponent, ErrorListComponent],
     exports: [NavMenuComponent, SidebarComponent, TablePaginationComponent,
-        CommonModule, FormsModule, RTModule, ChartsModule, RouterModule, LoaderComponent, TableStateComponent,
+        CommonModule, FormsModule, RTModule, ChartsModule, RouterModule, RoleModule, LoaderComponent, TableStateComponent,
         ErrorListComponent, ReactiveFormsModule],
-    providers: [DataService, AuthGuard, AuthenticationService]
+    providers: [DataService, AuthGuard, AuthService, JwtHelper]
 })
 export class SharedModule {
     static forRoot(): ModuleWithProviders {

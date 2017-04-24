@@ -28,8 +28,8 @@ export class TeacherService extends ApiService<Teacher>{
     {
         return this.http.get("/api/teachers/positions").map(this.extractData);
     }
-    public getSpecialities():Observable<SelectListItem[]>
+    public getDepartments():Observable<SelectListItem[]>
     {
-        return this.http.get("/api/specialities").map(this.extractData);
+        return this.http.get("/api/departments/select-list").map(this.extractData);
     }
 }

@@ -2,24 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router,ActivatedRoute } from '@angular/router';
-import { TeacherService } from '../teacher.service';
-import { Teacher } from '../models/teacher';
+import { Group } from '../models/group';
 import { CustomValidators } from '../../shared/custom-validators';
 import { OperationResult } from '../../shared/operation-result';
+import { SelectListItem } from '../../shared/select-list-item';
+import { GroupService } from '../group.service';
 
 @Component({
-    selector: 'teachers-edit',
-    templateUrl: './teacher-edit.component.html'
+    selector: 'group-edit',
+    templateUrl: './edit.component.html'
 })
-export class TeachersEditComponent implements OnInit {
+export class GroupEditComponent implements OnInit {
     private form: FormGroup;
     private errors: string[] = [];
 
+    private specialityOptions:SelectListItem[];
     private id:number;
-    private teacher: Teacher;
+    private group: Group;
     private isLoading:boolean=true;
 
-    constructor(private service: TeacherService, private router: Router, private activatedRoute:ActivatedRoute, private formBuilder: FormBuilder) {
+    constructor(private service: GroupService, private router: Router, private activatedRoute:ActivatedRoute, private formBuilder: FormBuilder) {
         this.id = activatedRoute.snapshot.params['id'];
         if(!this.id){
             router.navigateByUrl("['/404']");
@@ -28,9 +30,8 @@ export class TeachersEditComponent implements OnInit {
             .subscribe(result=>{
                 this.isLoading=false;
                 this.form = this.formBuilder.group({
-                    "fio": [result.fio, Validators.compose([Validators.required, CustomValidators.notEmpty()])],
-                    "maxWorkCount": [result.maxWorkCount, Validators.compose([Validators.required,CustomValidators.minValue(1)])],
-                    "position": [result.position.id]
+                    "name": [result.name, Validators.compose([Validators.required, CustomValidators.notEmpty()])],
+                    "speciality": [result.specialityId, Validators.required],
                 });        
             })
     }
@@ -38,26 +39,26 @@ export class TeachersEditComponent implements OnInit {
     ngOnInit()
     {
         this.form = this.formBuilder.group({
-                    "fio": [undefined],
-                    "maxWorkCount": [undefined],
-                    "position": [undefined]
+                    "name": [undefined],
+                    "speciality": [undefined],
+                    "department":[undefined]
                 });   
+        this.service.getSpecialities().subscribe(r=>this.specialityOptions = r);
     }
 
     private submit(value: any): void {
         event.preventDefault();
 
-        const teacher = new Teacher();
-        teacher.id = this.id;
-        teacher.fio = value.fio;
-        teacher.positionId = value.position;
-        teacher.maxWorkCount = value.maxWorkCount;
+        const group = new Group();
+        group.id = this.id;
+        group.name = value.name;
+        group.specialityId = value.speciality;
         
-        this.service.update(teacher).subscribe(result=>this.checkResult(result));
+        this.service.update(group).subscribe(result=>this.checkResult(result));
     }
 
     public goBack(): void {
-        this.router.navigate(['/teachers']);
+        this.router.navigate(['/group']);
     }
 
     public checkResult(result:OperationResult):void{

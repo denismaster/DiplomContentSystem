@@ -7,12 +7,12 @@ using DiplomContentSystem.Core;
 using DiplomContentSystem.Dto;
 namespace DiplomContentSystem.Controllers
 {
-    [Route("api/specialities")]
+    [Route("api/departments")]
     [Authorize(Policy=AuthConsts.PolicyUser)]
-    public class SpecialityController : Controller
+    public class DepartmentController : Controller
     {
-        private readonly IRepository<Speciality> _repository;
-        public SpecialityController(IRepository<Speciality> repository)
+        private readonly IRepository<Department> _repository;
+        public DepartmentController(IRepository< Department> repository)
         {
             if(repository==null) throw new ArgumentNullException(nameof(repository));
             _repository = repository;
