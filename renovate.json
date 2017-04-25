@@ -1,7 +1,7 @@
 {
   "enabled": true,
   "autodiscover": false,
-  "packageFiles": [],
+  "packageFiles": ["./src/DiplomContentSystem/package.json"],
   "depTypes": ["dependencies", "devDependencies", "optionalDependencies"],
   "separateMajorReleases": true,
   "ignoreDeps": [],
