@@ -62,5 +62,11 @@
     "karma-cli": "1.0.1",
     "karma-jasmine": "1.0.2",
     "karma-webpack": "1.8.0"
+  },
+  "renovate": {
+    "labels": [
+      "upgrade",
+      "bot"
+    ]
   }
 }
