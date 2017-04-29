@@ -9,17 +9,17 @@ using DiplomContentSystem.Services.Groups;
 namespace DiplomContentSystem.Controllers
 {
     [Route("api/groups")]
-    [Authorize(Policy=AuthConsts.PolicyUser)]
+    [Authorize(Policy = AuthConsts.PolicyUser)]
     public class GroupController : Controller
     {
         private readonly GroupService _service;
         public GroupController(GroupService service)
         {
-            if(service==null) throw new ArgumentNullException(nameof(service));
+            if (service == null) throw new ArgumentNullException(nameof(service));
             _service = service;
         }
 
-        public IActionResult Get([FromBody] Dto.GroupRequest request )
+        public IActionResult Get([FromBody] Dto.GroupRequest request)
         {
             return Ok(_service.GetGroups(request));
         }
@@ -29,8 +29,19 @@ namespace DiplomContentSystem.Controllers
         public IActionResult Get()
         {
             var result = _service.GetAsSelectList();
-            if(result!=null) return Ok(result);
+            if (result != null) return Ok(result);
             return BadRequest();
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add([FromBody]Dto.GroupEditItem group)
+        {
+            return Ok(_service.Add(group));
+        }
+        [HttpPost("update")]
+        public IActionResult Update([FromBody]Dto.GroupEditItem group)
+        {
+            return Ok(_service.Update(group));
         }
     }
 }

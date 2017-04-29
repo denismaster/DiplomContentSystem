@@ -15,6 +15,11 @@ namespace DiplomContentSystem.DataLayer
                     context.Roles.AddRange(Role.Admin, Role.Owner, Role.Student, Role.Teacher);
                     context.SaveChanges();
                 }
+                if (!context.Periods.Any())
+                {
+                    context.Periods.Add(Period.Current);
+                    context.SaveChanges();
+                }
                 if(!context.TeachersPositions.Any())
                 {
                     context.TeachersPositions.AddRange(

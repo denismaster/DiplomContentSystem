@@ -52,7 +52,7 @@ namespace DiplomContentSystem.Services.Groups
             });
         }
 
-        /* public bool AddGroup(GroupEditItem GroupDto)
+         public bool Add(GroupEditItem GroupDto)
         {
             var dbGroup = _mapper.Map<Group>(GroupDto);
             _repository.Add(dbGroup);
@@ -60,12 +60,12 @@ namespace DiplomContentSystem.Services.Groups
             return true;
         }
 
-        public bool UpdateGroup(GroupEditItem GroupDto)
+        public bool Update(GroupEditItem GroupDto)
         {
             var dbGroup = _mapper.Map<Group>(GroupDto);
             _repository.Update(dbGroup);
             _repository.SaveChanges();
             return true;
-        }*/
+        }
     }
 }
