@@ -24,7 +24,7 @@ namespace DiplomContentSystem.Services.Groups
         {
             var queryBuilder = new GroupsQueryBuilder();
             var response = new ListResponse<GroupListItem>();
-            string[] includes = {"Speciality", "Speciality.Department"};
+            string[] includes = {"Speciality", "Speciality.Department","Students"};
 
             var query = queryBuilder.UseDto(request)
                                     .UsePaging()
@@ -40,7 +40,7 @@ namespace DiplomContentSystem.Services.Groups
 
         public Group Get(int id)
         {   
-            string[] includes = {"Speciality","Speciality.Department"};
+            string[] includes = {"Speciality","Speciality.Department","Students"};
             return _repository.Get(id,includes);
         }
 

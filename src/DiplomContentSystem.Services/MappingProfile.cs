@@ -13,8 +13,8 @@ namespace DiplomContentSystem.Services
             
             CreateMap<Group, GroupListItem>()
                 .ForMember(item => item.Speciality, opt => opt.MapFrom(src => (src.Speciality != null) ? src.Speciality.Name : null))
-                .ForMember(item => item.Department, opt => opt.MapFrom(src => (src.Speciality.Department != null) ? src.Speciality.Department.ShortName : null));
-                //.ForMember(item=> item.StudentsCount, opt=>opt.MapFrom)
+                .ForMember(item => item.Department, opt => opt.MapFrom(src => (src.Speciality.Department != null) ? src.Speciality.Department.ShortName : null))
+                .ForMember(item=> item.StudentsCount, opt=>opt.MapFrom(src=>src.Students.Count));
 
             CreateMap<TeacherEditItem, Teacher>()
                 .ForMember(item => item.Id, opt => opt.MapFrom(src => src.Id == null ? 0 : src.Id))

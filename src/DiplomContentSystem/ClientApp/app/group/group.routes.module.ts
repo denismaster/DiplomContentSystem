@@ -18,7 +18,7 @@ const routes: Routes = [
     {
         path: 'groups/edit/:id',
         component: GroupEditComponent,
-         canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
     }
 ];
 

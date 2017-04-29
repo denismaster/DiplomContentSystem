@@ -4,4 +4,5 @@ export class Group {
     period: string;
     speciality: string;
     specialityId:number;
+    studentsCount:number;
 }
