@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import {RtList,filter } from 'right-angled';
+import { RtList, filter } from 'right-angled';
 import { Group } from '../models/group';
 import { GroupService } from '../group.service';
+import { SelectListItem } from '../../shared/select-list-item';
+import { TeacherService } from '../../teacher/teacher.service';
 @Component({
     selector: 'group-list',
     templateUrl: './list.component.html'
@@ -10,21 +12,26 @@ import { GroupService } from '../group.service';
 export class GroupsComponent {
 
     @filter()
-    private FIO:string;
+    private name: string;
 
-    private showFilter:boolean;
+    @filter()
+    private department: number = 0;
+
+    private showFilter: boolean;
     private isLoading: boolean = true;
-    
-    constructor(private service: GroupService) {
+
+    private departmentOptions: SelectListItem[];
+
+    constructor(private service: GroupService, private teacherService: TeacherService) {
+        this.teacherService.getDepartments().subscribe(r => this.departmentOptions = r);
     }
 
-    getGroups = (request)=>
-    {
+    getGroups = (request) => {
         this.isLoading = true;
-        return this.service.getList(request).do((response)=>this.isLoading=false);
+        return this.service.getList(request).do((response) => { if (response.totalCount > 0) this.isLoading = false });
     }
 
-     onListInit(list: RtList): void {
+    onListInit(list: RtList): void {
         list.registerFilterTarget(this);
     }
 }
