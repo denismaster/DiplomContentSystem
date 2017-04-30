@@ -1,4 +1,5 @@
 ﻿using DiplomContentSystem.Core;
+using DiplomContentSystem.Services;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -16,13 +17,20 @@ namespace DiplomContentSystem.Services.Groups
                 default: return group => group.Id;
             }
         }
+
         public override IQueryBuilder<Group> UseFilters()
         {
             var groupsRequest = _requestDto as Dto.GroupRequest;
+            var expression  = Services.PredicateBuilder.True<Group>();
             if (!string.IsNullOrEmpty(groupsRequest.Name))
             {
-                _dbQuery.FilterExpression = group => group.Name.Contains(groupsRequest.Name);
+               expression =  expression.And(group => group.Name.Contains(groupsRequest.Name));
             }
+            if (groupsRequest.Department > 0)
+            {
+               expression =  expression.And(group => group.Speciality.Department.Id == groupsRequest.Department);
+            }
+            _dbQuery.FilterExpression = expression;
             return this;
         }
     }
