@@ -7,7 +7,7 @@
             <error-list [errors]="errors"></error-list>
             <div class="form-group" [class.has-error]="!form.controls['name'].valid && form.controls['name'].touched">
                 <label class="control-label">Название</label>
-                <input name="lastName" placeholder="Фамилия" class="form-control" type="text" [formControl]="form.controls['name']" />
+                <input name="lastName" placeholder="Название" class="form-control" type="text" [formControl]="form.controls['name']" />
                 <div class="text-danger help-block">
                     <span *ngIf="form.controls['name'].hasError('required')&&form.controls['name'].touched">
                         Поле должно быть заполнено.

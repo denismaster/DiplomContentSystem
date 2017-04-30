@@ -41,7 +41,9 @@ namespace DiplomContentSystem.Services.Groups
         public Group Get(int id)
         {   
             string[] includes = {"Speciality","Speciality.Department","Students"};
-            return _repository.Get(id,includes);
+            var result = _repository.Get(id, includes);
+            result.Speciality.Department.Specialities = null;
+            return result;
         }
 
         public IEnumerable<SelectListItem> GetAsSelectList()

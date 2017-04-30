@@ -24,13 +24,23 @@ namespace DiplomContentSystem.Controllers
             return Ok(_service.GetGroups(request));
         }
 
-
         [HttpGet("select-list")]
         public IActionResult Get()
         {
             var result = _service.GetAsSelectList();
             if (result != null) return Ok(result);
             return BadRequest();
+        }
+        
+        [HttpGet("{id:int}")]
+        public IActionResult GetOne(int id)
+        {
+            var result = _service.Get(id);
+            if(result!=null)
+            {
+                return Ok(result);
+            }
+            return NotFound();
         }
 
         [HttpPost("add")]

@@ -33,8 +33,8 @@ export class GroupAddComponent implements OnInit {
         event.preventDefault();
 
         const group = new Group();
-        group.name = value.fio;
-        group.specialityId = value.department;
+        group.name = value.name;
+        group.specialityId = value.speciality;
         
         this.service.add(group).subscribe(result=>this.checkResult(result));
     }

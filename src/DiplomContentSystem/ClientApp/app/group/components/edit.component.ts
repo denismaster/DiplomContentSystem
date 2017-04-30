@@ -41,7 +41,6 @@ export class GroupEditComponent implements OnInit {
         this.form = this.formBuilder.group({
                     "name": [undefined],
                     "speciality": [undefined],
-                    "department":[undefined]
                 });   
         this.service.getSpecialities().subscribe(r=>this.specialityOptions = r);
     }
