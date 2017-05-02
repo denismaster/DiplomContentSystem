@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using DiplomContentSystem.Services.Students;
 using DiplomContentSystem.Services.Teachers;
+using DiplomContentSystem.Services.Users;
 using DiplomContentSystem.Services.DiplomWorks;
 using DiplomContentSystem.Services.Groups;
 using DiplomContentSystem.DataLayer;
@@ -56,6 +57,7 @@ namespace DiplomContentSystem
                     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
             services.AddAutoMapper();
             services.AddScoped<TeacherService>();
+            services.AddScoped<UserService>();
             services.AddScoped<StudentService>();
             services.AddScoped<DiplomWorksService>();
             services.AddScoped<GroupService>();
@@ -66,6 +68,7 @@ namespace DiplomContentSystem
             services.AddScoped<IRepository<Speciality>, RepositoryBase<Speciality>>();
             services.AddScoped<IRepository<Department>, RepositoryBase<Department>>();
             services.AddScoped<IRepository<Group>, RepositoryBase<Group>>();
+            services.AddScoped<IRepository<User>, RepositoryBase<User>>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddDbContext<DiplomContext>();
             services.AddScoped<IAuthService, AuthService>();
