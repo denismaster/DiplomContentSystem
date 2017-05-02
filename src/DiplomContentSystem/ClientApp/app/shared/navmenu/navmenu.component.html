@@ -19,20 +19,70 @@
                         <span class='fa fa-home'></span> Главная
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/teachers']">
-                        <span class='fa fa-university'></span> Преподаватели
+                <li class="dropdown" [routerLinkActive]="['link-active']">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="fa fa-university"></span>
+                        Институт
+                        <span class="caret"></span>
                     </a>
+                    <ul class="dropdown-menu">
+                        <li [routerLinkActive]="['link-active']">
+                            <a [routerLink]="['/teachers']">
+                                Преподаватели
+                            </a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li [routerLinkActive]="['link-active']">
+                            <a [routerLink]="['/groups']">
+                                Группы
+                            </a>
+                        </li>
+                        <li [routerLinkActive]="['link-active']">
+                            <a [routerLink]="['/specialities']">
+                               Специальности
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/students']">
-                        <span class='fa fa-user'></span> Студенты
+                <li class="dropdown" [routerLinkActive]="['link-active']">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="fa fa-university"></span>
+                        Дипломная работа
+                        <span class="caret"></span>
                     </a>
-                </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/diploms']">
-                        <span class='fa fa-file-text'></span> Дипломные работы
+                    <ul class="dropdown-menu">
+                        <li [routerLinkActive]="['link-active']">
+                            <a [routerLink]="['/students']">
+                                <span class='fa fa-user'></span> Студенты
+                            </a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li [routerLinkActive]="['link-active']">
+                            <a [routerLink]="['/diploms']">
+                                <span class='fa fa-file-text'></span> Дипломные работы
+                            </a>
+                        </li>
+                    </ul>
+                </li>                
+                 <li class="dropdown" [routerLinkActive]="['link-active']">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="fa fa-file-pdf-o"></span>
+                        Администрирование
+                        <span class="caret"></span>
                     </a>
+                    <ul class="dropdown-menu">
+                        <li [routerLinkActive]="['link-active']">
+                            <a [routerLink]="['/users']">
+                                <span class='fa fa-users'></span> Пользователи
+                            </a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li [routerLinkActive]="['link-active']">
+                            <a [routerLink]="['/settings']">
+                                <span class='fa fa-gear'></span> Настройки
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="dropdown" [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/docs']" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
