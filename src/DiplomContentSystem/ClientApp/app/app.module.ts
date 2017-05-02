@@ -13,6 +13,7 @@ import { SignInComponent } from './login/components/sign-in.component';
 import { StudentsModule } from './student/student.module';
 import { DiplomWorksModule } from './diplomWorks/diplom-works.module';
 import { GroupModule } from './group/group.module';
+import { UsersModule } from './user/user.module';
 @NgModule({
     bootstrap: [ AppComponent ],
     declarations: [
@@ -29,7 +30,8 @@ import { GroupModule } from './group/group.module';
         TeachersModule,
         StudentsModule,
         DiplomWorksModule,
-        GroupModule
+        GroupModule,
+        UsersModule
     ],
 })
 export class AppModule {
