@@ -5,3 +5,5 @@ install:
   - cd DiplomContentSystem
   - npm -g install npm
   - npm install
+build_script:
+- cmd: dotnet build
