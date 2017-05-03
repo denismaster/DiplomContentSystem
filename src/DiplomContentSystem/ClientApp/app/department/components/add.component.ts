@@ -12,20 +12,15 @@ import { SelectListItem } from '../../shared/select-list-item';
     selector: 'departments-add',
     templateUrl: './add.component.html'
 })
-export class DepartmentAddComponent implements OnInit {
+export class DepartmentAddComponent {
     private form: FormGroup;
-    private specialityOptions:SelectListItem[];
     private errors: string[] = [];
 
     constructor(private service: DepartmentService, private router: Router, private formBuilder: FormBuilder) {
         this.form = this.formBuilder.group({
             "name": [undefined, Validators.compose([Validators.required, CustomValidators.notEmpty()])],
+            "shortName": [undefined, Validators.compose([Validators.required, CustomValidators.notEmpty()])],
         });
-    }
-    
-    ngOnInit()
-    {
-        this.service.getSpecialities().subscribe(r=>this.specialityOptions = r);
     }
 
     private submit(value: any): void {
@@ -33,21 +28,20 @@ export class DepartmentAddComponent implements OnInit {
 
         const department = new Department();
         department.name = value.name;
-        
-        this.service.add(department).subscribe(result=>this.checkResult(result));
+         department.shortName = value.shortName;
+
+        this.service.add(department).subscribe(result => this.checkResult(result));
     }
 
     public goBack(): void {
         this.router.navigate(['/departments']);
     }
 
-    public checkResult(result:OperationResult):void{
-        if(!result.hasErrors)
-        {
+    public checkResult(result: OperationResult): void {
+        if (!result.hasErrors) {
             this.goBack();
         }
-        else
-        {
+        else {
             this.errors = result.errors;
         }
     }

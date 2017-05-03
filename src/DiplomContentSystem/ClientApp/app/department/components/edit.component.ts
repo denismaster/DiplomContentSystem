@@ -12,11 +12,10 @@ import { DepartmentService } from '../department.service';
     selector: 'department-edit',
     templateUrl: './edit.component.html'
 })
-export class DepartmentEditComponent implements OnInit {
+export class DepartmentEditComponent {
     private form: FormGroup;
     private errors: string[] = [];
 
-    private specialityOptions:SelectListItem[];
     private id:number;
     private department: Department;
     private isLoading:boolean=true;
@@ -31,6 +30,7 @@ export class DepartmentEditComponent implements OnInit {
                 this.isLoading=false;
                 this.form = this.formBuilder.group({
                     "name": [result.name, Validators.compose([Validators.required, CustomValidators.notEmpty()])],
+                    "shortName": [result.shortName, Validators.compose([Validators.required, CustomValidators.notEmpty()])],
                 });        
             })
     }
@@ -39,9 +39,8 @@ export class DepartmentEditComponent implements OnInit {
     {
         this.form = this.formBuilder.group({
                     "name": [undefined],
-                    "speciality": [undefined],
+                    "shortName": [undefined]
                 });   
-        this.service.getSpecialities().subscribe(r=>this.specialityOptions = r);
     }
 
     private submit(value: any): void {
@@ -50,12 +49,12 @@ export class DepartmentEditComponent implements OnInit {
         const department = new Department();
         department.id = this.id;
         department.name = value.name;
-        
+        department.name = value.name;
         this.service.update(department).subscribe(result=>this.checkResult(result));
     }
 
     public goBack(): void {
-        this.router.navigate(['/department']);
+        this.router.navigate(['/departments']);
     }
 
     public checkResult(result:OperationResult):void{
