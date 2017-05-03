@@ -5,3 +5,4 @@ install:
   - cd DiplomContentSystem
   - npm -g install npm
   - npm install
+ image: Visual Studio 2017 RC
