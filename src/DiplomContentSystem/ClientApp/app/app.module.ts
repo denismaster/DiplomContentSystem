@@ -15,6 +15,7 @@ import { DiplomWorksModule } from './diplomWorks/diplom-works.module';
 import { GroupModule } from './group/group.module';
 import { UsersModule } from './user/user.module';
 import { DepartmentModule } from './department/department.module';
+import { SpecialityModule } from './specialities/speciality.module';
 @NgModule({
     bootstrap: [ AppComponent ],
     declarations: [
@@ -33,7 +34,8 @@ import { DepartmentModule } from './department/department.module';
         DiplomWorksModule,
         GroupModule,
         UsersModule,
-        DepartmentModule
+        DepartmentModule,
+        SpecialityModule
     ],
 })
 export class AppModule {
