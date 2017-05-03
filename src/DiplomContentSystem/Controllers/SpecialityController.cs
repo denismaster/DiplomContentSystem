@@ -5,28 +5,53 @@ using Microsoft.AspNetCore.Authorization;
 using DiplomContentSystem.Authentication;
 using DiplomContentSystem.Core;
 using DiplomContentSystem.Dto;
+using DiplomContentSystem.Services.Specialities;
 namespace DiplomContentSystem.Controllers
 {
     [Route("api/specialities")]
-    [Authorize(Policy=AuthConsts.PolicyUser)]
+    [Authorize(Policy = AuthConsts.PolicyUser)]
     public class SpecialityController : Controller
     {
-        private readonly IRepository<Speciality> _repository;
-        public SpecialityController(IRepository<Speciality> repository)
+        private readonly SpecialityService _service;
+        public SpecialityController(SpecialityService service)
         {
-            if(repository==null) throw new ArgumentNullException(nameof(repository));
-            _repository = repository;
+            if (service == null) throw new ArgumentNullException(nameof(service));
+            _service = service;
+        }
+
+        public IActionResult Get([FromBody] Dto.SpecialityRequest request)
+        {
+            return Ok(_service.GetSpecialitys(request));
         }
 
         [HttpGet("select-list")]
         public IActionResult Get()
         {
-            var result = _repository.Get().Select(item=>new SelectListItem(){
-                Value = item.Id.ToString(),
-                Text = item.Name
-            });
-            if(result!=null) return Ok(result);
+            var result = _service.GetAsSelectList();
+            if (result != null) return Ok(result);
             return BadRequest();
+        }
+        
+        [HttpGet("{id:int}")]
+        public IActionResult GetOne(int id)
+        {
+            var result = _service.Get(id);
+            if(result!=null)
+            {
+                return Ok(result);
+            }
+            return NotFound();
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add([FromBody]Dto.SpecialityEditItem group)
+        {
+            return Ok(_service.Add(group));
+        }
+        [HttpPost("update")]
+        public IActionResult Update([FromBody]Dto.SpecialityEditItem group)
+        {
+            return Ok(_service.Update(group));
         }
     }
 }

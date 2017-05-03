@@ -15,6 +15,7 @@ using DiplomContentSystem.Services.Users;
 using DiplomContentSystem.Services.DiplomWorks;
 using DiplomContentSystem.Services.Groups;
 using DiplomContentSystem.Services.Departments;
+using DiplomContentSystem.Services.Specialities;
 using DiplomContentSystem.DataLayer;
 using DiplomContentSystem.Core;
 using FluentValidation.AspNetCore;
@@ -63,6 +64,7 @@ namespace DiplomContentSystem
             services.AddScoped<DiplomWorksService>();
             services.AddScoped<GroupService>();
             services.AddScoped<DepartmentService>();
+            services.AddScoped<SpecialityService>();
             services.AddScoped<IRepository<Teacher>, RepositoryBase<Teacher>>();
             services.AddScoped<IRepository<Student>, RepositoryBase<Student>>();
             services.AddScoped<IRepository<DiplomWork>, RepositoryBase<DiplomWork>>();
