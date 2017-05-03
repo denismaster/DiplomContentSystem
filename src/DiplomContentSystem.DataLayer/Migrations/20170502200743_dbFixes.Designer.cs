@@ -8,9 +8,10 @@ using DiplomContentSystem.DataLayer;
 namespace DiplomContentSystem.DataLayer.Migrations
 {
     [DbContext(typeof(DiplomContext))]
-    partial class DiplomContextModelSnapshot : ModelSnapshot
+    [Migration("20170502200743_dbFixes")]
+    partial class dbFixes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
