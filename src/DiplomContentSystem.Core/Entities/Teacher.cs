@@ -18,6 +18,7 @@ namespace DiplomContentSystem.Core
         public Department Department { get; set; }
 
         public List<DiplomWork> DiplomWorks { get; set; }
+        public List<Student> Students { get; set; }
         public List<TeacherComment> TeacherComments { get; set; }
     }
 }
