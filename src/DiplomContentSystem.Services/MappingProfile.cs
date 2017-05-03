@@ -11,6 +11,9 @@ namespace DiplomContentSystem.Services
                 .ForMember(item => item.Department, opt => opt.MapFrom(src => (src.Department != null) ? src.Department.ShortName : null))
                 .ForMember(item => item.Position, opt => opt.MapFrom(src => (src.Position != null) ? src.Position.Name : null));
             
+                .ForMember(item => item.Position, opt => opt.MapFrom(src => (src.Position != null) ? src.Position.Name : null))
+                .ForMember(item => item.WorkCount, opt => opt.MapFrom(src => src.Students.Count));
+
             CreateMap<TeacherEditItem, Teacher>()
                 .ForMember(item => item.Id, opt => opt.MapFrom(src => src.Id == null ? 0 : src.Id))
                 .ForMember(item => item.PositionId, opt => opt.MapFrom(src => src.PositionId))
