@@ -23,6 +23,11 @@ namespace DiplomContentSystem.Services
             CreateMap<Department, DepartmentListItem>()
             .ForMember(item => item.SpecialityCount, opt => opt.MapFrom(src => src.Specialities.Count));
 
+            CreateMap<DepartmentEditItem, Department>()
+                .ForMember(item => item.Id, opt => opt.MapFrom(src => src.Id == null ? 0 : src.Id))
+                .ForMember(item => item.InstituteId, opt => opt.UseValue(1))
+                .ForMember(item => item.Specialities, opt => opt.Ignore());
+
             CreateMap<UserEditItem, User>()
                 .ForMember(item => item.Id, opt => opt.MapFrom(src => src.Id == null ? 0 : src.Id))
                 .ForMember(item => item.PasswordHash, opt => opt.MapFrom(src => PasswordUtils.Hash(src.Password)));

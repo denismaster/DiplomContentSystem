@@ -40,8 +40,7 @@ namespace DiplomContentSystem.Services.Departments
 
         public Department Get(int id)
         {   
-            string[] includes = {"Specialities"};
-            var result = _repository.Get(id, includes);
+            var result = _repository.Get(id);
             return result;
         }
 
