@@ -43,7 +43,17 @@
                     </td>
                     <td>{{ item.position }}</td>
                     <td>{{ item.department }}</td>
-                    <td>{{ item.maxWorkCount}}</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" 
+                             [class.progress-bar-success]="item.workCount!==item.maxWorkCount"
+                             [class.progress-bar-danger]="item.workCount===item.maxWorkCount"
+                             [style.width.%]="item.workCount/item.maxWorkCount*100"
+                             style="min-width: 3em;" >
+                             {{item.workCount}}/{{ item.maxWorkCount}}
+                            </div>
+                        </div>
+                    </td>
                     <td>
                         <role-admin>
                             <a [routerLink]="['edit/',item.id]" class="btn btn-warning btn-sm">
