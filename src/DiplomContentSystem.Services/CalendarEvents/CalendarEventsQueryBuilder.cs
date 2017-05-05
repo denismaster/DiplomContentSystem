@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 namespace DiplomContentSystem.Services.CalendarEvents
 {
-    public class CalendarEventsQueryBuilder : QueryBuilderBase<CalendarEvent>
+   /* public class CalendarEventsQueryBuilder : QueryBuilderBase<CalendarEvent>
     {
         protected override Expression<Func<CalendarEvent, object>> GetSortExpression(string sortFieldName)
         {
@@ -33,5 +33,5 @@ namespace DiplomContentSystem.Services.CalendarEvents
             _dbQuery.FilterExpression = expression;
             return this;
         }
-    }
+    }*/
 }

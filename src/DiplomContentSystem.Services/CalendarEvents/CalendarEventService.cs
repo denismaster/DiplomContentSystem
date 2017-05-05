@@ -6,7 +6,7 @@ using DiplomContentSystem.Dto;
 using AutoMapper;
 namespace DiplomContentSystem.Services.CalendarEvents
 {
-    public class CalendarEventService
+   /* public class CalendarEventService
     {
         private readonly IRepository<CalendarEvent> _repository;
         private readonly IMapper _mapper;
@@ -69,5 +69,5 @@ namespace DiplomContentSystem.Services.CalendarEvents
             _repository.SaveChanges();
             return true;
         }
-    }
+    }*/
 }
