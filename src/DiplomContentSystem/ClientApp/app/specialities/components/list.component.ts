@@ -23,12 +23,12 @@ export class SpecialitiesComponent {
     private departmentOptions: SelectListItem[];
 
     constructor(private service: SpecialityService, private teacherService: TeacherService) {
-        this.teacherService.getDepartments().subscribe(r => this.departmentOptions = r);
+        this.teacherService.getDepartments().subscribe(r => {this.departmentOptions = r});
     }
 
     getSpecialities = (request) => {
         this.isLoading = true;
-        return this.service.getList(request).do((response) => { if (response.totalCount > 0) this.isLoading = false });
+        return this.service.getList(request).do((response) => { console.log(response); if (response.totalCount > 0) this.isLoading = false });
     }
 
     onListInit(list: RtList): void {

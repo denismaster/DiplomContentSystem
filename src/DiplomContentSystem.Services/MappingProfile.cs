@@ -39,6 +39,7 @@ namespace DiplomContentSystem.Services
             
             CreateMap<Speciality, SpecialityListItem>()
                 .ForMember(item => item.Department, opt => opt.MapFrom(src => (src.Department != null) ? src.Department.Name : null))
+                .ForMember(item=>item.Code, opt=>opt.MapFrom(src=>src.Сode))
                 .ForMember(item => item.GroupCount, opt=>opt.Ignore());
 
 
