@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Учебная группа
+    </div>
+    <div class="panel-body" *ngIf="isLoading">
+        <loader></loader>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="submit(form.value)" *ngIf="!isLoading">
+        <div class="panel-body">
+            <error-list [errors]="errors"></error-list>
+            <div class="form-group" [class.has-error]="!form.controls['name'].valid && form.controls['name'].touched">
+                <label class="control-label">Название</label>
+                <input name="name" placeholder="Название" class="form-control" type="text" [formControl]="form.controls['name']" />
+                <div class="text-danger help-block">
+                    <span *ngIf="form.controls['name'].hasError('required')&&form.controls['name'].touched">
+                        Поле должно быть заполнено.
+                    </span>
+                    <span *ngIf="form.controls['name'].hasError('notEmpty')&&form.controls['name'].touched">
+                        Поле не должно быть пустым.
+                    </span>
+                </div>
+            </div>
+            <div class="form-group" [class.has-error]="!form.controls['speciality'].valid && form.controls['speciality'].touched">
+                <label class="control-label">Специальность</label>
+                <select class="form-control" placeholder="Специальность" [formControl]="form.controls['speciality']">
+                    <option *ngFor = "let option of specialityOptions" [value]="option.value">
+                        {{option.text}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Сохранить</button>
+            <a [routerLink]="['/groups']" class="btn btn-default">Отмена</a>
+        </div>
+    </form>
+</div>
