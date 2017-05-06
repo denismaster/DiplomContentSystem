@@ -20,7 +20,7 @@ namespace DiplomContentSystem.DataLayer
         public DbSet<DiplomWorkMaterial> DiplomWorkMaterials { get; set; }
         public DbSet<GostControlTry> GostControlTries { get; set; }
         public DbSet<ImplementationStage> ImplementationStages { get; set; }
-        public DbSet<CustomStage> SubImplementationStages { get; set; }
+        public DbSet<CustomStage> CustomStages { get; set; }
         public DbSet<TeacherComment> TeacherComments { get; set; }
         public DbSet<StudentComment> StudentComments { get; set; }
         public DbSet<DiplomWorkComment> DiplomWorkComments { get; set; }

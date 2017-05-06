@@ -33,7 +33,13 @@ namespace DiplomContentSystem.DataLayer
         }
         public IEnumerable<T> Get(Expression<Func<T, bool>> predicate, IEnumerable<string> includes = null)
         {
-            return _context.Set<T>().AsNoTracking().AsEnumerable();
+            var query = _context.Set<T>().AsNoTracking();
+            if (includes != null)
+            {
+                foreach (var include in includes)
+                    query = query.Include(include);
+            }
+            return query.Where(predicate).AsEnumerable();
         }
 
         public long Count(Expression<Func<T, bool>> predicate = null)
