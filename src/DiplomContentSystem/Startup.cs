@@ -26,6 +26,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using DiplomContentSystem.Controllers;
 using DiplomContentSystem.Authentication;
+using DiplomContentSystem.Requests;
 
 namespace DiplomContentSystem
 {
@@ -80,6 +81,7 @@ namespace DiplomContentSystem
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddDbContext<DiplomContext>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<RequestService>();
             services
                 .AddAuthPolicy()
                 .ConfigureJwtIssuerOptions(Configuration, _signingKey);
