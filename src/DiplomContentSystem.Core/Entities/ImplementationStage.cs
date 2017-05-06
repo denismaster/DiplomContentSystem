@@ -13,8 +13,6 @@ namespace DiplomContentSystem.Core
         public int GlobalStageId { get; set; }
         public int DiplomWorkId { get; set; }
         public DiplomWork DiplomWork { get; set; }
-
-        public List<CustomStage> SubImplementationStages { get; set; }
         public string Name
         {
             get
