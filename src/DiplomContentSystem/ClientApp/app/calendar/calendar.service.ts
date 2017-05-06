@@ -12,16 +12,21 @@ import { SelectListItem } from '../shared/select-list-item';
 export class CalendarService extends ApiService<CalendarEvent>{
     protected static routes:ApiRoutes = 
     {
-        getUrl:"/api/calendars",
+        getUrl:"/api/calendar",
         getOneUrl:"/api/calendars/",
         addUrl:"api/calendars/add",
         updateUrl:"/api/calendars/update/",
         deleteUrl:"/api/calendars/delete/"
     }
-
+    
     constructor(http: DataService)
     {
         super(CalendarService.routes,http);
+    }
+
+     public getStages():Observable<any>
+    {
+        return this.http.get("/api/calendar/2").map(this.extractData);
     }
 
     public getSpecialities():Observable<SelectListItem[]>

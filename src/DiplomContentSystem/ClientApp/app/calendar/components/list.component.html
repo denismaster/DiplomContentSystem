@@ -2,8 +2,8 @@
     <div class="panel-heading">
         Календарный план
         <div class="btn-group btn-group-sm pull-right">
-            <button type="button" class="btn btn-default" (click)="showFilter=!showFilter">
-                <i class="fa fa-search"></i>
+            <button type="button" class="btn btn-success" (click)="download()">
+                <i class="fa fa-download"></i>
                  Сохранить
             </button>
             <a type="button" class="btn btn-default" [routerLink]="['/calendar/new']">
@@ -13,7 +13,7 @@
     </div>
     <ul class="timeline">
         <li *ngFor="let item of list.items" class="timeline-inverted">
-            <div class="timeline-badge" [class.success]="item.checked"><i class="glyphicon" [class.glyphicon-ok]="item.checked" [class.glyphicon-check]="!item.checked"></i></div>
+            <div class="timeline-badge" [class.success]="item.accepted"><i class="glyphicon" [class.glyphicon-ok]="item.accepted" [class.glyphicon-check]="!item.accepted"></i></div>
             <div class="timeline-panel">
                 <div class="timeline-heading">
                     <h4 class="timeline-title">
