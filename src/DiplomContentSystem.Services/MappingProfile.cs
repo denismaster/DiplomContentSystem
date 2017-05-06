@@ -50,7 +50,7 @@ namespace DiplomContentSystem.Services
                 .ForMember(item => item.PeriodId, opt => opt.Ignore())
                 .ForMember(item => item.Speciality, opt => opt.Ignore());
 
-
+            CreateMap<IStage,CalendarEventListItem>();
 
             CreateMap<Student, StudentListItem>()
                 .ForMember(item => item.DiplomWork, opt => opt.MapFrom(src => (src.DiplomWork != null) ? src.DiplomWork.Name : null))
