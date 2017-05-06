@@ -6,46 +6,48 @@ using DiplomContentSystem.Dto;
 using AutoMapper;
 namespace DiplomContentSystem.Services.CalendarEvents
 {
-   /* public class CalendarEventService
+    public class CalendarEventService
     {
-        private readonly IRepository<CalendarEvent> _repository;
+        private readonly IRepository<ImplementationStage> _globalStagesRepository;
+         private readonly IRepository<CustomStage> _customStagesRepository;
         private readonly IMapper _mapper;
 
-        public CalendarEventService(IRepository<CalendarEvent> repository, IMapper mapper)
+        public CalendarEventService(IRepository<ImplementationStage> globalStagesRepository,IRepository<CustomStage> customStagesRepository, IMapper mapper)
         {
-            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            if (globalStagesRepository == null) throw new ArgumentNullException(nameof(globalStagesRepository));
+            if (customStagesRepository == null) throw new ArgumentNullException(nameof(customStagesRepository));
             if (mapper == null) throw new ArgumentNullException(nameof(mapper));
-            _repository = repository;
+            _globalStagesRepository = globalStagesRepository;
+            _customStagesRepository = customStagesRepository;
             _mapper = mapper;
             
         }
 
-        public Dto.ListResponse<CalendarEventListItem> GetCalendarEvents(CalendarEventRequest request)
+        public Dto.ListResponse<CalendarEventListItem> GetCalendarEvents(int diplomWorkId)
         {
-            var queryBuilder = new CalendarEventsQueryBuilder();
+            //var queryBuilder = new CalendarEventsQueryBuilder();
             var response = new ListResponse<CalendarEventListItem>();
-            string[] includes = {"Speciality", "Speciality.Department","Students"};
+            string[] includes = {"GlobalStage"};
 
-            var query = queryBuilder.UseDto(request)
-                                    .UsePaging()
-                                    .UseFilters()
-                                    .UseSortings(defaultSorting:"id")
-                                    .Build();
+            var globalStages = _globalStagesRepository.Get(stage=>stage.DiplomWorkId==diplomWorkId, includes).OfType<IStage>().ToList();
+            var customStages = _customStagesRepository.Get(stage=>stage.DiplomWorkId==diplomWorkId).OfType<IStage>().ToList();
 
-            response.TotalCount = _repository.Count(query.FilterExpression);
-            response.Items = _mapper.Map<IEnumerable<CalendarEventListItem>>(_repository.Get(query, includes));
+            var stages = globalStages.Union(customStages).ToList();
+            response.TotalCount = stages.Count();
+            response.Items = _mapper.Map<List<CalendarEventListItem>>(stages);
 
             return response;
         }
 
-        public CalendarEvent Get(int id)
+       /* public CalendarEvent Get(int id)
         {   
             string[] includes = {"Speciality","Speciality.Department","Students"};
             var result = _repository.Get(id, includes);
             result.Speciality.Department.Specialities = null;
             return result;
-        }
+        } */
 
+        /* 
         public IEnumerable<SelectListItem> GetAsSelectList()
         {
             return this._repository.Get().Select(item=>new SelectListItem(){
@@ -53,8 +55,9 @@ namespace DiplomContentSystem.Services.CalendarEvents
                 Text = item.Name
             });
         }
+        */
 
-         public bool Add(CalendarEventEditItem CalendarEventDto)
+/*         public bool Add(CalendarEventEditItem CalendarEventDto)
         {
             var dbCalendarEvent = _mapper.Map<CalendarEvent>(CalendarEventDto);
             _repository.Add(dbCalendarEvent);
@@ -68,6 +71,6 @@ namespace DiplomContentSystem.Services.CalendarEvents
             _repository.Update(dbCalendarEvent);
             _repository.SaveChanges();
             return true;
-        }
-    }*/
+        }*/
+    }
 }
