@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http } from '@angular/http';
+import { Http, ResponseContentType } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { CalendarEvent } from './models/calendar';
 import { ServiceBase } from '../shared/service-base';
@@ -27,6 +27,11 @@ export class CalendarService extends ApiService<CalendarEvent>{
      public getStages():Observable<any>
     {
         return this.http.get("/api/calendar/2").map(this.extractData);
+    }
+
+    public getCalendarFile()
+    {
+        return this.http.post("/api/documents/calendar/2",true,null, ResponseContentType.Blob);
     }
 
     public getSpecialities():Observable<SelectListItem[]>
