@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Дипломная работа
+                <div class="btn-group btn-group-sm pull-right">
+                    <button type="button" class="btn btn-success">
+                        <i class="fa fa-time"></i>
+                        Календарный план
+                    </button>
+                </div>
+            </div>
+            <div class="panel-body" *ngIf="isLoading">
+                <loader></loader>
+            </div>
+            <div class="form-horizontal" *ngIf="!isLoading">
+                <div class="panel-body">
+                    <error-list [errors]="errors"></error-list>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Тема работы</label>
+                        <p class="col-sm-10 form-control-static">
+                            {{ work.name }}
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Студент</label>
+                        <p class="col-sm-10 form-control-static">
+                            {{work.student }}
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Руководитель</label>
+                        <p class="col-sm-10 form-control-static">
+                            {{work.teacher }}
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Утверждена</label>
+                        <p class="col-sm-10 form-control-static">
+                            {{work.isAccepted }}
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Дата утверждения</label>
+                        <p class="col-sm-10 form-control-static">
+                            {{work.acceptedDate }}
+                        </p>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-primary"> Редактировать</button>
+                    <a [routerLink]="['/groups']" class="btn btn-default">Отмена</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">Добавить материал...</button>
+            </div>
+            <div class="btn-group" role="group" aria-label="...">
+
+                <button type="button" class="btn btn-default">Утвердить тему</button>
+                <button type="button" class="btn btn-warning">Недопуск</button>
+            </div>
+        </div>
+        <br>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Нормоконтроль
+            </div>
+            <div class="panel-body">
+                <h2 class="text-center">68%</h2>
+                <br>
+                <button type="button" class="text-center btn btn-default">Добавить попытку</button>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Материалы
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item">Календарный_план.docx</li>
+                <li class="list-group-item">Титульная страница.docx</li>
+            </ul>
+        </div>
+    </div>
+</div>

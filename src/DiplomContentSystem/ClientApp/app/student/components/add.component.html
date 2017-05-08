@@ -1,0 +1,44 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Новый студент
+    </div>
+    <form [formGroup]="form" (ngSubmit)="submit(form.value)">
+        <div class="panel-body panel-body-loader">
+            <error-list [errors]="errors"></error-list>
+            <div class="form-group" [class.has-error]="!form.controls['fio'].valid && form.controls['fio'].touched">
+                <label class="control-label">ФИО</label>
+                <input name="lastName" placeholder="Фамилия" class="form-control" type="text" [formControl]="form.controls['fio']" />
+                <div class="text-danger help-block">
+                    <span *ngIf="form.controls['fio'].hasError('required')&&form.controls['fio'].touched">
+                        Поле должно быть заполнено.
+                    </span>
+                    <span *ngIf="form.controls['fio'].hasError('notEmpty')&&form.controls['fio'].touched">
+                        Поле не должно быть пустым.
+                    </span>
+                    <span *ngIf="form.controls['fio'].hasError('wordCount')&&form.controls['fio'].touched">
+                        ФИО должно содержать 3 слова.
+                    </span>
+                </div>
+            </div>
+            <div class="form-group" [class.has-error]="!form.controls['group'].valid && form.controls['group'].touched">
+                <label class="control-label">Группа</label>
+                <select class="form-control" placeholder="Группа" [formControl]="form.controls['group']">
+                    <option selected>Укажите группу</option>
+                    <option *ngFor = "let option of groupOptions" [value]="option.value">
+                        {{option.text}}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group" [class.has-error]="!form.controls['speciality'].valid && form.controls['speciality'].touched">
+                <label class="control-label">Кафедра</label>
+                <select class="form-control" placeholder="Группа" [formControl]="form.controls['speciality']">
+                    
+                </select>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Добавить</button>
+            <a [routerLink]="['/teachers']" class="btn btn-default">Отмена</a>
+        </div>
+    </form>
+</div>

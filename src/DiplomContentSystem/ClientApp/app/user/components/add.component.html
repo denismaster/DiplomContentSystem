@@ -1,0 +1,38 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        Новый пользователь
+    </div>
+    <form [formGroup]="form" (ngSubmit)="submit(form.value)">
+        <div class="panel-body panel-body-loader">
+            <error-list [errors]="errors"></error-list>
+            <div class="form-group" [class.has-error]="!form.controls['login'].valid && form.controls['login'].touched">
+                <label class="control-label">ФИО</label>
+                <input name="lastName" placeholder="Фамилия" class="form-control" type="text" [formControl]="form.controls['login']" />
+                <div class="text-danger help-block">
+                    <span *ngIf="form.controls['login'].hasError('required')&&form.controls['login'].touched">
+                        Поле должно быть заполнено.
+                    </span>
+                    <span *ngIf="form.controls['login'].hasError('notEmpty')&&form.controls['login'].touched">
+                        Поле не должно быть пустым.
+                    </span>
+                </div>
+            </div>
+            <div class="form-group" [class.has-error]="!form.controls['password'].valid && form.controls['password'].touched">
+                <label class="control-label">Нагрузка</label>
+                <input class="form-control" type="text" placeholder="Нагрузка" [formControl]="form.controls['password']" />
+                <div class="text-danger help-block">
+                    <span *ngIf="form.controls['password'].hasError('required')&&form.controls['password'].touched">
+                        Поле должно быть заполнено.
+                    </span>
+                    <span *ngIf="form.controls['login'].hasError('notEmpty')&&form.controls['login'].touched">
+                        Поле не должно быть пустым.
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Добавить</button>
+            <a [routerLink]="['/teachers']" class="btn btn-default">Отмена</a>
+        </div>
+    </form>
+</div>

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DiplomContentSystem.Core
 {
@@ -11,6 +8,6 @@ namespace DiplomContentSystem.Core
         public string Name { get; set; }
         public string ShortName { get; set; }
 
-        public List<Speciality> Specialties { get; set; }
+        public List<Department> Departments { get; set; }
     }
 }

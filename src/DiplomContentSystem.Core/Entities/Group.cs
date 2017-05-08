@@ -13,6 +13,9 @@ namespace DiplomContentSystem.Core
         public int SpecialityId { get; set; }
         public Speciality Speciality { get; set; }
 
+        public int PeriodId {get;set;}
+        public Period Period {get;set;}
+        
         public List<Student> Students { get; set; }
     }
 }

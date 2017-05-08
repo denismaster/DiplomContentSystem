@@ -3,6 +3,7 @@ export class Teacher {
     fio: string;
     position: Position;
     positionId: number;
+    departmentId: number;
     maxWorkCount: string;
 }
 export class Position

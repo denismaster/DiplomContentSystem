@@ -47,8 +47,7 @@ namespace DiplomContentSystem.Services.DiplomWorks
 
         public DiplomWork Get(int id)
         {
-            string[] includes = { "Teacher", "Student" };
-            return _repository.Get(id, includes);
+            return _repository.Get(id);
         }
 
         public bool AddDiplomWork(DiplomWork DiplomWork)

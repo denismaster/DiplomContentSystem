@@ -11,7 +11,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using DiplomContentSystem.Services.Students;
 using DiplomContentSystem.Services.Teachers;
+using DiplomContentSystem.Services.Users;
 using DiplomContentSystem.Services.DiplomWorks;
+using DiplomContentSystem.Services.Groups;
+using DiplomContentSystem.Services.Departments;
+using DiplomContentSystem.Services.Specialities;
+using DiplomContentSystem.Services.CalendarEvents;
 using DiplomContentSystem.DataLayer;
 using DiplomContentSystem.Core;
 using FluentValidation.AspNetCore;
@@ -21,6 +26,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using DiplomContentSystem.Controllers;
 using DiplomContentSystem.Authentication;
+using DiplomContentSystem.Requests;
 
 namespace DiplomContentSystem
 {
@@ -55,14 +61,27 @@ namespace DiplomContentSystem
                     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
             services.AddAutoMapper();
             services.AddScoped<TeacherService>();
+            services.AddScoped<UserService>();
             services.AddScoped<StudentService>();
             services.AddScoped<DiplomWorksService>();
+            services.AddScoped<GroupService>();
+            services.AddScoped<DepartmentService>();
+            services.AddScoped<SpecialityService>();
+            services.AddScoped<CalendarEventService>();
             services.AddScoped<IRepository<Teacher>, RepositoryBase<Teacher>>();
             services.AddScoped<IRepository<Student>, RepositoryBase<Student>>();
             services.AddScoped<IRepository<DiplomWork>, RepositoryBase<DiplomWork>>();
+            services.AddScoped<IRepository<TeacherPosition>, RepositoryBase<TeacherPosition>>();
+            services.AddScoped<IRepository<Speciality>, RepositoryBase<Speciality>>();
+            services.AddScoped<IRepository<Department>, RepositoryBase<Department>>();
+            services.AddScoped<IRepository<ImplementationStage>, RepositoryBase<ImplementationStage>>();
+            services.AddScoped<IRepository<CustomStage>, RepositoryBase<CustomStage>>();
+            services.AddScoped<IRepository<Group>, RepositoryBase<Group>>();
+            services.AddScoped<IRepository<User>, RepositoryBase<User>>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddDbContext<DiplomContext>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<RequestService>();
             services
                 .AddAuthPolicy()
                 .ConfigureJwtIssuerOptions(Configuration, _signingKey);
@@ -83,6 +102,10 @@ namespace DiplomContentSystem
                 {
                     HotModuleReplacement = true,
                 });
+                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    serviceScope.ServiceProvider.GetService<DiplomContext>().EnsureSeedData();
+                }
             }
             else
             {

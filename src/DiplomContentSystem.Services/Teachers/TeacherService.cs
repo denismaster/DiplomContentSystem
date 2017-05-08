@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 using DiplomContentSystem.Core;
 using DiplomContentSystem.Dto;
 using AutoMapper;
@@ -26,7 +23,7 @@ namespace DiplomContentSystem.Services.Teachers
         {
             var queryBuilder = new TeachersQueryBuilder();
             var response = new ListResponse<TeacherListItem>();
-            string[] includes = {"Position","Speciality"};
+            string[] includes = {"Position","Department","Students"};
 
             var query = queryBuilder.UseDto(request)
                                     .UsePaging()
@@ -42,7 +39,7 @@ namespace DiplomContentSystem.Services.Teachers
 
         public Teacher Get(int id)
         {   
-            string[] includes = {"Position","Speciality"};
+            string[] includes = {"Position","Department","Students"};
             return _repository.Get(id,includes);
         }
 

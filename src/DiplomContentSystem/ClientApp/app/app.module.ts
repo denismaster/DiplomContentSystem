@@ -12,6 +12,11 @@ import { TeachersModule } from './teacher/teacher.module';
 import { SignInComponent } from './login/components/sign-in.component';
 import { StudentsModule } from './student/student.module';
 import { DiplomWorksModule } from './diplomWorks/diplom-works.module';
+import { GroupModule } from './group/group.module';
+import { UsersModule } from './user/user.module';
+import { DepartmentModule } from './department/department.module';
+import { SpecialityModule } from './specialities/speciality.module';
+import { CalendarModule } from './calendar/calendar.module';
 @NgModule({
     bootstrap: [ AppComponent ],
     declarations: [
@@ -27,7 +32,12 @@ import { DiplomWorksModule } from './diplomWorks/diplom-works.module';
         SharedModule,
         TeachersModule,
         StudentsModule,
-        DiplomWorksModule
+        DiplomWorksModule,
+        GroupModule,
+        UsersModule,
+        DepartmentModule,
+        SpecialityModule,
+        CalendarModule
     ],
 })
 export class AppModule {
