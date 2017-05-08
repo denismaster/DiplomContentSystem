@@ -38,7 +38,7 @@
                 <tr *ngFor="let item of list.items">
                     <td>{{ item.id }}</td>
                     <td>
-                        <a disabled  [routerLink]="['edit/', item.id]">
+                        <a disabled  [routerLink]="['view/', item.id]">
                             {{ item.name }}
                         </a>
                     </td>
