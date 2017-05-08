@@ -39,6 +39,30 @@ namespace DiplomContentSystem.Services.CalendarEvents
             return response;
         }
 
+        public Dto.CalendarTemplateItem GetTemplateData(int diplomWorkId)
+        {
+            var result = new CalendarTemplateItem();
+            result.Stages = this.GetCalendarEvents(diplomWorkId).Items.Select(item=>{
+                return new CalendarTemplateStage()
+                {
+                    StartDate = item.StartDate.ToString("dd.MM.yyyy"),
+                    EndDate = item.EndDate.ToString("dd.MM.yyyy"),
+                    Accepted = item.Accepted,
+                    Name = item.Name
+                };
+            });
+            var i = 1;
+            foreach(var stage in result.Stages)
+            {
+                var _i = i;
+                stage.Id = _i;
+                i++;
+            }
+            result.Teacher = "Авдеев А.И.";
+            result.Student = "Курашин М.А.";
+
+            return result;
+        }
        /* public CalendarEvent Get(int id)
         {   
             string[] includes = {"Speciality","Speciality.Department","Students"};
