@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,14 @@ namespace DiplomContentSystem.Requests
             {
                 try
                 {
-                    var content = new StringContent(JsonConvert.SerializeObject(data)
-                    );
+                    var content = new StringContent(JsonConvert.SerializeObject(data,
+                    new JsonSerializerSettings()
+                    {
+                        ContractResolver = new CamelCasePropertyNamesContractResolver() 
+                    }), System.Text.Encoding.UTF8, "application/json");
                     client.BaseAddress = new Uri("http://localhost:1337");
                     
-                    var response = await client.PostAsync("api/docx", content);
+                    var response = await client.PostAsync("api/docx",content);
                     response.EnsureSuccessStatusCode(); // Throw in not success
 
                     return await response.Content.ReadAsStreamAsync();
