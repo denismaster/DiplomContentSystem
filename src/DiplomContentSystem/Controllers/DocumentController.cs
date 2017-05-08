@@ -9,6 +9,7 @@ using DiplomContentSystem.Services.Departments;
 using DiplomContentSystem.Requests;
 using System.Threading.Tasks;
 using Microsoft.Net.Http.Headers;
+using DiplomContentSystem.Services.CalendarEvents;
 
 namespace DiplomContentSystem.Controllers
 {
@@ -17,24 +18,20 @@ namespace DiplomContentSystem.Controllers
     public class DocumentsController : Controller
     {
         private readonly RequestService _service;
-        public DocumentsController(RequestService service)
+        private readonly CalendarEventService _calendarService;
+        public DocumentsController(RequestService service,CalendarEventService calendarService)
         {
             if (service == null) throw new ArgumentNullException(nameof(service));
+            if (calendarService == null) throw new ArgumentNullException(nameof(_calendarService));
             _service = service;
+            _calendarService = calendarService;
         }
         [HttpPost("calendar/{id:int}")]
         public async Task<IActionResult> DownloadStages(int id)
         {
-            var stream = await _service.SendRequest(true);
-            var result = new FileStreamResult(stream, "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-            result.FileDownloadName = "calendar.docx";
-            return result;
-           // return File(stream,"application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-            //return new FileStreamResult(stream, new MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.wordprocessingml.document"))
-           // {
-          //      FileDownloadName = "calendar.docx"
-          //  };
+            var data = _calendarService.GetTemplateData(id);
+            var stream = await _service.SendRequest(data);
+            return new FileStreamResult(stream,"application/vnd.openxmlformats-officedocument.wordprocessingml.document");
         }
-
     }
 }
