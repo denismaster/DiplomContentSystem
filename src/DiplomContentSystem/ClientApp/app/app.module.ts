@@ -18,6 +18,7 @@ import { UsersModule } from './user/user.module';
 import { DepartmentModule } from './department/department.module';
 import { SpecialityModule } from './specialities/speciality.module';
 import { CalendarModule } from './calendar/calendar.module';
+import { TemplatesModule } from './templates/template.module';
 @NgModule({
     bootstrap: [ AppComponent ],
     declarations: [
@@ -39,6 +40,7 @@ import { CalendarModule } from './calendar/calendar.module';
         UsersModule,
         DepartmentModule,
         SpecialityModule,
+        TemplatesModule,
         CalendarModule
     ],
 })
