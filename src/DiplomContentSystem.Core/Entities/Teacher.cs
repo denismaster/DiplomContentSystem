@@ -8,17 +8,17 @@ namespace DiplomContentSystem.Core
     public class Teacher : IEntity
     {
         public int Id { get; set; }
-        public string FIO { get; set; }
-        //TODO: добавить возможность менять должности и ставить их в зависимости от периода
-        public TeacherPosition Position { get; set; }
-        public int PositionId {get;set;}
-        //TODO: число дипломников также зависит от периода
+        public string FIO { get; set; }        
         public int MaxWorkCount { get; set; }
 
-        public int SpecialityId { get; set; }
-        public Speciality Speciality { get; set; }
+        public int PositionId {get;set;}
+        public TeacherPosition Position { get; set; }
+        
+        public int DepartmentId { get; set; }
+        public Department Department { get; set; }
 
         public List<DiplomWork> DiplomWorks { get; set; }
+        public List<Student> Students { get; set; }
         public List<TeacherComment> TeacherComments { get; set; }
     }
 }

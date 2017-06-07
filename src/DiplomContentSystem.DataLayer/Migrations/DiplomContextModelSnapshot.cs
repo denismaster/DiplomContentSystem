@@ -14,7 +14,7 @@ namespace DiplomContentSystem.DataLayer.Migrations
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");
+                .HasAnnotation("ProductVersion", "1.1.1");
 
             modelBuilder.Entity("DiplomContentSystem.Core.Comment", b =>
                 {
@@ -28,6 +28,48 @@ namespace DiplomContentSystem.DataLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("DiplomContentSystem.Core.CustomStage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Accepted");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("DiplomWorkId");
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DiplomWorkId");
+
+                    b.ToTable("CustomStages");
+                });
+
+            modelBuilder.Entity("DiplomContentSystem.Core.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("InstituteId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("ShortName");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InstituteId");
+
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("DiplomContentSystem.Core.DiplomWork", b =>
@@ -116,6 +158,22 @@ namespace DiplomContentSystem.DataLayer.Migrations
                     b.ToTable("DiplomWorkMaterialComments");
                 });
 
+            modelBuilder.Entity("DiplomContentSystem.Core.GlobalStage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GlobalStage");
+                });
+
             modelBuilder.Entity("DiplomContentSystem.Core.GostControlTry", b =>
                 {
                     b.Property<int>("Id")
@@ -163,9 +221,13 @@ namespace DiplomContentSystem.DataLayer.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int>("PeriodId");
+
                     b.Property<int>("SpecialityId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PeriodId");
 
                     b.HasIndex("SpecialityId");
 
@@ -177,37 +239,19 @@ namespace DiplomContentSystem.DataLayer.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("Date");
-
-                    b.Property<string>("Description");
+                    b.Property<bool>("Accepted");
 
                     b.Property<int>("DiplomWorkId");
 
-                    b.Property<string>("Name");
+                    b.Property<int>("GlobalStageId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DiplomWorkId");
 
+                    b.HasIndex("GlobalStageId");
+
                     b.ToTable("ImplementationStages");
-                });
-
-            modelBuilder.Entity("DiplomContentSystem.Core.ImplementationStageComment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("CommentId");
-
-                    b.Property<int>("ImplementationStageId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
-
-                    b.HasIndex("ImplementationStageId");
-
-                    b.ToTable("ImplementationStageComments");
                 });
 
             modelBuilder.Entity("DiplomContentSystem.Core.Institute", b =>
@@ -240,12 +284,24 @@ namespace DiplomContentSystem.DataLayer.Migrations
                     b.ToTable("Periods");
                 });
 
+            modelBuilder.Entity("DiplomContentSystem.Core.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("DiplomContentSystem.Core.Speciality", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("InstituteId");
+                    b.Property<int>("DepartmentId");
 
                     b.Property<string>("Name");
 
@@ -255,7 +311,7 @@ namespace DiplomContentSystem.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InstituteId");
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Specialities");
                 });
@@ -302,48 +358,12 @@ namespace DiplomContentSystem.DataLayer.Migrations
                     b.ToTable("StudentComments");
                 });
 
-            modelBuilder.Entity("DiplomContentSystem.Core.SubImplementationStage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<string>("Description");
-
-                    b.Property<int>("ImplementationStageId");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ImplementationStageId");
-
-                    b.ToTable("SubImplementationStages");
-                });
-
-            modelBuilder.Entity("DiplomContentSystem.Core.SubImplementationStageComment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("CommentId");
-
-                    b.Property<int>("SubImplementationStageId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
-
-                    b.HasIndex("SubImplementationStageId");
-
-                    b.ToTable("SubImplementationStageComments");
-                });
-
             modelBuilder.Entity("DiplomContentSystem.Core.Teacher", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int>("DepartmentId");
 
                     b.Property<string>("FIO");
 
@@ -351,13 +371,11 @@ namespace DiplomContentSystem.DataLayer.Migrations
 
                     b.Property<int>("PositionId");
 
-                    b.Property<int>("SpecialityId");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PositionId");
+                    b.HasIndex("DepartmentId");
 
-                    b.HasIndex("SpecialityId");
+                    b.HasIndex("PositionId");
 
                     b.ToTable("Teachers");
                 });
@@ -390,6 +408,49 @@ namespace DiplomContentSystem.DataLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TeachersPositions");
+                });
+
+            modelBuilder.Entity("DiplomContentSystem.Core.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Login");
+
+                    b.Property<string>("PasswordHash");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("DiplomContentSystem.Core.UserRole", b =>
+                {
+                    b.Property<int>("UserId");
+
+                    b.Property<int>("RoleId");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("UserRole");
+                });
+
+            modelBuilder.Entity("DiplomContentSystem.Core.CustomStage", b =>
+                {
+                    b.HasOne("DiplomContentSystem.Core.DiplomWork", "DiplomWork")
+                        .WithMany("CustomStages")
+                        .HasForeignKey("DiplomWorkId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DiplomContentSystem.Core.Department", b =>
+                {
+                    b.HasOne("DiplomContentSystem.Core.Institute", "Institute")
+                        .WithMany("Departments")
+                        .HasForeignKey("InstituteId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DiplomContentSystem.Core.DiplomWork", b =>
@@ -467,6 +528,11 @@ namespace DiplomContentSystem.DataLayer.Migrations
 
             modelBuilder.Entity("DiplomContentSystem.Core.Group", b =>
                 {
+                    b.HasOne("DiplomContentSystem.Core.Period", "Period")
+                        .WithMany()
+                        .HasForeignKey("PeriodId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("DiplomContentSystem.Core.Speciality", "Speciality")
                         .WithMany()
                         .HasForeignKey("SpecialityId")
@@ -479,26 +545,18 @@ namespace DiplomContentSystem.DataLayer.Migrations
                         .WithMany("ImplementationStages")
                         .HasForeignKey("DiplomWorkId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
 
-            modelBuilder.Entity("DiplomContentSystem.Core.ImplementationStageComment", b =>
-                {
-                    b.HasOne("DiplomContentSystem.Core.Comment", "Comment")
-                        .WithMany("ImplementationStageComments")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DiplomContentSystem.Core.ImplementationStage", "ImplementationStage")
-                        .WithMany("ImplementationStageComments")
-                        .HasForeignKey("ImplementationStageId")
+                    b.HasOne("DiplomContentSystem.Core.GlobalStage", "GlobalStage")
+                        .WithMany("Stages")
+                        .HasForeignKey("GlobalStageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DiplomContentSystem.Core.Speciality", b =>
                 {
-                    b.HasOne("DiplomContentSystem.Core.Institute", "Institute")
-                        .WithMany("Specialties")
-                        .HasForeignKey("InstituteId")
+                    b.HasOne("DiplomContentSystem.Core.Department", "Department")
+                        .WithMany("Specialities")
+                        .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -514,7 +572,7 @@ namespace DiplomContentSystem.DataLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("DiplomContentSystem.Core.Teacher", "Teacher")
-                        .WithMany()
+                        .WithMany("Students")
                         .HasForeignKey("TeacherId");
                 });
 
@@ -531,37 +589,16 @@ namespace DiplomContentSystem.DataLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("DiplomContentSystem.Core.SubImplementationStage", b =>
-                {
-                    b.HasOne("DiplomContentSystem.Core.ImplementationStage", "ImplementationStage")
-                        .WithMany("SubImplementationStages")
-                        .HasForeignKey("ImplementationStageId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("DiplomContentSystem.Core.SubImplementationStageComment", b =>
-                {
-                    b.HasOne("DiplomContentSystem.Core.Comment", "Comment")
-                        .WithMany("SubImplementationStageComments")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DiplomContentSystem.Core.SubImplementationStage", "SubImplementationStage")
-                        .WithMany("SubImplementationStageComment")
-                        .HasForeignKey("SubImplementationStageId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("DiplomContentSystem.Core.Teacher", b =>
                 {
+                    b.HasOne("DiplomContentSystem.Core.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("DiplomContentSystem.Core.TeacherPosition", "Position")
                         .WithMany()
                         .HasForeignKey("PositionId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DiplomContentSystem.Core.Speciality", "Speciality")
-                        .WithMany()
-                        .HasForeignKey("SpecialityId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -575,6 +612,19 @@ namespace DiplomContentSystem.DataLayer.Migrations
                     b.HasOne("DiplomContentSystem.Core.Teacher", "Teacher")
                         .WithMany("TeacherComments")
                         .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DiplomContentSystem.Core.UserRole", b =>
+                {
+                    b.HasOne("DiplomContentSystem.Core.User", "User")
+                        .WithMany("Roles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DiplomContentSystem.Core.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

@@ -13,6 +13,11 @@ import { SignInComponent } from './login/components/sign-in.component';
 import { StudentsModule } from './student/student.module';
 import { DiplomWorksModule } from './diplomWorks/diplom-works.module';
 import { TemplatingModule } from './templating/templating.module';
+import { GroupModule } from './group/group.module';
+import { UsersModule } from './user/user.module';
+import { DepartmentModule } from './department/department.module';
+import { SpecialityModule } from './specialities/speciality.module';
+import { CalendarModule } from './calendar/calendar.module';
 @NgModule({
     bootstrap: [ AppComponent ],
     declarations: [
@@ -29,7 +34,12 @@ import { TemplatingModule } from './templating/templating.module';
         TeachersModule,
         StudentsModule,
         DiplomWorksModule,
-        TemplatingModule
+        TemplatingModule,
+        GroupModule,
+        UsersModule,
+        DepartmentModule,
+        SpecialityModule,
+        CalendarModule
     ],
 })
 export class AppModule {

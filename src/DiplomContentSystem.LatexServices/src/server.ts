@@ -27,6 +27,9 @@ export class Server {
         this.router.post("/convert", (request: Request, response: Response) => {
             this.routeHandler.convert(request, response);
         });
+        this.router.post("/docx", (request:Request, response:Response)=>{
+            this.routeHandler.docx(request, response);
+        });
         this.app.use("/api", this.router);
         
         this.app.use((error:any,request:Request,response:Response,next:any)=>{

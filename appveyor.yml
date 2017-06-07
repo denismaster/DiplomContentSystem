@@ -1,0 +1,9 @@
+install:
+  # Install .NET Core SDK and Angular2 modules.
+  - cd src
+  - dotnet restore
+  - cd DiplomContentSystem
+  - npm -g install npm
+  - npm install
+build_script:
+- cmd: dotnet build

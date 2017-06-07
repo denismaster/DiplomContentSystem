@@ -1,0 +1,83 @@
+﻿<div class="panel panel-default"  [rtList]="getTeachers" #list="rtList" (onListInit)="onListInit($event)">
+    <div class="panel-heading">
+        Преподаватели
+        <div class="btn-group btn-group-sm pull-right">
+            <button type="button" class="btn btn-default" (click)="showFilter=!showFilter">
+                <i class="fa fa-search"></i>
+                 Поиск
+            </button>
+            <a type="button" class="btn btn-default" [routerLink]="['/teachers/new']">
+                 <i class="fa fa-plus"></i>
+                 Добавить
+            </a>
+        </div>
+    </div>
+    <div class="panel-body" *ngIf="showFilter">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Искать по ФИО..." style="max-width: 100%!important"
+            [(ngModel)]="FIO">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" (click)="list.reloadData()">Найти</button>
+            </span>
+        </div><!-- /input-group -->
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th><span rtSort="fio">ФИО</span></th>
+                    <th><span rtSort="position">Должность</span></th>
+                    <th><span rtSort="department">Кафедра</span></th>
+                    <th><span rtSort="maxWorkCount">Нагрузка</span></th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of list.items">
+                    <td>{{ item.id }}</td>
+                    <td>
+                        <a [routerLink]="['edit/', item.id]">
+                            {{ item.fio }}
+                        </a>
+                    </td>
+                    <td>{{ item.position }}</td>
+                    <td>{{ item.department }}</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" 
+                             [class.progress-bar-success]="item.workCount!==item.maxWorkCount"
+                             [class.progress-bar-danger]="item.workCount===item.maxWorkCount"
+                             [style.width.%]="item.workCount/item.maxWorkCount*100"
+                             style="min-width: 3em;" >
+                             {{item.workCount}}/{{ item.maxWorkCount}}
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <role-admin>
+                            <a [routerLink]="['edit/',item.id]" class="btn btn-warning btn-sm">
+                                <i class="fa fa-edit"></i>
+                            </a>       
+                        </role-admin>
+                        <role-student>
+                            <button type="button" class="btn btn-sm btn-success">
+                                Назначить
+                            </button> 
+                        </role-student>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot *ngIf="isLoading">
+                <tr>
+                    <td colspan="6">
+                        <table-state></table-state>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="panel-footer">
+        <table-pagination></table-pagination>
+    </div>
+</div>

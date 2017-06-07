@@ -22,6 +22,7 @@ namespace DiplomContentSystem.Core
         public List<Student> Students { get; set; }
         public List<DiplomWorkMaterial> DiplomWorkMaterials { get; set; }
         public List<ImplementationStage> ImplementationStages { get; set; }
+         public List<CustomStage> CustomStages { get; set; }
         public List<DiplomWorkComment> DiplomWorkComments { get; set; }
     }
 }

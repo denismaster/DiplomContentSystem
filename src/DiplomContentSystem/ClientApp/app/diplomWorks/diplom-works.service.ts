@@ -5,6 +5,7 @@ import { ServiceBase } from '../shared/service-base';
 import { OperationResult } from '../shared/operation-result';
 import { ApiService, ApiRoutes } from '../shared/api-service';
 import { Diplom } from './models/diplom';
+import { DataService } from '../shared/data-service';
 
 @Injectable()
 export class DiplomWorksService extends ApiService<Diplom>{
@@ -16,7 +17,7 @@ export class DiplomWorksService extends ApiService<Diplom>{
         updateUrl:"/api/diploms/update/",
         deleteUrl:"/api/diploms/delete/"
     }
-    constructor(http: Http)
+    constructor(http: DataService)
     {
         super(DiplomWorksService.routes,http);
     }

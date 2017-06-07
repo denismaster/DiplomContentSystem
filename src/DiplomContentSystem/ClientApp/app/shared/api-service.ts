@@ -2,6 +2,7 @@ import { ServiceBase } from './service-base';
 import { Observable } from 'rxjs/Observable';
 import { Http } from '@angular/http';
 import { OperationResult } from './operation-result';
+import { DataService } from './data-service';
 
 export interface ApiRoutes {
     getUrl: string;
@@ -19,7 +20,7 @@ export interface ListResponse<T> {
 export let NotSupportedException :string = "Not Supported";
 
 export class ApiService<T> extends ServiceBase {
-    constructor(protected routes: ApiRoutes, protected http: Http) {
+    constructor(protected routes: ApiRoutes, protected http:DataService) {
         super();
     }
 
