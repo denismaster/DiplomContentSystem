@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { TemplateService } from '../template.service';
+import { TemplateService } from '../templates.service';
 import { Template } from '../models/template';
 import {RtList,filter } from 'right-angled';
 @Component({

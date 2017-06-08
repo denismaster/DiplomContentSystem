@@ -25,10 +25,11 @@
             <thead>
                 <tr>
                     <th>№</th>
-                    <th><span rtSort="fio">ФИО</span></th>
-                    <th><span rtSort="position">Должность</span></th>
-                    <th><span rtSort="department">Кафедра</span></th>
-                    <th><span rtSort="maxWorkCount">Нагрузка</span></th>
+                    <th><span rtSort="fio">Название</span></th>
+                    <th><span rtSort="position">Тип шаблона</span></th>
+                    <th><span rtSort="department">Имя файла</span></th>
+                    <th><span rtSort="maxWorkCount">Формат</span></th>
+                    <th><span>По умолчанию</span></th>
                     <th>Действия</th>
                 </tr>
             </thead>
@@ -55,17 +56,12 @@
                                 <i class="fa fa-edit"></i>
                             </a>
                         </role-admin>
-                        <role-student>
-                            <button type="button" class="btn btn-sm btn-success">
-                                Назначить
-                            </button>
-                        </role-student>
                     </td>
                 </tr>
             </tbody>
             <tfoot *ngIf="isLoading">
                 <tr>
-                    <td colspan="6">
+                    <td colspan="7">
                         <table-state></table-state>
                     </td>
                 </tr>

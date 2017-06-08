@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RequestOptions } from '@angular/http';
+import { RequestOptions, Headers } from '@angular/http';
 import { DataService } from '../../shared/data-service';
 import { Observable } from 'rxjs';
 

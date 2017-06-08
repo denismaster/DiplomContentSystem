@@ -12,13 +12,12 @@ import { TeachersModule } from './teacher/teacher.module';
 import { SignInComponent } from './login/components/sign-in.component';
 import { StudentsModule } from './student/student.module';
 import { DiplomWorksModule } from './diplomWorks/diplom-works.module';
-import { TemplatingModule } from './templating/templating.module';
 import { GroupModule } from './group/group.module';
 import { UsersModule } from './user/user.module';
 import { DepartmentModule } from './department/department.module';
 import { SpecialityModule } from './specialities/speciality.module';
 import { CalendarModule } from './calendar/calendar.module';
-import { TemplatesModule } from './templates/template.module';
+import { TemplatesModule } from './templates/templates.module';
 @NgModule({
     bootstrap: [ AppComponent ],
     declarations: [
@@ -35,7 +34,6 @@ import { TemplatesModule } from './templates/template.module';
         TeachersModule,
         StudentsModule,
         DiplomWorksModule,
-        TemplatingModule,
         GroupModule,
         UsersModule,
         DepartmentModule,

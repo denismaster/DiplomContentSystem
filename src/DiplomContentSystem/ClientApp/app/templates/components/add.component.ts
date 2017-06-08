@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TemplateService } from '../template.service';
+import { TemplateService } from '../templates.service';
 import { Template } from '../models/template';
 import { CustomValidators } from '../../shared/custom-validators';
 import { OperationResult } from '../../shared/operation-result';
