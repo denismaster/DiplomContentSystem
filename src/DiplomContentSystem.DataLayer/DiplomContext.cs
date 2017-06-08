@@ -30,6 +30,9 @@ namespace DiplomContentSystem.DataLayer
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
 
+        public DbSet<TemplateType> TemplateTypes { get; set; }
+        public DbSet<TemplateType> Templates { get; set; }
+        
         public DiplomContext(DbContextOptions<DiplomContext> options) : base(options)
         {
         }

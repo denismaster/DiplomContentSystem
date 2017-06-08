@@ -2,6 +2,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { SignInComponent } from './login/components/sign-in.component';
+import { CounterComponent } from './components/counter/counter.component';
 const appRoutes: Routes = [
     {
         path: '',
@@ -15,6 +16,10 @@ const appRoutes: Routes = [
     {
         path: 'login',
         component: SignInComponent,
+    },
+    {
+        path: 'counter',
+        component: CounterComponent,
     },
     {
         path: '**',
