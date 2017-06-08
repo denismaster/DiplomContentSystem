@@ -50,6 +50,19 @@ namespace DiplomContentSystem.Services.DiplomWorks
             return _repository.Get(id);
         }
 
+        public object GetChartData()
+        {
+            string[] includes = { "CustomStages", "ImplementationStages","ImplementationStages.GlobalStage" };
+            var grouped = _repository
+            .Get(t=>true, includes)
+            .Select(d=>new { Diplom=d, Stage = d.CurrentGlobalStage})
+            .GroupBy(d=>d.Stage)
+            .Select(d=>new {
+                BarLabel = d.Key?.Name??"", Count  = d.Count()
+            });
+            return grouped;
+        }
+
         public bool AddDiplomWork(DiplomWork DiplomWork)
         {
             var dbDiplomWork = new DiplomWork();
