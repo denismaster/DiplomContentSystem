@@ -24,7 +24,7 @@ namespace DiplomContentSystem.Services
 
             CreateMap<User, UserListItem>();
             CreateMap<Department, DepartmentListItem>()
-            .ForMember(item => item.SpecialityCount, opt => opt.MapFrom(src => src.Specialities.Count));
+                .ForMember(item => item.SpecialityCount, opt => opt.MapFrom(src => src.Specialities.Count));
 
             CreateMap<DepartmentEditItem, Department>()
                 .ForMember(item => item.Id, opt => opt.MapFrom(src => src.Id == null ? 0 : src.Id))
