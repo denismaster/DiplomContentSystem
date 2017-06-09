@@ -19,6 +19,9 @@ namespace DiplomContentSystem.Services
                 .ForMember(item => item.Position, opt => opt.Ignore())
                 .ForMember(item => item.Department, opt => opt.Ignore());
 
+            CreateMap<Template, TemplateListItem>()
+                .ForMember(item => item.TemplateType, opt=>opt.MapFrom(src=>(src.TemplateType!=null)?src.TemplateType.Name:null));
+
             CreateMap<User, UserListItem>();
             CreateMap<Department, DepartmentListItem>()
             .ForMember(item => item.SpecialityCount, opt => opt.MapFrom(src => src.Specialities.Count));

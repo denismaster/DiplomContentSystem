@@ -22,11 +22,32 @@
     <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Сообщения
+                Пользователь
             </div>
             <div class="panel-body" *ngIf="!isLoading">
-                
+                Иванов И.А, старший преподаватель <button class="btn btn-sm btn-default">Управление</button>
             </div>
+             <div class="panel-body" *ngIf="isLoading">
+                <loader></loader>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Сообщения
+            </div>
+            <ul class="list-group" *ngIf="!isLoading">
+                <li class="list-group-item">
+                    <span class="badge">1</span>
+                    <a>Смит Д.Д.</a>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">4</span>
+                    <a>Пушкин А.С.</a>
+                </li>
+                <li class="list-group-item">
+                    <a>Кузнецов В.Г.</a>
+                </li>
+            </ul>
              <div class="panel-body" *ngIf="isLoading">
                 <loader></loader>
             </div>
