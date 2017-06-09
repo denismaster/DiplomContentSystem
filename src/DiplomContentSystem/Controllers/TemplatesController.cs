@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using DiplomContentSystem.Authentication;
 using DiplomContentSystem.Core;
 using DiplomContentSystem.Dto;
+using DiplomContentSystem.Services.Templates;
 using Microsoft.AspNetCore.Hosting;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -18,10 +19,20 @@ namespace DiplomContentSystem.Controllers
     public class TemplateController : Controller
     {
         private readonly IHostingEnvironment _environment;
-        public TemplateController(IHostingEnvironment environment)
+
+        private readonly TemplateService _service;
+        public TemplateController(IHostingEnvironment environment, TemplateService service)
         {
             if(environment==null) throw new ArgumentNullException(nameof(environment));
+            if(service==null) throw new ArgumentNullException(nameof(service));
+            _service = service;
             _environment = environment;
+        }
+
+        [HttpPost("")]
+        public IActionResult Get(TemplateRequest request)
+        {
+            return Ok(_service.GetTemplates(request));
         }
 
         [HttpPost("upload")]

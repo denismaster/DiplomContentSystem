@@ -8,7 +8,8 @@
                 <span class='icon-bar'></span>
             </button>
             <a class='navbar-brand' style="color:white" [routerLink]="['/home']">
-                <span class='fa fa-university'></span> АИС Диплом
+                <span class='fa fa-university'></span>
+                АИС Диплом
             </a>
         </div>
         <div class='navbar-collapse collapse nav-wrapper'>
@@ -20,7 +21,8 @@
                 </li>
                 <li class="dropdown" [routerLinkActive]="['link-active']">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="fa fa-university"></span> Институт
+                        <span class="fa fa-university"></span>
+                        Институт
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
@@ -49,7 +51,8 @@
                 </li>
                 <li class="dropdown" [routerLinkActive]="['link-active']">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="fa fa-university"></span> Дипломная работа
+                        <span class="fa fa-university"></span>
+                        Дипломная работа
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
@@ -70,10 +73,11 @@
                             </a>
                         </li>
                     </ul>
-                </li>
-                <li class="dropdown" [routerLinkActive]="['link-active']">
+                </li>                
+                 <li class="dropdown" [routerLinkActive]="['link-active']">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="fa fa-file-pdf-o"></span> Администрирование
+                        <span class="fa fa-file-pdf-o"></span>
+                        Администрирование
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
@@ -92,36 +96,42 @@
                 </li>
                 <li class="dropdown" [routerLinkActive]="['link-active']">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="fa fa-file-pdf-o"></span> Документы
+                        <span class="fa fa-file-pdf-o"></span>
+                        Документы
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a [routerLink]="['/templates']">Шаблоны документов</a></li>
                         <li><a href="#">Нормоконтроль</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Сгенерировать приказ...</a></li>
+                        <li><a href="#">Приказ об утверждении</a></li>
+                        <li><a href="#">Приказ о допуске</a></li>
+                        <li><a href="#">Приказ о недопуске</a></li>
+                        <li><a href="#">Предзащиты</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">Настройки</a></li>
                     </ul>
                 </li>
             </ul>
-
+            
             <div class="navbar-right">
                 <ul class="nav navbar-nav">
                     <li class="dropdown" *ngIf="username">
-                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             {{username}}<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="#">
-                                    <span class='fa fa-gear'></span> Настройки
+                                    <span class='fa fa-gear'></span>
+                                    Настройки
                                 </a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>
                                 <a (click)="logout()">
-                                    <span class='fa fa-sign-out'></span> Выйти
+                                    <span class='fa fa-sign-out'></span>
+                                    Выйти
                                 </a>
                             </li>
                         </ul>
@@ -133,7 +143,7 @@
                     </li>
                 </ul>
             </div>
-
+            
         </div>
     </div>
 </div>

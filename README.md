@@ -1,6 +1,6 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/9gw2rm8vgfltagcm?svg=true)](https://ci.appveyor.com/project/denismaster/diplomcontentsystem)
+[![Build status](https://ci.appveyor.com/api/projects/status/xi5nhpqxui340ki0?svg=true)](https://ci.appveyor.com/project/denismaster/diplomcontentsystem-osi23)
 # DiplomContentSystem
-Система документооборота для дипломных работ
+Система автоматизации документооборота при подготовке дипломных проектов. Подсистемы студента и преподавателя.
 
 ## Зависимости
 
