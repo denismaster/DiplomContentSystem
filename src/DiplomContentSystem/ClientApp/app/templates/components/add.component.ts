@@ -14,21 +14,21 @@ import { SelectListItem } from '../../shared/select-list-item';
 })
 export class TemplatesAddComponent implements OnInit {
     private form: FormGroup;
-    private positionOptions:SelectListItem[];
-    private departmentOptions:SelectListItem[];
+    private templateTypeOptions:SelectListItem[];
     private errors: string[] = [];
 
     constructor(private service: TemplateService, private router: Router, private formBuilder: FormBuilder) {
         this.form = this.formBuilder.group({
-            "fio": [undefined, Validators.compose([Validators.required, CustomValidators.notEmpty(), CustomValidators.wordCount(3)])],
-            "maxWorkCount": [undefined, Validators.compose([Validators.required,CustomValidators.minValue(1)])],
-            "position": ["", Validators.required],
-            "department": ["", Validators.required]
+            "name": [undefined, Validators.compose([Validators.required, CustomValidators.notEmpty()])],
+            "templateType": [undefined, Validators.required],
+            "isDefault": [undefined, Validators.required],
+            "file": [undefined]
         });
     }
     
     ngOnInit()
     {
+        this.service.getTemplateTypes().subscribe(r=>this.templateTypeOptions = r);
     }
 
     private submit(value: any): void {
