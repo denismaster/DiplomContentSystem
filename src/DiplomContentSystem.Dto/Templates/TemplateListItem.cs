@@ -12,5 +12,6 @@ namespace DiplomContentSystem.Dto
         public string Type { get; set; }
         public string TemplateType { get; set; }
         public string FileName { get; set; }
+        public bool IsDefault {get;set;}
     }
 }

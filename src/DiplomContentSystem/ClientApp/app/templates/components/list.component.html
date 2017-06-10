@@ -25,11 +25,11 @@
             <thead>
                 <tr>
                     <th>№</th>
-                    <th><span rtSort="fio">Название</span></th>
-                    <th><span rtSort="position">Тип шаблона</span></th>
-                    <th><span rtSort="department">Имя файла</span></th>
-                    <th><span rtSort="maxWorkCount">Формат</span></th>
-                    <th><span>По умолчанию</span></th>
+                    <th><span rtSort="name">Название</span></th>
+                    <th><span rtSort="type">Тип шаблона</span></th>
+                    <th>Имя файла</th>
+                    <th>Формат</th>
+                    <th>По умолчанию</th>
                     <th>Действия</th>
                 </tr>
             </thead>
@@ -44,6 +44,10 @@
                     <td>{{ item.templateType}}</td>
                     <td>{{ item.fileName}}</td>
                     <td>{{ item.type}}</td>
+                    <td>
+                        <span  *ngIf="item.isDefault"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Да</span>
+                        <span *ngIf="!item.isDefault"><span class="glyphicon glyphicon-remove" aria-hidden="true" ></span> Нет</span>
+                    </td>
                     <td>
                         <role-admin>
                             <a [routerLink]="['edit/',item.id]" class="btn btn-warning btn-sm">
