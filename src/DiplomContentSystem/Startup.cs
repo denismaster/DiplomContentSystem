@@ -28,6 +28,7 @@ using System.Text;
 using DiplomContentSystem.Controllers;
 using DiplomContentSystem.Authentication;
 using DiplomContentSystem.Requests;
+using Newtonsoft.Json;
 
 namespace DiplomContentSystem
 {
@@ -59,7 +60,11 @@ namespace DiplomContentSystem
                                     .Build();
                     config.Filters.Add(new AuthorizeFilter(policy));
                 })
-                    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>())
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
             services.AddAutoMapper();
             services.AddScoped<TeacherService>();
             services.AddScoped<UserService>();
@@ -98,6 +103,7 @@ namespace DiplomContentSystem
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
 
             if (env.IsDevelopment())
             {
