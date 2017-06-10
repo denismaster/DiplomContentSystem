@@ -11,16 +11,9 @@ namespace DiplomContentSystem.Core
         public string Text { get; set; }
         public DateTime Date { get; set; }
 
-        //Автор
-        public List<TeacherComment> TeacherComments { get; set; }
+        public int UserId { get;set; }
+        public User User {get;set;}
 
-        public List<StudentComment> StudentComments { get; set; }
-
-        //Комментируемы объект
-        public List<DiplomWorkComment> DiplomWorkComments { get; set; }
-
-        public List<DiplomWorkMaterialComment> DiplomWorkMaterialComments { get; set; }
-
-        public List<GostControlTryComment> GostControlTryComments { get; set; }
+        
     }
 }

@@ -5,4 +5,8 @@ export class CalendarEvent {
     speciality: string;
     specialityId:number;
     studentsCount:number;
+
+    startDate: Date;
+    endDate:Date;
+    isGlobal: boolean
 }
