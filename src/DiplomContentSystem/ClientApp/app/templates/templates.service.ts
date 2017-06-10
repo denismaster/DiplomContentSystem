@@ -24,12 +24,8 @@ export class TemplateService extends ApiService<Template>{
         super(TemplateService.routes,http);
     }
 
-    public getPositions():Observable<SelectListItem[]>
+    public getTemplateTypes():Observable<SelectListItem[]>
     {
-        return this.http.get("/api/templates/positions").map(this.extractData);
-    }
-    public getDepartments():Observable<SelectListItem[]>
-    {
-        return this.http.get("/api/departments/select-list").map(this.extractData);
+        return this.http.get("/api/templates/types").map(this.extractData);
     }
 }
