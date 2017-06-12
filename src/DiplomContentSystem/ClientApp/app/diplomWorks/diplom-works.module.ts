@@ -4,6 +4,7 @@ import { DiplomWorksService } from './diplom-works.service';
 import { DiplomWorksListComponent } from './components/list.component';
 import { DiplomWorksRoutesModule } from './diplom-works.routes.module';
 import { DiplomWorkViewComponent } from './components/edit.component';
+import { PlagiatComponent } from './components/plagiat.component';
 
 
 /**
@@ -12,8 +13,8 @@ import { DiplomWorkViewComponent } from './components/edit.component';
 
 @NgModule({
     imports: [SharedModule,DiplomWorksRoutesModule],
-    declarations: [DiplomWorksListComponent,DiplomWorkViewComponent],
-    exports: [DiplomWorksListComponent, DiplomWorkViewComponent],
+    declarations: [DiplomWorksListComponent,DiplomWorkViewComponent, PlagiatComponent],
+    exports: [DiplomWorksListComponent, DiplomWorkViewComponent, PlagiatComponent],
     providers:[DiplomWorksService]
 })
 export class DiplomWorksModule { }

@@ -23,10 +23,16 @@
                         </a>
                     </h4>
                     <role-student>
-                        Отметить выполнение
+                        <button type="button" class="btn btn-success" *ngIf="!item.accepted">
+                            <i class="fa fa-download"></i>
+                            Отметить выполнение
+                        </button>
                     </role-student>
                     <role-admin>
-                        Подтвердить
+                        <button type="button" class="btn btn-success" *ngIf="!item.accepted" (click)="item.accepted=true">
+                            <i class="fa fa-download"></i>
+                            Подтвердить
+                        </button>
                     </role-admin>
                     <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{item.startDate | date:"dd.MM.yyyy"}} - {{item.endDate| date:"dd.MM.yyyy"}}</small></p>
                 </div>

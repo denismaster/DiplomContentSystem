@@ -47,7 +47,8 @@ namespace DiplomContentSystem.Services.DiplomWorks
 
         public DiplomWork Get(int id)
         {
-            return _repository.Get(id);
+            string[] includes = { "Teacher", "Students" };
+            return _repository.Get(id,includes);
         }
 
         public object GetChartData()

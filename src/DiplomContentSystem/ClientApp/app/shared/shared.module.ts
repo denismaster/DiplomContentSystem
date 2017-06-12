@@ -16,16 +16,18 @@ import { AuthService } from '../login/authentication-service';
 import { JwtHelper } from './services/jwt-helper';
 import { RoleModule } from './roles/role.module';
 import { CommentsComponent } from './comments/comments.component';
+import { FileListComponent } from './file-list/file-list.component';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
     imports: [CommonModule, RouterModule, RTModule, ChartsModule, FormsModule, ReactiveFormsModule, RoleModule],
-    declarations: [NavMenuComponent, SidebarComponent, LoaderComponent, TableStateComponent, TablePaginationComponent, ErrorListComponent, CommentsComponent,],
+    declarations: [NavMenuComponent, SidebarComponent, LoaderComponent, TableStateComponent,
+     TablePaginationComponent, ErrorListComponent, CommentsComponent,FileListComponent],
     exports: [NavMenuComponent, SidebarComponent, TablePaginationComponent,
         CommonModule, FormsModule, RTModule, ChartsModule, RouterModule, RoleModule, LoaderComponent, TableStateComponent,
-        ErrorListComponent, CommentsComponent, ReactiveFormsModule],
+        ErrorListComponent, CommentsComponent, ReactiveFormsModule, FileListComponent],
     providers: [DataService, AuthGuard, AuthService, JwtHelper]
 })
 export class SharedModule {

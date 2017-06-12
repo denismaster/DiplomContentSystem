@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DiplomContentSystem.Dto;
 using DiplomContentSystem.Core;
+using System.Linq;
 namespace DiplomContentSystem.Services
 {
     public class MappingProfile : Profile
@@ -61,7 +62,12 @@ namespace DiplomContentSystem.Services
                 .ForMember(item => item.Teacher, opt => opt.MapFrom(src => (src.Teacher != null) ? src.Teacher.FIO : null));
 
             CreateMap<DiplomWork, DiplomWorkListItem>()
-                .ForMember(item => item.Teacher, opt => opt.MapFrom(src => (src.Teacher != null) ? src.Teacher.FIO : null));
+                .ForMember(item => item.Teacher, opt => opt.MapFrom(src => (src.Teacher != null) ? src.Teacher.FIO : null))
+                .ForMember(item => item.Student, opt=>opt.MapFrom(src=>src.Students.FirstOrDefault().FIO))
+                .ForMember(item=>item.StudentId, opt=>opt.MapFrom(src=>src.Students.FirstOrDefault().Id));
+
+
+            
         }
     }
 }

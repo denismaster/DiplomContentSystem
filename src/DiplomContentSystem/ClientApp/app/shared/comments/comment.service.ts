@@ -9,7 +9,7 @@ export class CommentService extends ApiService<Comment>{
     protected static routes:ApiRoutes = 
     {
         getUrl:"/api/comments",
-        addUrl:"api/diploms/add",
+        addUrl:"api/comments/add",
     }
     constructor(http: DataService)
     {

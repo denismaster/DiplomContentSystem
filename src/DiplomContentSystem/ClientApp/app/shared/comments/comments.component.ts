@@ -3,7 +3,8 @@ import { Comment } from './comment';
 import { AuthService } from '../../login/authentication-service';
 @Component({
     selector: 'comments',
-    templateUrl: './comments.component.html'
+    templateUrl: './comments.component.html',
+    styleUrls:['./comments.component.css']
 })
 export class CommentsComponent  {
     @Input() public comments: Comment[]=[];

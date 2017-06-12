@@ -13,7 +13,7 @@
             </a>
         </div>
         <div class='navbar-collapse collapse nav-wrapper'>
-            <ul class='nav navbar-nav'>
+            <ul class='nav navbar-nav' *ngIf="username">
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/home']">
                         <span class='fa fa-home'></span> Главная

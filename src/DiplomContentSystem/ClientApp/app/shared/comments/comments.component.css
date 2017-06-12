@@ -1,0 +1,6 @@
+.comments input,
+.comments textarea,
+.comments select
+{
+    max-width: initial!important;
+}
