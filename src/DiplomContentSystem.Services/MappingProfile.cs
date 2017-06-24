@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DiplomContentSystem.Dto;
 using DiplomContentSystem.Core;
+using System.Linq;
 namespace DiplomContentSystem.Services
 {
     public class MappingProfile : Profile
@@ -19,9 +20,12 @@ namespace DiplomContentSystem.Services
                 .ForMember(item => item.Position, opt => opt.Ignore())
                 .ForMember(item => item.Department, opt => opt.Ignore());
 
+            CreateMap<Template, TemplateListItem>()
+                .ForMember(item => item.TemplateType, opt=>opt.MapFrom(src=>(src.TemplateType!=null)?src.TemplateType.Name:null));
+
             CreateMap<User, UserListItem>();
             CreateMap<Department, DepartmentListItem>()
-            .ForMember(item => item.SpecialityCount, opt => opt.MapFrom(src => src.Specialities.Count));
+                .ForMember(item => item.SpecialityCount, opt => opt.MapFrom(src => src.Specialities.Count));
 
             CreateMap<DepartmentEditItem, Department>()
                 .ForMember(item => item.Id, opt => opt.MapFrom(src => src.Id == null ? 0 : src.Id))
@@ -58,7 +62,12 @@ namespace DiplomContentSystem.Services
                 .ForMember(item => item.Teacher, opt => opt.MapFrom(src => (src.Teacher != null) ? src.Teacher.FIO : null));
 
             CreateMap<DiplomWork, DiplomWorkListItem>()
-                .ForMember(item => item.Teacher, opt => opt.MapFrom(src => (src.Teacher != null) ? src.Teacher.FIO : null));
+                .ForMember(item => item.Teacher, opt => opt.MapFrom(src => (src.Teacher != null) ? src.Teacher.FIO : null))
+                .ForMember(item => item.Student, opt=>opt.MapFrom(src=>src.Students.FirstOrDefault().FIO))
+                .ForMember(item=>item.StudentId, opt=>opt.MapFrom(src=>src.Students.FirstOrDefault().Id));
+
+
+            
         }
     }
 }

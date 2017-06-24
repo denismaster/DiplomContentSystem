@@ -17,6 +17,7 @@ using DiplomContentSystem.Services.Groups;
 using DiplomContentSystem.Services.Departments;
 using DiplomContentSystem.Services.Specialities;
 using DiplomContentSystem.Services.CalendarEvents;
+using DiplomContentSystem.Services.Templates;
 using DiplomContentSystem.DataLayer;
 using DiplomContentSystem.Core;
 using FluentValidation.AspNetCore;
@@ -27,6 +28,7 @@ using System.Text;
 using DiplomContentSystem.Controllers;
 using DiplomContentSystem.Authentication;
 using DiplomContentSystem.Requests;
+using Newtonsoft.Json;
 
 namespace DiplomContentSystem
 {
@@ -58,7 +60,11 @@ namespace DiplomContentSystem
                                     .Build();
                     config.Filters.Add(new AuthorizeFilter(policy));
                 })
-                    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>())
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
             services.AddAutoMapper();
             services.AddScoped<TeacherService>();
             services.AddScoped<UserService>();
@@ -67,8 +73,11 @@ namespace DiplomContentSystem
             services.AddScoped<GroupService>();
             services.AddScoped<DepartmentService>();
             services.AddScoped<SpecialityService>();
+            services.AddScoped<TemplateService>();
             services.AddScoped<CalendarEventService>();
             services.AddScoped<IRepository<Teacher>, RepositoryBase<Teacher>>();
+            services.AddScoped<IRepository<Template>, RepositoryBase<Template>>();
+            services.AddScoped<IRepository<TemplateType>, RepositoryBase<TemplateType>>();
             services.AddScoped<IRepository<Student>, RepositoryBase<Student>>();
             services.AddScoped<IRepository<DiplomWork>, RepositoryBase<DiplomWork>>();
             services.AddScoped<IRepository<TeacherPosition>, RepositoryBase<TeacherPosition>>();
@@ -94,6 +103,7 @@ namespace DiplomContentSystem
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
 
             if (env.IsDevelopment())
             {

@@ -410,6 +410,38 @@ namespace DiplomContentSystem.DataLayer.Migrations
                     b.ToTable("TeachersPositions");
                 });
 
+            modelBuilder.Entity("DiplomContentSystem.Core.Template", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("FileName");
+
+                    b.Property<bool>("IsDefault");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("TemplateTypeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TemplateTypeId");
+
+                    b.ToTable("Templates");
+                });
+
+            modelBuilder.Entity("DiplomContentSystem.Core.TemplateType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TemplateTypes");
+                });
+
             modelBuilder.Entity("DiplomContentSystem.Core.User", b =>
                 {
                     b.Property<int>("Id")
@@ -612,6 +644,14 @@ namespace DiplomContentSystem.DataLayer.Migrations
                     b.HasOne("DiplomContentSystem.Core.Teacher", "Teacher")
                         .WithMany("TeacherComments")
                         .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DiplomContentSystem.Core.Template", b =>
+                {
+                    b.HasOne("DiplomContentSystem.Core.TemplateType", "TemplateType")
+                        .WithMany("Templates")
+                        .HasForeignKey("TemplateTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

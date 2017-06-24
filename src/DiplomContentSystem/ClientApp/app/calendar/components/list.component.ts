@@ -6,6 +6,7 @@ import { CalendarService } from '../calendar.service';
 import { SelectListItem } from '../../shared/select-list-item';
 import { TeacherService } from '../../teacher/teacher.service';
 import * as FileSaver from "file-saver";
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
     selector: 'calendar-list',
     templateUrl: './list.component.html'
@@ -20,15 +21,21 @@ export class CalendarsComponent {
 
     private showFilter: boolean;
     private isLoading: boolean = true;
-
+    private id: number;
     private departmentOptions: SelectListItem[];
 
-    constructor(private service: CalendarService, private teacherService: TeacherService) {
+    private selectedId: number = undefined;
+
+    constructor(private service: CalendarService,private router: Router, private activatedRoute:ActivatedRoute) {
        // this.teacherService.getDepartments().subscribe(r => this.departmentOptions = r);
+       this.id = activatedRoute.snapshot.params['id'];
+       if(!this.id){
+            router.navigateByUrl("['/404']");
+        }
     }
 
     getList = (request) => {
-       return this.service.getStages();
+       return this.service.getStages(this.id);
     }
 
     onListInit(list: RtList): void {
@@ -37,7 +44,7 @@ export class CalendarsComponent {
 
     download()
     {
-        this.service.getCalendarFile().subscribe((response:Response)=>{
+        this.service.getCalendarFile(this.id).subscribe((response:Response)=>{
             let blob = new Blob([response.blob()], {type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"});
             FileSaver.saveAs(blob, "calendar.docx");
         })

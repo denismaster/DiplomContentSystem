@@ -95,8 +95,6 @@ namespace DiplomContentSystem.DataLayer
                     }
                 }
                 query = orderedQuery;
-
-
             }
             if (request.Skip.HasValue)
             {

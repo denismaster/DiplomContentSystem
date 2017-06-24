@@ -1,0 +1,62 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        Новый шаблон
+    </div>
+    <form [formGroup]="form" (ngSubmit)="submit(form.value)">
+        <div class="panel-body panel-body-loader">
+            <error-list [errors]="errors"></error-list>
+            <div class="form-group" [class.has-error]="!form.controls['name'].valid && form.controls['name'].touched">
+                <label class="control-label">Название</label>
+                <input name="lastName" placeholder="Фамилия" class="form-control" type="text" [formControl]="form.controls['name']" />
+                <div class="text-danger help-block">
+                    <span *ngIf="form.controls['name'].hasError('required')&&form.controls['name'].touched">
+                        Поле должно быть заполнено.
+                    </span>
+                    <span *ngIf="form.controls['name'].hasError('notEmpty')&&form.controls['name'].touched">
+                        Поле не должно быть пустым.
+                    </span>
+                </div>
+            </div>
+            <div class="form-group" [class.has-error]="!form.controls['templateType'].valid && form.controls['templateType'].touched">
+                <label class="control-label">Тип шаблонаь</label>
+                <select class="form-control" placeholder="Должность" [formControl]="form.controls['templateType']">
+                    <option disabled selected value="">Укажите тип...</option>
+                    <option *ngFor = "let option of templateTypeOptions" [value]="option.value">
+                        {{option.text}}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group" [class.has-error]="!form.controls['file'].valid && form.controls['file'].touched">
+                <label class="control-label">Шаблон</label>
+                <input type="file" id="fileInput" class="form-control" [formControl]="form.controls['file']" />
+                <div class="text-danger help-block">
+                    <span *ngIf="form.controls['file'].hasError('required')&&form.controls['file'].touched">
+                        Поле должно быть заполнено.
+                    </span>
+                    <span *ngIf="form.controls['file'].hasError('notEmpty')&&form.controls['file'].touched">
+                        Поле не должно быть пустым.
+                    </span>
+                </div>
+            </div>
+            <div class="form-group" [class.has-error]="!form.controls['maxWorkCount'].valid && form.controls['maxWorkCount'].touched">
+                <div class="checkbox">
+                    <label>
+                            <input type="checkbox" [formControl]="form.controls['isDefault']"> Шаблон по умолчанию
+                    </label>
+                </div>
+                <div class="text-danger help-block">
+                    <span *ngIf="form.controls['isDefault'].hasError('required')&&form.controls['isDefault'].touched">
+                        Поле должно быть заполнено.
+                    </span>
+                    <span *ngIf="form.controls['isDefault'].hasError('minValue')&&form.controls['isDefault'].touched">
+                        Значение должно быть больше 0.
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Добавить</button>
+            <a [routerLink]="['/templates']" class="btn btn-default">Отмена</a>
+        </div>
+    </form>
+</div>

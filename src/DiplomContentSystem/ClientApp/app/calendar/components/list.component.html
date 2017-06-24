@@ -13,16 +13,30 @@
     </div>
     <ul class="timeline">
         <li *ngFor="let item of list.items" class="timeline-inverted">
-            <div class="timeline-badge" [class.success]="item.accepted"><i class="glyphicon" [class.glyphicon-ok]="item.accepted" [class.glyphicon-check]="!item.accepted"></i></div>
+            <div class="timeline-badge" 
+            [class.success]="item.accepted"><i class="glyphicon" [class.glyphicon-ok]="item.accepted" [class.glyphicon-check]="!item.accepted"></i></div>
             <div class="timeline-panel">
                 <div class="timeline-heading">
                     <h4 class="timeline-title">
-                        <a [routerLink]="['/calendar/',1,'stage', item.id]">
+                        <a >
                             {{item.name}}
                         </a>
                     </h4>
+                    <role-student>
+                        <button type="button" class="btn btn-success" *ngIf="!item.accepted">
+                            <i class="fa fa-download"></i>
+                            Отметить выполнение
+                        </button>
+                    </role-student>
+                    <role-admin>
+                        <button type="button" class="btn btn-success" *ngIf="!item.accepted" (click)="item.accepted=true">
+                            <i class="fa fa-download"></i>
+                            Подтвердить
+                        </button>
+                    </role-admin>
                     <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{item.startDate | date:"dd.MM.yyyy"}} - {{item.endDate| date:"dd.MM.yyyy"}}</small></p>
                 </div>
+                <comments></comments>
             </div>
         </li>
     </ul>

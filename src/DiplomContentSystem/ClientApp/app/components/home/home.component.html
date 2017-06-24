@@ -4,7 +4,7 @@
             <div class="panel-heading">
                 Статусы дипломных работ
             </div>
-            <div class="panel-body">
+            <div class="panel-body" *ngIf="!isLoading">
                 <div style="display: block">
                 <canvas baseChart
                             [data]="doughnutChartData"
@@ -14,28 +14,43 @@
                             (chartClick)="chartClicked($event)"></canvas>
                 </div>
             </div>
+             <div class="panel-body" *ngIf="isLoading">
+                <loader></loader>
+            </div>
         </div>
     </div>
     <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Еще пример графика
+                Пользователь
             </div>
-            <div class="panel-body">
-                <div style="display: block">
-                <canvas baseChart
-                            [data]="doughnutChartData"
-                            [labels]="doughnutChartLabels"
-                            [chartType]="barChartType"></canvas>
-                </div>
+            <div class="panel-body" *ngIf="!isLoading">
+                Иванов И.В, старший преподаватель <button class="btn btn-sm btn-default">Управление</button>
+            </div>
+             <div class="panel-body" *ngIf="isLoading">
+                <loader></loader>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Сообщения
+            </div>
+            <ul class="list-group" *ngIf="!isLoading">
+                <li class="list-group-item">
+                    <span class="badge">1</span>
+                    <a>Смит Д.Д.</a>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">4</span>
+                    <a>Пушкин А.С.</a>
+                </li>
+                <li class="list-group-item">
+                    <a>Кузнецов В.Г.</a>
+                </li>
+            </ul>
+             <div class="panel-body" *ngIf="isLoading">
+                <loader></loader>
             </div>
         </div>
     </div>
-</div>
-
-<div class="jumbotron">
-    <h1 class="text-center"> 
-        <i class="fa fa-university"></i>
-    </h1>
-      <h2 class="text-center">АИС Диплом</h2> 
 </div>

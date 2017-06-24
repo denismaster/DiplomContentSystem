@@ -1,0 +1,20 @@
+<div class="panel panel-default comments">
+    <div class="panel-heading">
+        {{ title }}
+        <div class="btn-group btn-group-sm pull-right">
+            <button type="button" class="btn btn-default" (click)="addFile()">
+                Добавить...
+            </button>
+        </div>
+    </div>
+    <div class="list-group" *ngIf="!isFolded">
+        <a class="list-group-item text-center" *ngIf="!files||files.length==0">
+            Нет файлов.
+        </a>
+        <a class="list-group-item" *ngFor="let file of files.files">
+            <p class="list-group-item-text">
+                {{ file.name }} ({{ file.size }} Мб)
+            </p>
+        </a>
+    </div>
+</div>

@@ -58,8 +58,8 @@ namespace DiplomContentSystem.Services.CalendarEvents
                 stage.Id = _i;
                 i++;
             }
-            result.Teacher = "Авдеев А.И.";
-            result.Student = "Курашин М.А.";
+            result.Teacher = "Иванов И.В.";
+            result.Student = "Петров А.Г.";
 
             return result;
         }

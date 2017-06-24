@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Антиплагиат
+        <div class="btn-group btn-group-sm pull-right">
+            <button type="button" class="btn btn-default" (click)="addFile()">
+                Добавить результат
+            </button>
+        </div>
+    </div>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Дата прохождения</th>
+                <th>Результат</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2" *ngIf="!results||results.length==0">Нет файлов</td>                 
+            <tr>
+            <tr *ngFor="let result of results">
+                <td>{{ result.date | date:'dd.MM.yyyy hh:mm'}}</td>
+                <td>{{ result.result }} % </td>
+            </tr>
+        </tbody>
+        
+    </table>
+</div>

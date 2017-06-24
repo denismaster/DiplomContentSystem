@@ -4,10 +4,10 @@
             <div class="panel-heading">
                 Дипломная работа
                 <div class="btn-group btn-group-sm pull-right">
-                    <button type="button" class="btn btn-success">
+                    <a [routerLink]="['/calendar', this.id ]" class="btn btn-success">
                         <i class="fa fa-time"></i>
                         Календарный план
-                    </button>
+                    </a>
                 </div>
             </div>
             <div class="panel-body" *ngIf="isLoading">
@@ -25,25 +25,25 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Студент</label>
                         <p class="col-sm-10 form-control-static">
-                            {{work.student }}
+                            {{work.students[0].fio }}
                         </p>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Руководитель</label>
                         <p class="col-sm-10 form-control-static">
-                            {{work.teacher }}
+                            {{work.teacher.fio }}
                         </p>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Утверждена</label>
                         <p class="col-sm-10 form-control-static">
-                            {{work.isAccepted }}
+                            {{work.isAccepted }} Да
                         </p>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Дата утверждения</label>
                         <p class="col-sm-10 form-control-static">
-                            {{work.acceptedDate }}
+                            {{work.acceptedDate }} 01.03.2017
                         </p>
                     </div>
                 </div>
@@ -60,30 +60,33 @@
                 <button type="button" class="btn btn-default">Добавить материал...</button>
             </div>
             <div class="btn-group" role="group" aria-label="...">
-
-                <button type="button" class="btn btn-default">Утвердить тему</button>
+                <button type="button" class="btn btn-default" disabled>Утвердить тему</button>
+                 <button type="button" class="btn btn-default">Допустить</button>
                 <button type="button" class="btn btn-warning">Недопуск</button>
             </div>
         </div>
         <br>
+        <anti-plagiat [results]="antiplagiatResults"></anti-plagiat>
         <div class="panel panel-default">
             <div class="panel-heading">
-                Нормоконтроль
+                Предзащита
+                <div class="btn-group btn-group-sm pull-right">
+                    <a [routerLink]="['/add']" class="btn btn-default">
+                        <i class="fa fa-time"></i>
+                        Добавить дату
+                    </a>
+                     <a [routerLink]="['/add']" class="btn btn-default">
+                        <i class="fa fa-time"></i>
+                        Добавить результат
+                    </a>
+                </div>
             </div>
             <div class="panel-body">
-                <h2 class="text-center">68%</h2>
-                <br>
-                <button type="button" class="text-center btn btn-default">Добавить попытку</button>
+                <p class="title text-center">Нет данных</p>
             </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Материалы
-            </div>
-            <ul class="list-group">
-                <li class="list-group-item">Календарный_план.docx</li>
-                <li class="list-group-item">Титульная страница.docx</li>
-            </ul>
-        </div>
+        <file-list title="Материалы" [files]="files"></file-list>
     </div>
+    
 </div>
+<comments></comments>

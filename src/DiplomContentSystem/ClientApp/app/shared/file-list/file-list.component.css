@@ -1,0 +1,6 @@
+.file-list input,
+.file-list textarea,
+.file-list select
+{
+    max-width: initial!important;
+}

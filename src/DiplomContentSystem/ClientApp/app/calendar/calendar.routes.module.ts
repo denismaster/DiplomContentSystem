@@ -6,7 +6,7 @@ import { CalendarEditComponent } from './components/edit.component';
 import { AuthGuard } from '../shared/auth-guard.service';
 const routes: Routes = [
     {
-        path: 'calendar',
+        path: 'calendar/:id',
         component: CalendarsComponent,
         canActivate: [AuthGuard]
     },

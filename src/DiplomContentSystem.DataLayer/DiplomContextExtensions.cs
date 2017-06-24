@@ -20,6 +20,11 @@ namespace DiplomContentSystem.DataLayer
                     context.Periods.Add(Period.Current);
                     context.SaveChanges();
                 }
+                if (!context.TemplateTypes.Any())
+                {
+                    context.TemplateTypes.Add(TemplateType.StagePlan);
+                    context.SaveChanges();
+                }
                 if(!context.TeachersPositions.Any())
                 {
                     context.TeachersPositions.AddRange(

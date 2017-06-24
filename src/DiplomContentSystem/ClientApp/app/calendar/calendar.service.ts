@@ -24,14 +24,14 @@ export class CalendarService extends ApiService<CalendarEvent>{
         super(CalendarService.routes,http);
     }
 
-     public getStages():Observable<any>
+     public getStages(id:number):Observable<any>
     {
-        return this.http.get("/api/calendar/2").map(this.extractData);
+        return this.http.get("/api/calendar/"+id).map(this.extractData);
     }
 
-    public getCalendarFile()
+    public getCalendarFile(id:number)
     {
-        return this.http.post("/api/documents/calendar/2",true,null, ResponseContentType.Blob);
+        return this.http.post("/api/documents/calendar/"+id,true,null, ResponseContentType.Blob);
     }
 
     public getSpecialities():Observable<SelectListItem[]>

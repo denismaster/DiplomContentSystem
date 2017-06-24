@@ -1,0 +1,43 @@
+<div class="panel panel-default comments">
+    <div class="panel-heading">
+        Комментарии({{ count }})
+        <div class="btn-group btn-group-sm pull-right">
+            <button type="button" class="btn btn-default" (click)="reload()" *ngIf="!isFolded">
+                <i class="fa fa-repeat"></i>
+            </button>
+            <button type="button" class="btn btn-default" (click)="isFolded=!isFolded">
+                <i class="fa fa-angle-down" *ngIf="isFolded"></i>
+                <i class="fa fa-angle-up" *ngIf="!isFolded"></i>
+            </button>
+        </div>
+    </div>
+    <div class="list-group" *ngIf="!isFolded">
+        <a class="list-group-item text-center" *ngIf="!comments||comments.length==0">
+            Нет комментариев
+        </a>
+        <a class="list-group-item" *ngFor="let comment of comments">
+            <p class="list-group-item-heading">
+                <strong>{{comment.user}}</strong>
+                <span class="text-muted">{{comment.date | date:'dd.MM.yyyy hh:mm'}}</span>
+            </p>
+            <p class="list-group-item-text">{{ comment.text}}</p>
+        </a>
+    </div>
+    <div class="panel-footer" *ngIf="!isFolded">
+        <div class="input-group">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                    <span class="fa fa-upload"></span>
+                </button>
+            </span>
+            <textarea rows="1" type="text" class="form-control" placeholder="Комментировать..." [(ngModel)]="typedText">
+            </textarea>
+            <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" (click)="addComment()">
+                        <span class="fa fa-send"></span> Отправить
+                    </button>
+            </span>
+        </div>
+        <!-- /input-group -->
+    </div>
+</div>
